@@ -1,0 +1,221 @@
+<!doctype html>
+
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Danzx JBR Store x Hosting</title>
+  <style>
+    :root{--accent:#0066ff;--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#071025 0%, #071827 100%);color:#e6eef8;margin:0;padding:24px}
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    header h1{font-size:20px;margin:0}
+    nav{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{background:var(--glass);border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:inherit;text-decoration:none;cursor:pointer}
+    .hero{display:flex;gap:20px;align-items:center;margin-bottom:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .menu-item{padding:14px;border-radius:8px;background:var(--card)}
+    .muted{color:var(--muted);font-size:13px}
+    .price{font-weight:700;color:var(--accent)}
+    footer{margin-top:22px;color:var(--muted);font-size:13px}/* modal */
+.modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:40}
+.modal{background:#051428;padding:18px;border-radius:12px;max-width:520px;width:92%;border:1px solid rgba(255,255,255,0.04)}
+.modal h3{margin-top:0}
+.close{background:none;border:0;color:var(--muted);cursor:pointer}
+
+/* small helpers */
+.row{display:flex;gap:8px;align-items:center}
+.space{height:12px}
+.kbd{background:#061320;padding:6px 8px;border-radius:6px;font-size:12px;border:1px solid rgba(255,255,255,0.02)}
+.testimonial{background:linear-gradient(180deg,#061225,#051424);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+
+.profile-pic{width:48px;height:48px;border-radius:50%;object-fit:cover;margin-right:10px;border:2px solid var(--accent)}
+
+@media (max-width:600px){header{flex-direction:column;align-items:flex-start;gap:8px}}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="https://files.catbox.moe/93gsif.jpg" alt="Foto Profil" class="profile-pic">
+        <div>
+          <h1>Danzx JBR Store × Hosting</h1>
+          <div class="muted">Solusi hosting, bot ~ dengan aman & terpercaya</div>
+        </div>
+      </div>
+      <nav>
+        <a class="btn" href="#hosting">Hosting</a>
+        <a class="btn" href="#services">Lainnya</a>
+        <a class="btn" href="#testimoni">Testimoni</a>
+      </nav>
+    </header><section class="hero card">
+  <div style="flex:1">
+    <h2 style="margin:0 0 8px 0">Selamat datang di Danzx JBR Store</h2>
+    <div class="muted">Pilih layanan lalu lanjutkan ke Telegram untuk menyelesaikan pemesanan.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <a class="btn" href="https://t.me/Danzx_JBR" target="_blank">Hubungi via Telegram</a>
+    <div class="kbd">fast respon</div>
+  </div>
+</section>
+
+<div class="space"></div>
+
+<!-- HOSTING -->
+<section id="hosting">
+  <h3>Hosting</h3>
+  <div class="grid">
+    <div class="menu-item card">
+      <h4>Panel Pterodactyl</h4>
+      <p class="muted">Akses panel Pterodactyl untuk kelola bot kamu.</p>
+      <div class="row" style="margin-top:8px">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Order%20Panel%20Pterodactyl" target="_blank">Masuk ke Panel (Telegram)</a>
+      </div>
+    </div>
+
+    <div class="menu-item card">
+      <h4>Reseller Panel Pterodactyl</h4>
+      <p class="muted">Harga: <span class="price">10k</span></p>
+      <p class="muted">Cocok untuk reseller — bisa jualan panel.</p>
+      <div style="margin-top:8px" class="row">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20beli%20Reseller%20Panel%20Pterodactyl%20(10k)" target="_blank">Beli via Telegram</a>
+      </div>
+    </div>
+
+    <div class="menu-item card">
+      <h4>Admin Panel Pterodactyl — bisa create panel sepuasnya</h4>
+      <p class="muted">Harga: <span class="price">12k</span></p>
+      <p class="muted">Admin Panel .</p>
+      <div style="margin-top:8px" class="row">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Order%20Admin%20Panel%20Pterodactyl%20(12k)" target="_blank">Beli via Telegram</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="space"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <h3>Layanan Lainnya</h3>
+  <div class="grid">
+
+    <div class="menu-item card">
+      <h4>Top Up (Game)</h4>
+      <p class="muted">Top up Free Fire / Mobile Legends dan game lain.</p>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20Top%20Up%20FF" target="_blank">Top Up FF (Telegram)</a>
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20Top%20Up%20ML" target="_blank">Top Up ML (Telegram)</a>
+      </div>
+    </div>
+
+    <div class="menu-item card">
+      <h4>Rename Script</h4>
+      <p class="muted">Order jasa rename / customizing script.</p>
+      <div style="margin-top:8px">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20order%20Rename%20Script" target="_blank">Order via Telegram</a>
+      </div>
+    </div>
+
+    <div class="menu-item card">
+      <h4>Script Bot</h4>
+      <p class="muted">Kumpulan script bot. Klik lihat untuk detail.</p>
+      <div style="margin-top:8px">
+        <button class="btn" onclick="openModal('scriptsModal')">Lihat Script</button>
+      </div>
+    </div>
+
+    <div class="menu-item card">
+      <h4>Sewa Bot</h4>
+      <p class="muted">Pilihan sewa bot untuk push kontak dan jaga grup .</p>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20sewa%20Bot%20Push%20Kontak%20Auto%20Save" target="_blank">Sewa Bot Push Kontak</a>
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20sewa%20Bot%20Jaga%20Grup" target="_blank">Sewa Bot Jaga Grup</a>
+      </div>
+    </div>
+
+    <div class="menu-item card">
+      <h4>Murband & Unband WhatsApp</h4>
+      <p class="muted">Layanan murband / unband pada platform WhatsApp.</p>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20Mau%20Join%20Murband" target="_blank">Murband (Telegram)</a>
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20Mau%20Unband%20WhatsApp" target="_blank">Unband WA (Telegram)</a>
+      </div>
+    </div>
+
+    <div class="menu-item card">
+      <h4>Nokos SV</h4>
+      <p class="muted">Layanan nokos server — order lewat Telegram.</p>
+      <div style="margin-top:8px">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Order%20Nokos" target="_blank">Order via Telegram</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="space"></div>
+
+<!-- INFO & TESTIMONIALS -->
+<section>
+  <div class="grid">
+    <div class="card menu-item">
+      <h4>Danzx JBR</h4>
+      <p class="muted">Danzx menyediakan layanan hosting, panel Pterodactyl, bot, script dan layanan terkait game & WhatsApp. Semua order difinalisasi melalui Telegram.</p>
+      <div style="margin-top:8px"><a class="btn" href="https://t.me/Danzx_JBR">Tanya via Telegram</a></div>
+    </div>
+
+    <div class="card menu-item" id="testimoni">
+      <h4>Testimoni Danzx</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+        <div class="testimonial">
+          <strong>DANZX JBR INFORMATION</strong>
+          <div class="muted">"Semua information Danzx ada di sini ya kak."</div>
+        </div>
+        <div class="testimonial">
+          <strong>DANZX TESTIMONI</strong>
+          <div class="muted">"semua testimoni Danzx JBR ada di saluran"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="muted">Catatan: Semua tombol yang mengarah ke Telegram menggunakan placeholder. Silakan ganti "YourTelegramUsername" di link dengan username Telegram Anda (contoh: t.me/DanzxSupport).</div>
+</footer>
+
+  </div>  <!-- MODAL: Scripts list -->  <div id="scriptsModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('scriptsModal')">
+    <div class="modal">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3>Daftar Script Bot</h3>
+        <button class="close" onclick="closeModal('scriptsModal')">✖</button>
+      </div>
+      <p class="muted">Pilih script yang diinginkan lalu lanjutkan pemesanan lewat Telegram.</p>
+      <ol>
+        <li><strong>Selfbot</strong></li>
+        <li><strong>Nika V14</strong></li>
+        <li><strong>Push Kontak Auto Save</strong></li>
+        <li><strong>Meribot</strong></li>
+        <li><strong>Danzx cPanel</strong></li>
+        <li><strong>Evelyne Mega Bot</strong></li>
+      </ol>
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20beli%20Sc)" target="_blank">Order via Telegram</a>
+        <button class="btn" onclick="closeModal('scriptsModal')">Tutup</button>
+      </div>
+    </div>
+  </div>  <script>
+    function openModal(id){document.getElementById(id).style.display='flex'}
+    function closeModal(id){document.getElementById(id).style.display='none'}
+
+    // small enhancement: deep-link buttons open in new tab
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal('scriptsModal') } })
+  </script></body>
+</html>
