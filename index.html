@@ -2,220 +2,212 @@
 
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Danzx JBR Store x Hosting</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Checkout — DANA / QRIS (Simulasi)</title>
   <style>
-    :root{--accent:#0066ff;--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--glass:rgba(255,255,255,0.04)}
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#071025 0%, #071827 100%);color:#e6eef8;margin:0;padding:24px}
-    .container{max-width:1100px;margin:0 auto}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-    header h1{font-size:20px;margin:0}
-    nav{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{background:var(--glass);border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:10px;color:inherit;text-decoration:none;cursor:pointer}
-    .hero{display:flex;gap:20px;align-items:center;margin-bottom:18px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-    .menu-item{padding:14px;border-radius:8px;background:var(--card)}
-    .muted{color:var(--muted);font-size:13px}
-    .price{font-weight:700;color:var(--accent)}
-    footer{margin-top:22px;color:var(--muted);font-size:13px}/* modal */
-.modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:40}
-.modal{background:#051428;padding:18px;border-radius:12px;max-width:520px;width:92%;border:1px solid rgba(255,255,255,0.04)}
-.modal h3{margin-top:0}
-.close{background:none;border:0;color:var(--muted);cursor:pointer}
-
-/* small helpers */
-.row{display:flex;gap:8px;align-items:center}
-.space{height:12px}
-.kbd{background:#061320;padding:6px 8px;border-radius:6px;font-size:12px;border:1px solid rgba(255,255,255,0.02)}
-.testimonial{background:linear-gradient(180deg,#061225,#051424);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
-
-.profile-pic{width:48px;height:48px;border-radius:50%;object-fit:cover;margin-right:10px;border:2px solid var(--accent)}
-
-@media (max-width:600px){header{flex-direction:column;align-items:flex-start;gap:8px}}
-
+    :root{--accent:#2563eb}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;margin:0;padding:20px;background:#f7f8fb;color:#111}
+    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(20,20,50,0.06);max-width:880px;margin:18px auto}
+    h1{font-size:20px;margin:0 0 12px}
+    .steps{display:flex;gap:8px;margin-bottom:12px}
+    .step{flex:1;padding:8px;border-radius:8px;text-align:center;background:#eef2ff;color:#3b3b7a}
+    .hidden{display:none}
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+    .product{border:1px solid #e6e9f2;border-radius:10px;padding:10px}
+    .center{text-align:center}
+    button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+    input[type=number]{width:70px}
+    .row{display:flex;gap:8px;align-items:center}
+    .right{text-align:right}
+    footer{font-size:13px;color:#666;margin-top:12px}
+    .muted{color:#666;font-size:13px}
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div style="display:flex;align-items:center;gap:10px">
-        <img src="https://files.catbox.moe/93gsif.jpg" alt="Foto Profil" class="profile-pic">
-        <div>
-          <h1>Danzx JBR Store × Hosting</h1>
-          <div class="muted">Solusi hosting, bot ~ dengan aman & terpercaya</div>
-        </div>
-      </div>
-      <nav>
-        <a class="btn" href="#hosting">Hosting</a>
-        <a class="btn" href="#services">Lainnya</a>
-        <a class="btn" href="#testimoni">Testimoni</a>
-      </nav>
-    </header><section class="hero card">
-  <div style="flex:1">
-    <h2 style="margin:0 0 8px 0">Selamat datang di Danzx JBR Store</h2>
-    <div class="muted">Pilih layanan lalu lanjutkan ke Telegram untuk menyelesaikan pemesanan.</div>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:8px">
-    <a class="btn" href="https://t.me/Danzx_JBR" target="_blank">Hubungi via Telegram</a>
-    <div class="kbd">fast respon</div>
+  <div class="card">
+    <h1>Demo Checkout multi-step — Pilih Produk & Bayar (DANA / QRIS)</h1>
+    <div class="steps">
+      <div id="step-pill-1" class="step">1. Buka Web</div>
+      <div id="step-pill-2" class="step">2. Pilih Produk</div>
+      <div id="step-pill-3" class="step">3. Checkout</div>
+      <div id="step-pill-4" class="step">4. Pembayaran</div>
+    </div><!-- STEP 1 -->
+<section id="step-1">
+  <p>Simulasi: halaman produk terbuka. Kamu bisa pilih produk manual, atau gunakan tombol "Auto-pilih" untuk memilih beberapa produk secara otomatis.</p>
+  <div class="row">
+    <button id="to-step-2">Lihat Produk</button>
+    <label style="margin-left:12px"><input type="checkbox" id="auto-open" /> Buka otomatis produk pada load (simulasi)</label>
   </div>
 </section>
 
-<div class="space"></div>
-
-<!-- HOSTING -->
-<section id="hosting">
-  <h3>Hosting</h3>
-  <div class="grid">
-    <div class="menu-item card">
-      <h4>Panel Pterodactyl</h4>
-      <p class="muted">Akses panel Pterodactyl untuk kelola bot kamu.</p>
-      <div class="row" style="margin-top:8px">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Order%20Panel%20Pterodactyl" target="_blank">Masuk ke Panel (Telegram)</a>
-      </div>
+<!-- STEP 2 -->
+<section id="step-2" class="hidden">
+  <div class="row" style="justify-content:space-between;margin-bottom:8px">
+    <div class="muted">Daftar produk</div>
+    <div class="row">
+      <button id="auto-select">Auto-pilih Produk</button>
+      <button id="to-cart">Lihat Keranjang</button>
     </div>
+  </div>
 
-    <div class="menu-item card">
-      <h4>Reseller Panel Pterodactyl</h4>
-      <p class="muted">Harga: <span class="price">10k</span></p>
-      <p class="muted">Cocok untuk reseller — bisa jualan panel.</p>
-      <div style="margin-top:8px" class="row">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20beli%20Reseller%20Panel%20Pterodactyl%20(10k)" target="_blank">Beli via Telegram</a>
-      </div>
+  <div class="products" id="products-list"></div>
+</section>
+
+<!-- STEP 3 CART -->
+<section id="step-3" class="hidden">
+  <h2>Keranjang</h2>
+  <div id="cart-items"></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+    <div class="muted">Pilih metode pembayaran:</div>
+    <div class="row">
+      <label><input type="radio" name="pay" value="dana" checked /> DANA</label>
+      <label style="margin-left:8px"><input type="radio" name="pay" value="qris" /> QRIS</label>
+      <button id="pay-now" style="margin-left:12px">Bayar & Arahkan</button>
     </div>
-
-    <div class="menu-item card">
-      <h4>Admin Panel Pterodactyl — bisa create panel sepuasnya</h4>
-      <p class="muted">Harga: <span class="price">12k</span></p>
-      <p class="muted">Admin Panel .</p>
-      <div style="margin-top:8px" class="row">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Order%20Admin%20Panel%20Pterodactyl%20(12k)" target="_blank">Beli via Telegram</a>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<div class="space"></div>
-
-<!-- SERVICES -->
-<section id="services">
-  <h3>Layanan Lainnya</h3>
-  <div class="grid">
-
-    <div class="menu-item card">
-      <h4>Top Up (Game)</h4>
-      <p class="muted">Top up Free Fire / Mobile Legends dan game lain.</p>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20Top%20Up%20FF" target="_blank">Top Up FF (Telegram)</a>
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20Top%20Up%20ML" target="_blank">Top Up ML (Telegram)</a>
-      </div>
-    </div>
-
-    <div class="menu-item card">
-      <h4>Rename Script</h4>
-      <p class="muted">Order jasa rename / customizing script.</p>
-      <div style="margin-top:8px">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20order%20Rename%20Script" target="_blank">Order via Telegram</a>
-      </div>
-    </div>
-
-    <div class="menu-item card">
-      <h4>Script Bot</h4>
-      <p class="muted">Kumpulan script bot. Klik lihat untuk detail.</p>
-      <div style="margin-top:8px">
-        <button class="btn" onclick="openModal('scriptsModal')">Lihat Script</button>
-      </div>
-    </div>
-
-    <div class="menu-item card">
-      <h4>Sewa Bot</h4>
-      <p class="muted">Pilihan sewa bot untuk push kontak dan jaga grup .</p>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20sewa%20Bot%20Push%20Kontak%20Auto%20Save" target="_blank">Sewa Bot Push Kontak</a>
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20sewa%20Bot%20Jaga%20Grup" target="_blank">Sewa Bot Jaga Grup</a>
-      </div>
-    </div>
-
-    <div class="menu-item card">
-      <h4>Murband & Unband WhatsApp</h4>
-      <p class="muted">Layanan murband / unband pada platform WhatsApp.</p>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20Mau%20Join%20Murband" target="_blank">Murband (Telegram)</a>
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20Mau%20Unband%20WhatsApp" target="_blank">Unband WA (Telegram)</a>
-      </div>
-    </div>
-
-    <div class="menu-item card">
-      <h4>Nokos SV</h4>
-      <p class="muted">Layanan nokos server — order lewat Telegram.</p>
-      <div style="margin-top:8px">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Order%20Nokos" target="_blank">Order via Telegram</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="space"></div>
-
-<!-- INFO & TESTIMONIALS -->
-<section>
-  <div class="grid">
-    <div class="card menu-item">
-      <h4>Danzx JBR</h4>
-      <p class="muted">Danzx menyediakan layanan hosting, panel Pterodactyl, bot, script dan layanan terkait game & WhatsApp. Semua order difinalisasi melalui Telegram.</p>
-      <div style="margin-top:8px"><a class="btn" href="https://t.me/Danzx_JBR">Tanya via Telegram</a></div>
-    </div>
-
-    <div class="card menu-item" id="testimoni">
-      <h4>Testimoni Danzx</h4>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-        <div class="testimonial">
-          <strong>DANZX JBR INFORMATION</strong>
-          <div class="muted">"Semua information Danzx ada di sini ya kak."</div>
-        </div>
-        <div class="testimonial">
-          <strong>DANZX TESTIMONI</strong>
-          <div class="muted">"semua testimoni Danzx JBR ada di saluran"</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- STEP 4 PAYMENT STATUS -->
+<section id="step-4" class="hidden">
+  <h2>Status Pembayaran</h2>
+  <p id="payment-status">Menunggu proses pembayaran...</p>
+  <div id="payment-data" class="muted"></div>
 </section>
 
 <footer>
-  <div class="muted">Catatan: Semua tombol yang mengarah ke Telegram menggunakan placeholder. Silakan ganti "YourTelegramUsername" di link dengan username Telegram Anda (contoh: t.me/DanzxSupport).</div>
+  <div>Catatan: ini adalah <strong>simulasi frontend</strong>. Untuk integrasi nyata DANA/QRIS kamu butuh backend & API resmi dari provider.</div>
 </footer>
 
-  </div>  <!-- MODAL: Scripts list -->  <div id="scriptsModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('scriptsModal')">
-    <div class="modal">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h3>Daftar Script Bot</h3>
-        <button class="close" onclick="closeModal('scriptsModal')">✖</button>
-      </div>
-      <p class="muted">Pilih script yang diinginkan lalu lanjutkan pemesanan lewat Telegram.</p>
-      <ol>
-        <li><strong>Selfbot</strong></li>
-        <li><strong>Nika V14</strong></li>
-        <li><strong>Push Kontak Auto Save</strong></li>
-        <li><strong>Meribot</strong></li>
-        <li><strong>Danzx cPanel</strong></li>
-        <li><strong>Evelyne Mega Bot</strong></li>
-      </ol>
-      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
-        <a class="btn" href="https://t.me/Danzx_JBR?text=Saya%20mau%20beli%20Sc)" target="_blank">Order via Telegram</a>
-        <button class="btn" onclick="closeModal('scriptsModal')">Tutup</button>
-      </div>
-    </div>
   </div>  <script>
-    function openModal(id){document.getElementById(id).style.display='flex'}
-    function closeModal(id){document.getElementById(id).style.display='none'}
+    // Produk sample
+    const products = [
+      {id:1, name:'Kaos Polos', price:55000},
+      {id:2, name:'Celana Jeans', price:120000},
+      {id:3, name:'Jaket Hoodie', price:185000},
+      {id:4, name:'Topi Baseball', price:45000},
+      {id:5, name:'Sepatu Sneakers', price:320000}
+    ];
 
-    // small enhancement: deep-link buttons open in new tab
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal('scriptsModal') } })
-  </script></body>
+    // Keranjang sederhana
+    let cart = [];
+
+    // UI helpers
+    const show = id => document.getElementById(id).classList.remove('hidden');
+    const hide = id => document.getElementById(id).classList.add('hidden');
+    const setActiveStepPill = n => {
+      [1,2,3,4].forEach(i=>document.getElementById('step-pill-'+i).style.background = i===n? 'linear-gradient(90deg,#e0e7ff,#c7d2fe)':'#eef2ff');
+    }
+
+    // Render daftar produk
+    function renderProducts(){
+      const list = document.getElementById('products-list');
+      list.innerHTML = '';
+      products.forEach(p=>{
+        const el = document.createElement('div'); el.className='product';
+        el.innerHTML = `<div><strong>${p.name}</strong></div>
+                        <div class="muted">Rp ${p.price.toLocaleString('id-ID')}</div>
+                        <div style="margin-top:8px" class="row">
+                          <label>Qty: <input type="number" min="0" value="0" data-id="${p.id}" style="margin-left:6px" /></label>
+                          <button data-add="${p.id}">Tambah</button>
+                        </div>`;
+        list.appendChild(el);
+      });
+
+      // attach handlers
+      list.querySelectorAll('[data-add]').forEach(btn=>btn.addEventListener('click',e=>{
+        const id = Number(e.currentTarget.dataset.add);
+        const input = document.querySelector(`input[data-id='${id}']`);
+        const qty = Number(input.value) || 0;
+        if(qty<=0){ alert('Silakan pilih qty > 0'); return; }
+        addToCart(id, qty);
+      }));
+    }
+
+    function addToCart(productId, qty){
+      const p = products.find(x=>x.id===productId);
+      const found = cart.find(x=>x.id===productId);
+      if(found) found.qty += qty; else cart.push({id:p.id, name:p.name, price:p.price, qty});
+      alert(qty + ' x ' + p.name + ' ditambahkan ke keranjang');
+    }
+
+    function renderCart(){
+      const container = document.getElementById('cart-items');
+      if(cart.length===0){ container.innerHTML = '<div class="muted">Keranjang kosong</div>'; return; }
+      let html = '<table style="width:100%"><thead><tr><th>Produk</th><th>Qty</th><th class="right">Subtotal</th></tr></thead><tbody>';
+      let total = 0;
+      cart.forEach(it=>{
+        const sub = it.price * it.qty; total += sub;
+        html += `<tr><td>${it.name}</td><td>${it.qty}</td><td class="right">Rp ${sub.toLocaleString('id-ID')}</td></tr>`;
+      });
+      html += `</tbody></table><div style="display:flex;justify-content:space-between;margin-top:12px"><strong>Total</strong><strong>Rp ${total.toLocaleString('id-ID')}</strong></div>`;
+      container.innerHTML = html;
+    }
+
+    // tombol & flow
+    document.getElementById('to-step-2').addEventListener('click', ()=>{
+      hide('step-1'); show('step-2'); setActiveStepPill(2);
+      renderProducts();
+    });
+
+    document.getElementById('auto-select').addEventListener('click', ()=>{
+      // Auto pilih 2 produk random
+      cart = [];
+      const picks = [products[Math.floor(Math.random()*products.length)], products[Math.floor(Math.random()*products.length)]];
+      picks.forEach(p=>cart.push({id:p.id,name:p.name,price:p.price,qty:1}));
+      alert('Auto-pilih selesai: 2 produk ditambahkan ke keranjang');
+    });
+
+    document.getElementById('to-cart').addEventListener('click', ()=>{
+      hide('step-2'); show('step-3'); setActiveStepPill(3);
+      renderCart();
+    });
+
+    document.getElementById('pay-now').addEventListener('click', ()=>{
+      if(cart.length===0){ alert('Keranjang kosong — pilih produk dulu'); return; }
+      const method = document.querySelector('input[name=pay]:checked').value;
+      const amount = cart.reduce((s,i)=>s+i.qty*i.price,0);
+      // Siapkan payload pembayaran — di implementasi nyata kirim ke backend
+      const payload = {orderId: 'ORD'+Date.now(), amount, method, items: cart};
+      // Arahkan ke halaman/payment provider (simulasi)
+      openPaymentWindow(payload);
+      hide('step-3'); show('step-4'); setActiveStepPill(4);
+      document.getElementById('payment-status').innerText = 'Mengalihkan ke provider pembayaran ('+method.toUpperCase()+')...';
+      document.getElementById('payment-data').innerText = JSON.stringify(payload, null, 2);
+    });
+
+    // Simulasi membuka halaman provider (menggunakan blob URL) — pada integrasi nyata: redirect ke endpoint server / provider
+    function openPaymentWindow(payload){
+      const {method, amount, orderId} = payload;
+      const html = `<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Pembayaran (${method.toUpperCase()})</title></head><body style=\"font-family:Arial;padding:20px\">`+
+        `<h2>Pembayaran (Simulasi) - ${method.toUpperCase()}</h2>`+
+        `<p>Order: <strong>${orderId}</strong></p>`+
+        `<p>Jumlah: <strong>Rp ${amount.toLocaleString('id-ID')}</strong></p>`+
+        `${method==='qris'? '<p>Scan QR berikut (simulasi)</p><div style=\"width:200px;height:200px;background:#eee;display:flex;align-items:center;justify-content:center;border:1px solid #ddd\">QRIS</div>':''}
+        <div style=\"margin-top:18px\">`+
+        `<button id=\"paybtn\">Simulasikan Pembayaran Sukses</button>`+
+        `</div>`+
+        `<script>document.getElementById('paybtn').addEventListener('click', ()=>{ window.opener.postMessage({status:'success', orderId:'${orderId}', method:'${method}'}, '*'); window.close(); });</script>`+`</body></html>`;
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
+
+// Menerima pesan dari jendela pembayaran simulasi
+window.addEventListener('message', e=>{
+  if(!e.data || !e.data.status) return;
+  if(e.data.status === 'success'){
+    document.getElementById('payment-status').innerText = 'Pembayaran berhasil! (Order: '+e.data.orderId+', Metode: '+e.data.method.toUpperCase()+')';
+    // di implementasi nyata: refresh status dari server, verifikasi signature, dsb.
+    cart = []; // kosongkan keranjang
+  }
+});
+
+// autoplay open if checkbox set
+window.addEventListener('load', ()=>{
+  if(document.getElementById('auto-open').checked){ document.getElementById('to-step-2').click(); }
+});
+
+  </script>
+</body>
 </html>
