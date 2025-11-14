@@ -1,213 +1,399 @@
 <!doctype html>
-
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Demo Checkout — DANA / QRIS (Simulasi)</title>
+  <title>Danzx Official — Gold Luxury</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--accent:#2563eb}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;margin:0;padding:20px;background:#f7f8fb;color:#111}
-    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(20,20,50,0.06);max-width:880px;margin:18px auto}
-    h1{font-size:20px;margin:0 0 12px}
-    .steps{display:flex;gap:8px;margin-bottom:12px}
-    .step{flex:1;padding:8px;border-radius:8px;text-align:center;background:#eef2ff;color:#3b3b7a}
-    .hidden{display:none}
-    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-    .product{border:1px solid #e6e9f2;border-radius:10px;padding:10px}
-    .center{text-align:center}
-    button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
-    input[type=number]{width:70px}
-    .row{display:flex;gap:8px;align-items:center}
-    .right{text-align:right}
-    footer{font-size:13px;color:#666;margin-top:12px}
-    .muted{color:#666;font-size:13px}
+    :root{
+      --bg-1:#050404;
+      --bg-2:#0b0a09;
+      --card:#0f0d0b;
+      --muted:#c9c0b6;
+      --gold:#caa84a;
+      --gold-2:#ffd46b;
+      --accent-shadow: 0 8px 30px rgba(202,168,74,0.12);
+      --radius:14px;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Outer container */
+    .site{max-width:980px;margin:18px auto;padding:14px}
+
+    /* NAV (sticky) */
+    .nav{
+      position:sticky;top:12px;z-index:80;padding:12px;border-radius:12px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      display:flex;align-items:center;gap:12px;box-shadow:var(--accent-shadow);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:52px;height:52px;border-radius:10px;object-fit:cover;border:2px solid rgba(202,168,74,0.12);box-shadow:0 6px 18px rgba(202,168,74,0.06)}
+    .brand h1{font-size:18px;margin:0;letter-spacing:0.4px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    .tabs{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .tab{
+      padding:8px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+      background:transparent;color:var(--muted);font-weight:700;cursor:pointer;transition:all .28s;
+      position:relative;overflow:hidden;
+    }
+    .tab:hover{transform:translateY(-3px)}
+    .tab.active{
+      color:#0b0a09;background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      box-shadow:0 8px 24px rgba(255,212,120,0.12);
+    }
+    /* gold shimmer on active */
+    .tab.active::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent);
+      transform:translateX(-120%);animation:shimmer .9s linear infinite;
+    }
+    @keyframes shimmer{to{transform:translateX(120%)}} 
+
+    /* main */
+    .main{padding:18px}
+    .page{display:none;opacity:0;transform:translateY(10px);transition:opacity .36s,transform .36s}
+    .page.show{display:block;opacity:1;transform:translateY(0)}
+
+    /* card */
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));
+      border-radius:var(--radius);padding:16px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.03);
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    /* product grid */
+    .prod-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+    .prod{
+      background:linear-gradient(180deg, rgba(202,168,74,0.02), rgba(0,0,0,0.04));
+      padding:12px;border-radius:12px;border:1px solid rgba(202,168,74,0.06);
+      transition:transform .22s, box-shadow .22s;cursor:default;
+    }
+    .prod:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(202,168,74,0.06)}
+    .prod .title{font-weight:800;color:var(--gold);margin-bottom:6px}
+    .prod .meta{color:var(--muted);font-size:14px}
+
+    /* buttons (gold) */
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;
+      text-decoration:none;font-weight:800;cursor:pointer;border:1px solid rgba(255,255,255,0.04);
+      transition:transform .18s,box-shadow .18s;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.gold{
+      background:linear-gradient(90deg,var(--gold),var(--gold-2));
+      color:#0b0a09;box-shadow:0 10px 30px rgba(202,168,74,0.12);
+    }
+    .btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+    .btn.tg{background:linear-gradient(90deg,#0088cc,#0066a2);color:#fff}
+    .btn.copy{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#0b0a09}
+
+    /* headings */
+    h2.section{color:var(--gold);margin:0 0 6px 0}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* QRIS image */
+    .qris-wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px}
+    .qris-img{max-width:220px;border-radius:12px;cursor:pointer;border:6px solid rgba(202,168,74,0.06);box-shadow:0 8px 30px rgba(202,168,74,0.06)}
+    .qris-img.hidden{display:none}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(4,3,2,0.78);visibility:hidden;opacity:0;transition:opacity .2s;z-index:200}
+    .modal.show{visibility:visible;opacity:1}
+    .modal-inner{position:relative;max-width:94vw}
+    .modal img{max-width:88vw;max-height:88vh;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,0.7)}
+    .modal .close{position:absolute;top:-18px;right:-18px;background:linear-gradient(90deg,#333, #111);color:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;font-weight:800}
+
+    /* testimonial cards */
+    .testi{display:grid;gap:10px}
+    .testi-item{background:linear-gradient(180deg, rgba(202,168,74,0.02), rgba(0,0,0,0.04));padding:12px;border-radius:12px;border:1px solid rgba(202,168,74,0.06);box-shadow:0 10px 30px rgba(202,168,74,0.04)}
+    .testi-item p{color:var(--muted);margin:0}
+    .testi-item b{color:var(--gold)}
+
+    /* responsive */
+    @media (max-width:720px){
+      .brand h1{font-size:15px}
+      .qris-img{max-width:160px}
+      .prod-list{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+    }
+
+    /* small gold shimmer animation on cards */
+    @keyframes shimmer-card {
+      0%{background-position:-200px 0}
+      100%{background-position:200px 0}
+    }
+    .card.shimmer::after{
+      content:"";position:absolute;left:0;right:0;top:0;bottom:0;border-radius:var(--radius);
+      background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.03),rgba(255,255,255,0));
+      mix-blend-mode:overlay;pointer-events:none;animation:shimmer-card 1.2s linear infinite;
+    }
+
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Demo Checkout multi-step — Pilih Produk & Bayar (DANA / QRIS)</h1>
-    <div class="steps">
-      <div id="step-pill-1" class="step">1. Buka Web</div>
-      <div id="step-pill-2" class="step">2. Pilih Produk</div>
-      <div id="step-pill-3" class="step">3. Checkout</div>
-      <div id="step-pill-4" class="step">4. Pembayaran</div>
-    </div><!-- STEP 1 -->
-<section id="step-1">
-  <p>Simulasi: halaman produk terbuka. Kamu bisa pilih produk manual, atau gunakan tombol "Auto-pilih" untuk memilih beberapa produk secara otomatis.</p>
-  <div class="row">
-    <button id="to-step-2">Lihat Produk</button>
-    <label style="margin-left:12px"><input type="checkbox" id="auto-open" /> Buka otomatis produk pada load (simulasi)</label>
-  </div>
-</section>
+  <div class="site">
+    <nav class="nav">
+      <div class="brand" style="gap:10px">
+        <img src="https://files.catbox.moe/kmw5cv.jpg" alt="Danzx Logo">
+        <div>
+          <h1>Danzx Official</h1>
+          <p class="muted">Gold Luxury • VPS • Panel • Script</p>
+        </div>
+      </div>
 
-<!-- STEP 2 -->
-<section id="step-2" class="hidden">
-  <div class="row" style="justify-content:space-between;margin-bottom:8px">
-    <div class="muted">Daftar produk</div>
-    <div class="row">
-      <button id="auto-select">Auto-pilih Produk</button>
-      <button id="to-cart">Lihat Keranjang</button>
+      <div class="tabs" role="tablist" aria-label="Navigasi halaman">
+        <button class="tab" data-page="vps">VPS</button>
+        <button class="tab" data-page="produk">Produk</button>
+        <button class="tab" data-page="payment">Payment</button>
+        <button class="tab" data-page="testi">Testimoni</button>
+      </div>
+    </nav>
+
+    <main class="main">
+      <!-- PAGE VPS -->
+      <section id="vps" class="page">
+        <div class="card">
+          <h2 class="section">Ready VPS — DigitalOcean (High Quality)</h2>
+          <div class="muted" style="margin-top:6px">Pilihan paket VPS, stabil & cepat</div>
+          <hr>
+          <div class="prod-list" aria-hidden="false">
+            <div class="prod"><div class="title">Ram 4 Core 2</div><div class="meta">Rp25.000 <span class="status open">• Open</span></div></div>
+            <div class="prod"><div class="title">Ram 8 Core 4</div><div class="meta">Rp30.000 <span class="status open">• Open</span></div></div>
+            <div class="prod"><div class="title">Ram 16 Core 4</div><div class="meta">Rp40.000 <span class="status open">• Open</span></div></div>
+            <div class="prod"><div class="title">Ram 16 Core 8</div><div class="meta">Rp45.000 <span class="status open">• Open</span></div></div>
+            <div class="prod"><div class="title">Ram 32 Core 8</div><div class="meta">Rp60.000 <span class="status close">• Close</span></div></div>
+          </div>
+
+          <div style="margin-top:12px;color:var(--muted)">
+            <strong>Benefit Pembelian:</strong>
+            <ul>
+              <li>High Quality, Awet Dan Stabil</li>
+              <li>Free Install Anti Rusuh</li>
+              <li>Free Install Panel Pterodactyl</li>
+              <li>Free Thema (Ram 8 - 16)</li>
+              <li>Free Request Domain Panel</li>
+              <li>Free Request Region dan OS</li>
+              <li>Masa Aktif VPS 25-30 Hari</li>
+              <li>Garansi 10 Hari (1x Replace)</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn gold" href="https://wa.me/message/MIDAD7UGMG6JE1" target="_blank">Pesan via WhatsApp</a>
+            <a class="btn tg" href="https://t.me/Danzx_Official" target="_blank">Hubungi via Telegram</a>
+            <a class="btn ghost" href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank">Lihat Testimoni</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE PRODUK -->
+      <section id="produk" class="page">
+        <!-- Panel -->
+        <div class="card">
+          <h2 class="section">Produk — Panel</h2>
+          <div class="muted" style="margin-top:6px">Panel Pterodactyl & panel layanan</div>
+          <hr>
+          <div class="prod-list">
+            <div class="prod"><div class="title">Panel Pterodactyl 1–10GB</div><div class="meta">Rp2.000 – Rp9.000</div></div>
+            <div class="prod"><div class="title">Panel Pterodactyl Unlimited</div><div class="meta">Rp10.000</div></div>
+            <div class="prod"><div class="title">Reseller Panel</div><div class="meta">Rp14.000</div></div>
+            <div class="prod"><div class="title">Admin Panel</div><div class="meta">Rp16.000</div></div>
+            <div class="prod"><div class="title">PT Panel</div><div class="meta">Rp25.000</div></div>
+            <div class="prod"><div class="title">Owner Panel</div><div class="meta">Rp30.000</div></div>
+            <div class="prod"><div class="title">Tangan Kanan Panel</div><div class="meta">Rp35.000</div></div>
+          </div>
+        </div>
+
+        <!-- Script -->
+        <div class="card">
+          <h2 class="section">Produk — Script</h2>
+          <div class="muted" style="margin-top:6px">Script & lisensi</div>
+          <hr>
+          <div class="prod-list">
+            <div class="prod"><div class="title">Script Danzo MD (Free Update)</div><div class="meta">Rp40.000</div></div>
+            <div class="prod"><div class="title">Reseller Script Danzo MD</div><div class="meta">Rp100.000</div></div>
+            <div class="prod"><div class="title">Script Selfbot</div><div class="meta">Rp25.000</div></div>
+            <div class="prod"><div class="title">Script Push Kontak</div><div class="meta">Rp15.000</div></div>
+            <div class="prod"><div class="title">Script Alice Assistant</div><div class="meta">Rp35.000</div></div>
+            <div class="prod"><div class="title">Script Ochobotz</div><div class="meta">Rp25.000</div></div>
+            <div class="prod"><div class="title">Reseller Script Ochobotz</div><div class="meta">Rp35.000</div></div>
+            <div class="prod"><div class="title">Script Protect Panel</div><div class="meta">Rp25.000</div></div>
+            <div class="prod"><div class="title">Script Bug Nika</div><div class="meta">Rp25.000</div></div>
+            <div class="prod"><div class="title">Script Bug Justin</div><div class="meta">Rp20.000</div></div>
+            <div class="prod"><div class="title">Script Vairezyne</div><div class="meta">Rp15.000</div></div>
+            <div class="prod"><div class="title">Reseller Vairezyne</div><div class="meta">Rp25.000</div></div>
+          </div>
+        </div>
+
+        <!-- Jasa & lainnya -->
+        <div class="card">
+          <h2 class="section">Jasa & Lainnya</h2>
+          <div class="muted" style="margin-top:6px">Install, rename, push channel, admin saluran</div>
+          <hr>
+          <div class="prod-list">
+            <div class="prod"><div class="title">Install Panel</div><div class="meta">Rp5.000</div></div>
+            <div class="prod"><div class="title">Install Protect</div><div class="meta">Rp5.000</div></div>
+            <div class="prod"><div class="title">Jasa Rename Bot / Script</div><div class="meta">Rp5.000 – Rp10.000</div></div>
+            <div class="prod"><div class="title">Jasa Push Channel</div><div class="meta">Rp10.000</div></div>
+            <div class="prod"><div class="title">Admin Saluran WhatsApp</div><div class="meta">Rp10.000 – Rp15.000</div></div>
+            <div class="prod"><div class="title">Saluran WhatsApp</div><div class="meta">Hubungi Admin</div></div>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn gold" href="https://wa.me/message/MIDAD7UGMG6JE1" target="_blank">Pesan via WhatsApp</a>
+            <a class="btn tg" href="https://t.me/Danzx_Official" target="_blank">Hubungi via Telegram</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE PAYMENT -->
+      <section id="payment" class="page">
+        <div class="card">
+          <h2 class="section">Payment — Danzx Official</h2>
+          <div class="muted" style="margin-top:6px">Metode pembayaran resmi</div>
+          <hr>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <div style="min-width:220px">
+              <div class="muted">Nama Dana</div>
+              <div style="font-weight:800;font-size:16px;color:var(--gold)">Masrofi'ah</div>
+              <div style="margin-top:6px;font-weight:800;color:#fff" id="danaNumber">08133124186</div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn copy" onclick="copyDana()">Salin Nomor</button>
+              <a class="btn gold" href="https://wa.me/message/MIDAD7UGMG6JE1" target="_blank">Konfirmasi via WhatsApp</a>
+              <a class="btn tg" href="https://t.me/Danzx_Official" target="_blank">Konfirmasi via Telegram</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0;color:var(--gold)">QRIS</h3>
+          <div class="muted" style="margin-top:6px">Klik tampilkan lalu ketuk gambar untuk preview dan simpan</div>
+          <div class="qris-wrap">
+            <button class="btn gold" id="toggleQrisBtn" onclick="toggleQris()">Tampilkan QRIS</button>
+            <img id="qrisImage" class="qris-img hidden" src="https://files.catbox.moe/sx9cc2.jpg" alt="QRIS Danzx" onclick="openModal()" />
+            <button class="btn copy" onclick="downloadQris()">⬇️ Simpan / Download</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE TESTIMONI -->
+      <section id="testi" class="page">
+        <div class="card">
+          <h2 class="section">Testimoni Pelanggan</h2>
+          <div class="muted" style="margin-top:6px">Suara pengguna & reseller</div>
+          <hr>
+          <div class="testi">
+            <div class="testi-item"><p>“VPS sangat stabil, respon admin cepat.”</p><b>- Riyan</b></div>
+            <div class="testi-item"><p>“Script Danzo MD mantap, update rutin & support ramah.”</p><b>- Fajar</b></div>
+            <div class="testi-item"><p>“Order panel lancar, ga pernah zonk.”</p><b>- Naufal</b></div>
+            <div class="testi-item"><p>“Bantuan install sampai beres. Recommended.”</p><b>- Andi</b></div>
+          </div>
+          <div style="margin-top:12px">
+            <a class="btn gold" href="https://wa.me/message/MIDAD7UGMG6JE1" target="_blank">Kirim Testimoni via WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal (QRIS preview) -->
+  <div id="qrisModal" class="modal" onclick="modalClick(event)">
+    <div class="modal-inner">
+      <button class="close" onclick="closeModal()">×</button>
+      <img id="qrisModalImg" src="https://files.catbox.moe/sx9cc2.jpg" alt="QRIS Large">
     </div>
   </div>
 
-  <div class="products" id="products-list"></div>
-</section>
+  <script>
+    // Navigation & pages
+    const tabs = document.querySelectorAll('.tab');
+    const pages = document.querySelectorAll('.page');
 
-<!-- STEP 3 CART -->
-<section id="step-3" class="hidden">
-  <h2>Keranjang</h2>
-  <div id="cart-items"></div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-    <div class="muted">Pilih metode pembayaran:</div>
-    <div class="row">
-      <label><input type="radio" name="pay" value="dana" checked /> DANA</label>
-      <label style="margin-left:8px"><input type="radio" name="pay" value="qris" /> QRIS</label>
-      <button id="pay-now" style="margin-left:12px">Bayar & Arahkan</button>
-    </div>
-  </div>
-</section>
-
-<!-- STEP 4 PAYMENT STATUS -->
-<section id="step-4" class="hidden">
-  <h2>Status Pembayaran</h2>
-  <p id="payment-status">Menunggu proses pembayaran...</p>
-  <div id="payment-data" class="muted"></div>
-</section>
-
-<footer>
-  <div>Catatan: ini adalah <strong>simulasi frontend</strong>. Untuk integrasi nyata DANA/QRIS kamu butuh backend & API resmi dari provider.</div>
-</footer>
-
-  </div>  <script>
-    // Produk sample
-    const products = [
-      {id:1, name:'Kaos Polos', price:55000},
-      {id:2, name:'Celana Jeans', price:120000},
-      {id:3, name:'Jaket Hoodie', price:185000},
-      {id:4, name:'Topi Baseball', price:45000},
-      {id:5, name:'Sepatu Sneakers', price:320000}
-    ];
-
-    // Keranjang sederhana
-    let cart = [];
-
-    // UI helpers
-    const show = id => document.getElementById(id).classList.remove('hidden');
-    const hide = id => document.getElementById(id).classList.add('hidden');
-    const setActiveStepPill = n => {
-      [1,2,3,4].forEach(i=>document.getElementById('step-pill-'+i).style.background = i===n? 'linear-gradient(90deg,#e0e7ff,#c7d2fe)':'#eef2ff');
-    }
-
-    // Render daftar produk
-    function renderProducts(){
-      const list = document.getElementById('products-list');
-      list.innerHTML = '';
-      products.forEach(p=>{
-        const el = document.createElement('div'); el.className='product';
-        el.innerHTML = `<div><strong>${p.name}</strong></div>
-                        <div class="muted">Rp ${p.price.toLocaleString('id-ID')}</div>
-                        <div style="margin-top:8px" class="row">
-                          <label>Qty: <input type="number" min="0" value="0" data-id="${p.id}" style="margin-left:6px" /></label>
-                          <button data-add="${p.id}">Tambah</button>
-                        </div>`;
-        list.appendChild(el);
+    function setActive(pageId){
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.page === pageId));
+      pages.forEach(p => {
+        if(p.id === pageId){ p.classList.add('show'); p.style.display='block'; }
+        else { p.classList.remove('show'); setTimeout(()=>{ p.style.display='none'; }, 320); }
       });
+    }
+    tabs.forEach(t => t.addEventListener('click', ()=> setActive(t.dataset.page)));
+    // default
+    document.addEventListener('DOMContentLoaded', ()=> setActive('vps'));
 
-      // attach handlers
-      list.querySelectorAll('[data-add]').forEach(btn=>btn.addEventListener('click',e=>{
-        const id = Number(e.currentTarget.dataset.add);
-        const input = document.querySelector(`input[data-id='${id}']`);
-        const qty = Number(input.value) || 0;
-        if(qty<=0){ alert('Silakan pilih qty > 0'); return; }
-        addToCart(id, qty);
-      }));
+    // Copy Dana
+    function copyDana(){
+      const num = document.getElementById('danaNumber').innerText.trim();
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(num).then(()=> toast('Nomor Dana disalin ✅'));
+      } else {
+        alert('Silakan salin manual: ' + num);
+      }
     }
 
-    function addToCart(productId, qty){
-      const p = products.find(x=>x.id===productId);
-      const found = cart.find(x=>x.id===productId);
-      if(found) found.qty += qty; else cart.push({id:p.id, name:p.name, price:p.price, qty});
-      alert(qty + ' x ' + p.name + ' ditambahkan ke keranjang');
+    // QRIS toggle + modal + download
+    const qrisImage = document.getElementById('qrisImage');
+    const toggleQrisBtn = document.getElementById('toggleQrisBtn');
+    const modal = document.getElementById('qrisModal');
+    function toggleQris(){
+      const visible = qrisImage.classList.contains('hidden') === false;
+      if(visible){
+        qrisImage.classList.add('hidden');
+        toggleQrisBtn.innerText = 'Tampilkan QRIS';
+      } else {
+        qrisImage.classList.remove('hidden');
+        toggleQrisBtn.innerText = 'Sembunyikan QRIS';
+        setTimeout(()=> qrisImage.scrollIntoView({behavior:'smooth', block:'center'}),120);
+      }
+    }
+    function openModal(){
+      modal.classList.add('show');
+      document.body.style.overflow='hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('show');
+      document.body.style.overflow='';
+    }
+    function modalClick(e){ if(e.target === modal) closeModal(); }
+
+    function downloadQris(){
+      const src = qrisImage.src || document.getElementById('qrisModalImg').src;
+      fetch(src).then(r => r.blob()).then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'QRIS_DanzxOfficial.jpg';
+        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      }).catch(()=>{ window.open(src, '_blank'); });
     }
 
-    function renderCart(){
-      const container = document.getElementById('cart-items');
-      if(cart.length===0){ container.innerHTML = '<div class="muted">Keranjang kosong</div>'; return; }
-      let html = '<table style="width:100%"><thead><tr><th>Produk</th><th>Qty</th><th class="right">Subtotal</th></tr></thead><tbody>';
-      let total = 0;
-      cart.forEach(it=>{
-        const sub = it.price * it.qty; total += sub;
-        html += `<tr><td>${it.name}</td><td>${it.qty}</td><td class="right">Rp ${sub.toLocaleString('id-ID')}</td></tr>`;
+    // small toast
+    function toast(msg){
+      const el = document.createElement('div');
+      el.innerText = msg;
+      Object.assign(el.style,{
+        position:'fixed',right:'20px',bottom:'20px',background:'rgba(0,0,0,0.6)',
+        color:'#fff',padding:'10px 14px',borderRadius:'10px',zIndex:9999,boxShadow:'0 8px 22px rgba(0,0,0,0.6)'
       });
-      html += `</tbody></table><div style="display:flex;justify-content:space-between;margin-top:12px"><strong>Total</strong><strong>Rp ${total.toLocaleString('id-ID')}</strong></div>`;
-      container.innerHTML = html;
+      document.body.appendChild(el);
+      setTimeout(()=> el.style.opacity='0',1600);
+      setTimeout(()=> el.remove(),2000);
     }
 
-    // tombol & flow
-    document.getElementById('to-step-2').addEventListener('click', ()=>{
-      hide('step-1'); show('step-2'); setActiveStepPill(2);
-      renderProducts();
+    // Accessibility: keyboard nav for tabs (Enter / Space)
+    tabs.forEach(t=>{
+      t.tabIndex = 0;
+      t.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' '){ e.preventDefault(); t.click(); } });
     });
-
-    document.getElementById('auto-select').addEventListener('click', ()=>{
-      // Auto pilih 2 produk random
-      cart = [];
-      const picks = [products[Math.floor(Math.random()*products.length)], products[Math.floor(Math.random()*products.length)]];
-      picks.forEach(p=>cart.push({id:p.id,name:p.name,price:p.price,qty:1}));
-      alert('Auto-pilih selesai: 2 produk ditambahkan ke keranjang');
-    });
-
-    document.getElementById('to-cart').addEventListener('click', ()=>{
-      hide('step-2'); show('step-3'); setActiveStepPill(3);
-      renderCart();
-    });
-
-    document.getElementById('pay-now').addEventListener('click', ()=>{
-      if(cart.length===0){ alert('Keranjang kosong — pilih produk dulu'); return; }
-      const method = document.querySelector('input[name=pay]:checked').value;
-      const amount = cart.reduce((s,i)=>s+i.qty*i.price,0);
-      // Siapkan payload pembayaran — di implementasi nyata kirim ke backend
-      const payload = {orderId: 'ORD'+Date.now(), amount, method, items: cart};
-      // Arahkan ke halaman/payment provider (simulasi)
-      openPaymentWindow(payload);
-      hide('step-3'); show('step-4'); setActiveStepPill(4);
-      document.getElementById('payment-status').innerText = 'Mengalihkan ke provider pembayaran ('+method.toUpperCase()+')...';
-      document.getElementById('payment-data').innerText = JSON.stringify(payload, null, 2);
-    });
-
-    // Simulasi membuka halaman provider (menggunakan blob URL) — pada integrasi nyata: redirect ke endpoint server / provider
-    function openPaymentWindow(payload){
-      const {method, amount, orderId} = payload;
-      const html = `<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Pembayaran (${method.toUpperCase()})</title></head><body style=\"font-family:Arial;padding:20px\">`+
-        `<h2>Pembayaran (Simulasi) - ${method.toUpperCase()}</h2>`+
-        `<p>Order: <strong>${orderId}</strong></p>`+
-        `<p>Jumlah: <strong>Rp ${amount.toLocaleString('id-ID')}</strong></p>`+
-        `${method==='qris'? '<p>Scan QR berikut (simulasi)</p><div style=\"width:200px;height:200px;background:#eee;display:flex;align-items:center;justify-content:center;border:1px solid #ddd\">QRIS</div>':''}
-        <div style=\"margin-top:18px\">`+
-        `<button id=\"paybtn\">Simulasikan Pembayaran Sukses</button>`+
-        `</div>`+
-        `<script>document.getElementById('paybtn').addEventListener('click', ()=>{ window.opener.postMessage({status:'success', orderId:'${orderId}', method:'${method}'}, '*'); window.close(); });</script>`+`</body></html>`;
-  const blob = new Blob([html], {type:'text/html'});
-  const url = URL.createObjectURL(blob);
-  window.open(url, '_blank');
-}
-
-// Menerima pesan dari jendela pembayaran simulasi
-window.addEventListener('message', e=>{
-  if(!e.data || !e.data.status) return;
-  if(e.data.status === 'success'){
-    document.getElementById('payment-status').innerText = 'Pembayaran berhasil! (Order: '+e.data.orderId+', Metode: '+e.data.method.toUpperCase()+')';
-    // di implementasi nyata: refresh status dari server, verifikasi signature, dsb.
-    cart = []; // kosongkan keranjang
-  }
-});
-
-// autoplay open if checkbox set
-window.addEventListener('load', ()=>{
-  if(document.getElementById('auto-open').checked){ document.getElementById('to-step-2').click(); }
-});
-
   </script>
 </body>
-</html>
+            </html>
