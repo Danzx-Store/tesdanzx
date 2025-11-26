@@ -1,321 +1,168 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Danzx Official</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contoh Button + Popup — Danzx Official</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#94a3b8;--glass: rgba(255,255,255,0.04)}
+    *{box-sizing:border-box}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;min-height:100vh;margin:0;background:linear-gradient(180deg,#071124 0%,#071935 60%);color:#e6eef8;display:flex;align-items:center;justify-content:center;padding:32px}
 
-<style>
-/* ---------------------- GLOBAL STYLE ---------------------- */
+    .container{width:100%;max-width:960px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));backdrop-filter: blur(6px);border-radius:14px;padding:36px;box-shadow:0 8px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
 
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #fff8e6;
-    color: #3a2a00;
-}
+    h1{margin:0 0 8px;font-size:20px}
+    p.lead{margin:0 0 20px;color:var(--muted)}
 
-/* Premium Gold Gradient */
-.gold {
-    background: linear-gradient(135deg, #f7d774, #ffedb7, #d1a234);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+    .controls{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{appearance:none;border:0;padding:12px 18px;border-radius:10px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#4f46e5);color:white;box-shadow:0 6px 18px rgba(124,58,237,0.24);transition:transform .12s ease,box-shadow .12s ease}
+    .btn-primary:active{transform:translateY(1px)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
 
-/* Container */
-.page {
-    display: none;
-    padding: 25px;
-    animation: fadeIn 0.6s ease-in-out;
-}
+    /* Modal styles */
+    .overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.6),rgba(2,6,23,0.75));display:flex;align-items:center;justify-content:center;padding:32px;z-index:100;opacity:0;pointer-events:none;transition:opacity .18s ease}
+    .overlay.visible{opacity:1;pointer-events:auto}
+    .modal{width:100%;max-width:640px;background:linear-gradient(180deg,#071428 0%,#061827 100%);border-radius:14px;padding:22px 22px 18px;box-shadow:0 20px 60px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.04);transform:translateY(12px) scale(.98);opacity:0;transition:transform .18s cubic-bezier(.2,.9,.2,1),opacity .18s ease}
+    .overlay.visible .modal{transform:none;opacity:1}
 
-.active {
-    display: block;
-}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .modal-title{font-size:16px;margin:0}
+    .close{background:transparent;border:0;color:var(--muted);font-weight:700;cursor:pointer;padding:8px;border-radius:8px}
+    .close:focus{outline:2px solid rgba(124,58,237,0.35)}
 
-/* Fade Animation */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(15px);}
-    to {opacity: 1; transform: translateY(0);}
-}
+    .modal-body{margin-top:14px;color:var(--muted);line-height:1.5}
 
-/* ---------------------- NAVBAR ---------------------- */
+    .kbd{background:var(--glass);padding:6px 8px;border-radius:8px;font-weight:700;color:#dfe8ff;border:1px solid rgba(255,255,255,0.03);font-size:13px}
 
-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #ffffffcc;
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-around;
-    padding: 14px 0;
-    border-top: 2px solid #d1a234;
-}
+    /* small responsive tweaks */
+    @media (max-width:520px){.card{padding:22px}.btn{width:100%;justify-content:center}}
 
-nav button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 12px;
-    background: #d1a234;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 0 8px #d1a234aa;
-}
-
-nav button:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 15px #ffdf82;
-}
-
-/* ---------------------- Header Card ---------------------- */
-
-.header-card {
-    text-align: center;
-    padding: 25px;
-    background: #fff3d1;
-    border-radius: 20px;
-    border: 2px solid #d1a234;
-    box-shadow: 0 0 15px #ffdd91;
-}
-
-.header-card img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 3px solid #d1a234;
-    box-shadow: 0 0 15px #ffdf82;
-}
-
-/* ---------------------- Item Box ---------------------- */
-
-.box {
-    background: white;
-    border: 2px solid #d1a234;
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 0 12px #ffdf82aa;
-    animation: fadeIn 0.6s ease;
-}
-
-/* ---------------------- Premium Gold Button ---------------------- */
-
-.btn-gold {
-    display: inline-block;
-    padding: 12px 18px;
-    background: linear-gradient(135deg, #d1a234, #f7d774, #d1a234);
-    background-size: 300%;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 12px;
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    box-shadow: 0 0 10px #ffdf82aa;
-    animation: shine 3s infinite linear;
-}
-
-@keyframes shine {
-    0% { background-position: 0% }
-    100% { background-position: 300% }
-}
-
-.btn-gold:hover {
-    transform: scale(1.05);
-}
-
-/* ---------------------- Popup QRIS ---------------------- */
-
-.qris-popup {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: #00000090;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.qris-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 18px;
-    width: 90%;
-    max-width: 350px;
-    text-align: center;
-    border: 2px solid #d1a234;
-    box-shadow: 0 0 20px #ffdf82;
-}
-
-.qris-box img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-/* Copy Button */
-.copy-btn {
-    padding: 10px 15px;
-    background: #d1a234;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    width: 100%;
-    margin-top: 10px;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ffdf82aa;
-}
-
-</style>
+    /* focus styles for accessibility */
+    .btn:focus,.close:focus{outline:3px solid rgba(79,70,229,0.18);outline-offset:2px}
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="card" role="region" aria-labelledby="headline">
+      <h1 id="headline">Demo Button + Popup</h1>
+      <p class="lead">Tekan tombol di bawah untuk membuka popup modal yang responsif, dapat diakses, dan memiliki transisi halus. Tekan <span class="kbd">Esc</span> untuk menutup.</p>
 
-<!-- 🎵 Background Music -->
-<audio id="bgm" autoplay loop>
-    <source src="https://d.top4top.io/m_36051aibj0.mp3" type="audio/mpeg">
-</audio>
+      <div class="controls">
+        <button class="btn btn-primary" id="openBtn" aria-haspopup="dialog" aria-controls="demoModal">
+          Buka Popup
+        </button>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    let audio = document.getElementById("bgm");
-    audio.volume = 0.4;
-    audio.play().catch(()=>{});
-});
-</script>
-
-<!-- ---------------------- HALAMAN 1 ---------------------- -->
-<div id="page1" class="page active">
-    <div class="header-card">
-        <img src="https://files.catbox.moe/kmw5cv.jpg">
-        <h2 class="gold">Danzx Official</h2>
-        <p>Premium Services • VPS • Panel • Script</p>
+        <button class="btn btn-ghost" id="infoBtn">
+          Info Lainnya
+        </button>
+      </div>
     </div>
+  </div>
 
-    <br>
-
-    <button class="btn-gold" onclick="openPage(2)">Lihat Produk</button>
-</div>
-
-<!-- ---------------------- HALAMAN 2 (PRODUK) ---------------------- -->
-<div id="page2" class="page">
-
-<h2 class="gold">Produk Panel</h2>
-
-<div class="box">
-panel pterodactyl 1-10gb : 2-9k <br>
-panel pterodactyl unlimited : 10k <br>
-reseller panel : 14k <br>
-admin panel : 16k <br>
-pt panel : 25k <br>
-owner panel : 30k <br>
-tangan kanan panel : 35k <br>
-install panel : 5k <br>
-install protect : 5k
-</div>
-
-<h2 class="gold">Produk Script</h2>
-
-<div class="box">
-script Danzo MD free update : 40k <br>
-reseller script Danzo MD : 100k <br>
-script Selfbot : 25k <br>
-script push kontak : 15k <br>
-script alice assistant : 35k <br>
-script ochobotz : 25k <br>
-reseller script ochobotz : 35k <br>
-script protect panel : 25k <br>
-script bug nika : 25k <br>
-script bug Justin : 20k <br>
-script vairezyne : 15k <br>
-reseller vairezyne : 25k
-</div>
-
-<h2 class="gold">Jasa Lainnya</h2>
-
-<div class="box">
-admin saluran WhatsApp : 10-15k <br>
-jasa rename <br>
-jasa push ch <br>
-dll.
-</div>
-
-<button class="btn-gold" onclick="openPage(3)">Ke Halaman Payment</button>
-
-</div>
-
-<!-- ---------------------- HALAMAN 3 (PAYMENT) ---------------------- -->
-<div id="page3" class="page">
-
-<h2 class="gold">Metode Pembayaran</h2>
-
-<div class="box">
-<b>Dana (Masrofi'ah)</b><br>
-Nomor: <b>08133124186</b><br><br>
-<button class="copy-btn" onclick="copyDana()">Salin Nomor Dana</button>
-</div>
-
-<div class="box">
-<b>QRIS</b><br><br>
-<button class="btn-gold" onclick="showQRIS()">Tampilkan QRIS</button>
-</div>
-
-<br>
-<a href="https://wa.me/message/MIDAD7UGMG6JE1">
-<button class="btn-gold">Konfirmasi Pembayaran</button>
-</a>
-
-</div>
-
-<!-- ---------------------- POPUP QRIS ---------------------- -->
-
-<div id="qrisPopup" class="qris-popup">
-    <div class="qris-box">
-        <h3>QRIS Pembayaran</h3>
-        <img src="https://files.catbox.moe/sx9cc2.jpg">
-        <button class="copy-btn" onclick="downloadQR()">Download QRIS</button>
-        <button class="copy-btn" onclick="closeQRIS()">Tutup</button>
+  <!-- Modal -->
+  <div class="overlay" id="overlay" role="presentation">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1" id="demoModal">
+      <div class="modal-header">
+        <h2 id="modalTitle" class="modal-title">Judul Popup</h2>
+        <button class="close" id="closeBtn" aria-label="Tutup dialog">✕</button>
+      </div>
+      <div class="modal-body">
+        <p>Ini adalah contoh popup sederhana. Kamu bisa meletakkan form, gambar, atau konten lain di sini. Popup ini juga menutup saat klik di luar area modal atau tekan <span class="kbd">Esc</span>.</p>
+        <p style="margin-top:12px">Contoh tindakan cepat:</p>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn btn-primary" id="actionSave">Simpan</button>
+          <button class="btn btn-ghost" id="actionCancel">Batal</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- ---------------------- SCRIPT ---------------------- -->
+  <script>
+    // Elemen
+    const openBtn = document.getElementById('openBtn');
+    const overlay = document.getElementById('overlay');
+    const demoModal = document.getElementById('demoModal');
+    const closeBtn = document.getElementById('closeBtn');
+    const actionCancel = document.getElementById('actionCancel');
+    const actionSave = document.getElementById('actionSave');
 
-<script>
-function openPage(pg) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById("page" + pg).classList.add("active");
-}
+    // Fokus sebelumnya untuk mengembalikan fokus saat modal ditutup
+    let previouslyFocused = null;
 
-function showQRIS() {
-    document.getElementById("qrisPopup").style.display = "flex";
-}
+    function openModal(){
+      previouslyFocused = document.activeElement;
+      overlay.classList.add('visible');
+      demoModal.focus();
+      document.body.style.overflow = 'hidden'; // cegah scroll belakang layar
+      // trap focus sederhana
+      trapFocus(demoModal);
+    }
 
-function closeQRIS() {
-    document.getElementById("qrisPopup").style.display = "none";
-}
+    function closeModal(){
+      overlay.classList.remove('visible');
+      document.body.style.overflow = '';
+      if(previouslyFocused) previouslyFocused.focus();
+    }
 
-function copyDana() {
-    navigator.clipboard.writeText("08133124186");
-    alert("Nomor Dana berhasil disalin!");
-}
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
 
-function downloadQR() {
-    const link = document.createElement('a');
-    link.href = "https://files.catbox.moe/sx9cc2.jpg";
-    link.download = "QRIS-DanzxOfficial.jpg";
-    link.click();
-}
-</script>
+    // Action buttons
+    actionCancel.addEventListener('click', closeModal);
+    actionSave.addEventListener('click', () => {
+      alert('Data disimpan (contoh).');
+      closeModal();
+    });
 
-<!-- ---------------------- NAVBAR ---------------------- -->
-<nav>
-<button onclick="openPage(1)">Home</button>
-<button onclick="openPage(2)">Produk</button>
-<button onclick="openPage(3)">Payment</button>
-</nav>
+    // Klik di overlay untuk menutup jika klik bukan di modal
+    overlay.addEventListener('click', (e) => {
+      if(e.target === overlay) closeModal();
+    });
 
+    // ESC untuk menutup
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && overlay.classList.contains('visible')) closeModal();
+    });
+
+    // Focus trap (sederhana)
+    function trapFocus(modal){
+      const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if(!first) return;
+
+      function handleKey(e){
+        if(e.key !== 'Tab') return;
+        if(e.shiftKey){ // shift + tab
+          if(document.activeElement === first){
+            e.preventDefault();
+            last.focus();
+          }
+        } else { // tab
+          if(document.activeElement === last){
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+
+      modal.addEventListener('keydown', handleKey);
+      // hapus listener saat modal ditutup
+      const observer = new MutationObserver(() => {
+        if(!overlay.classList.contains('visible')){
+          modal.removeEventListener('keydown', handleKey);
+          observer.disconnect();
+        }
+      });
+      observer.observe(overlay, {attributes:true, attributeFilter:['class']});
+    }
+
+    // Contoh tombol info lainya
+    document.getElementById('infoBtn').addEventListener('click', () => {
+      alert('Tombol info ditekan — kamu bisa menautkan ke halaman lain atau menampilkan tooltip.');
+    });
+  </script>
 </body>
-  </html>
+</html>
