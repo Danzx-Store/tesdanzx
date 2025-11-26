@@ -69,12 +69,24 @@
         <button class="close" id="closeBtn" aria-label="Tutup dialog">✕</button>
       </div>
       <div class="modal-body">
-        <p>Ini adalah contoh popup sederhana. Kamu bisa meletakkan form, gambar, atau konten lain di sini. Popup ini juga menutup saat klik di luar area modal atau tekan <span class="kbd">Esc</span>.</p>
-        <p style="margin-top:12px">Contoh tindakan cepat:</p>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <button class="btn btn-primary" id="actionSave">Simpan</button>
-          <button class="btn btn-ghost" id="actionCancel">Batal</button>
+        <h3 style="color:#e6eef8;font-size:15px;font-weight:700">Pilih Pembayaran</h3>
+
+        <!-- DANA SECTION -->
+        <div style="margin-top:16px;padding:14px;background:rgba(255,255,255,0.04);border-radius:12px;border:1px solid rgba(255,255,255,0.06)">
+          <h4 style="margin:0 0 6px;font-size:15px;color:#e6eef8">DANA</h4>
+          <p style="margin:0 0 10px;color:#94a3b8;font-size:14px">Nomor: <span id="danaNumber">08xxxxxxxxxx</span></p>
+          <button class="btn btn-primary" id="copyDana">Copy Nomor</button>
         </div>
+
+        <!-- QRIS SECTION -->
+        <div style="margin-top:18px;padding:14px;background:rgba(255,255,255,0.04);border-radius:12px;border:1px solid rgba(255,255,255,0.06)">
+          <h4 style="margin:0 0 10px;font-size:15px;color:#e6eef8">QRIS</h4>
+          <div style="width:100%;height:200px;background:#1a2235;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:14px">QRIS IMAGE HERE</div>
+          <button class="btn btn-primary" style="margin-top:10px">Download QRIS</button>
+        </div>
+
+      </div>
+</div>
       </div>
     </div>
   </div>
@@ -164,5 +176,42 @@
       alert('Tombol info ditekan — kamu bisa menautkan ke halaman lain atau menampilkan tooltip.');
     });
   </script>
+  <!-- Payment Popup -->
+  <div class="overlay" id="payOverlay" role="presentation">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="payTitle" tabindex="-1">
+      <div class="modal-header">
+        <h2 id="payTitle" class="modal-title">Metode Pembayaran</h2>
+        <button class="close" id="closePay" aria-label="Tutup dialog">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3 style="color:#e6eef8;font-size:15px;font-weight:700">Pilih Pembayaran</h3>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
+          <button class="btn btn-primary">DANA</button>
+          <button class="btn btn-primary">QRIS</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const payOverlay = document.getElementById('payOverlay');
+  const openPay = document.getElementById('openPay');
+  const closePay = document.getElementById('closePay');
+
+  openPay.addEventListener('click', () => {
+    payOverlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  });
+
+  closePay.addEventListener('click', () => {
+    payOverlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  });
+
+  payOverlay.addEventListener('click', (e) => {
+    if(e.target === payOverlay) payOverlay.classList.remove('visible');
+  });
+</script>
+
 </body>
 </html>
