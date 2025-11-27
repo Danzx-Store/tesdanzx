@@ -1,421 +1,374 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Danzx Hosting — Premium Store</title>
-
-<!-- optional icons -->
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Website Produk & Pembayaran - Danzx Hosting</title>
 
 <style>
-  /* ---------- Theme: Glassmorphism + Glow ---------- */
-  :root{
-    --bg1:#08060b; --bg2:#241433;
-    --glass: rgba(255,255,255,0.05);
-    --muted: rgba(255,255,255,0.75);
-    --accent:#8b5cf6;
-    --accent-2:#6ee7b7;
-    --success:#2ed573;
-    --card-radius:14px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;font-family:Inter,ui-sans-serif,system-ui,"Segoe UI",Roboto,Arial;
-    background: linear-gradient(135deg,var(--bg1),var(--bg2));
-    min-height:100vh;color:#fff;-webkit-font-smoothing:antialiased;padding:28px;
-  }
-  /* subtle animated background */
-  body::after{
-    content:"";position:fixed;inset:0;pointer-events:none;
-    background: radial-gradient(circle at 10% 10%, rgba(139,92,246,0.08), transparent 8%),
-                radial-gradient(circle at 90% 80%, rgba(110,231,183,0.06), transparent 10%);
-    mix-blend-mode:screen;opacity:0.9;
-  }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
 
-  .container{max-width:1080px;margin:0 auto}
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
 
-  header{display:flex;gap:12px;align-items:center;margin-bottom:20px}
-  .logo{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#a78bfa);display:flex;align-items:center;justify-content:center;font-weight:800;color:#071023;box-shadow:0 10px 30px rgba(139,92,246,0.18)}
-  .title h1{margin:0;font-size:20px}
-  .title p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.hero img {
+  width: 200px;
+  border-radius: 12px;
+}
 
-  .layout{display:grid;grid-template-columns:1fr 380px;gap:20px}
-  @media(max-width:920px){.layout{grid-template-columns:1fr}}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px 10px;
+}
 
-  /* product panel */
-  .panel{background:var(--glass);border-radius:var(--card-radius);padding:16px;backdrop-filter:blur(10px);box-shadow:0 8px 30px rgba(0,0,0,0.45)}
-  .panel h2{margin:0 0 12px}
-  .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.product {
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 10px;
+  margin: 10px;
+  width: 280px;
+  padding: 15px;
+  text-align: center;
+}
 
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-    transition:transform .18s, box-shadow .18s;
-    display:flex;flex-direction:column;gap:8px;
-  }
-  .card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,0.5)}
-  .card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
-  .card .title{font-weight:700}
-  .card .muted{color:var(--muted);font-size:13px}
-  .variants{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-  select{padding:8px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:#fff}
+.product img {
+  width: 100%;
+  border-radius: 8px;
+  animation: breathe 3s ease-in-out infinite;
+}
 
-  .btn{padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
-  .btn-buy{background:linear-gradient(135deg,var(--accent),#a78bfa);color:#061125;box-shadow:0 8px 20px rgba(139,92,246,0.12)}
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
 
-  /* side */
-  .side{display:flex;flex-direction:column;gap:12px}
-  .side .card{padding:14px}
-  .cart-list{max-height:320px;overflow:auto;display:flex;flex-direction:column;gap:8px}
-  .cart-row{display:flex;justify-content:space-between;gap:8px;background:rgba(0,0,0,0.15);padding:8px;border-radius:8px;align-items:center}
-  .qty{display:flex;gap:6px;align-items:center}
-  .small{font-size:13px;color:var(--muted)}
+.benefits ul {
+  padding-left: 20px;
+  text-align: left;
+}
 
-  .total-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-weight:700}
-  .actions{display:flex;gap:8px;margin-top:12px}
-  .primary{background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;padding:10px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
-  .success{background:linear-gradient(135deg,var(--success),#58e28b);color:#062017;padding:10px;border-radius:10px;border:none;cursor:pointer}
+.btn-pay {
+  display: inline-block;
+  margin: 30px auto;
+  padding: 15px 30px;
+  background: #fff;
+  color: #000;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  /* qris modal */
-  .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
-  .modal.show{opacity:1;pointer-events:auto}
-  .modal .panel{width:360px}
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
 
-  /* floating fab */
-  .fab{position:fixed;right:20px;bottom:20px;width:64px;height:64px;border-radius:999px;background:linear-gradient(135deg,var(--accent),#a78bfa);border:none;color:#071023;box-shadow:0 16px 40px rgba(123,80,255,0.22);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:80}
-  .fab .count{position:absolute;right:6px;top:6px;background:#ff6b6b;color:#fff;padding:4px 7px;border-radius:999px;font-weight:800;font-size:12px}
+/* Payment Page */
+#paymentPage {
+  display: none;
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 30px;
+}
 
-  footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+.input-group {
+  margin-bottom: 15px;
+}
 
-  /* small */
-  @media(max-width:520px){
-    .card img{height:120px}
-    .layout{grid-template-columns:1fr}
-  }
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #222;
+  color: #fff;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+}
+
+.btn-copy {
+  background:#00d0ff;
+  color:#000;
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  display:block;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.qris-toggle {
+  background:#fff;
+  color:#000;
+  border:none;
+  padding:10px;
+  border-radius:6px;
+  cursor:pointer;
+  width:100%;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.qris-box {
+  display:none;
+  text-align:center;
+  margin-top:10px;
+}
+
+.qris-box img {
+  width:260px;
+  border-radius:12px;
+}
 </style>
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <div class="logo">DZX</div>
-      <div class="title">
-        <h1>Danzx Hosting — Premium Store</h1>
-        <p class="small">Panel Pterodactyl • Script Bot • VPS • Jasa — Pembayaran cepat</p>
-      </div>
-    </header>
 
-    <main class="layout">
-      <!-- LEFT: Products -->
-      <section class="panel">
-        <h2>Produk Pilihan</h2>
-        <div class="products" id="products"></div>
-      </section>
+<!-- ╔══════════════════════════════╗
+     ║        PRODUK PAGE           ║
+     ╚══════════════════════════════╝ -->
+<div id="productPage">
 
-      <!-- RIGHT: Cart & Payment -->
-      <aside class="side">
-        <div class="card">
-          <h3>Keranjang</h3>
-          <div id="cartEmpty" class="small">Keranjang kosong — tambahkan produk.</div>
-          <div class="cart-list" id="cartList" style="display:none"></div>
-
-          <div class="total-row" id="totalRow" style="display:none">
-            <div>Subtotal</div>
-            <div id="subtotal">Rp 0</div>
-          </div>
-
-          <div style="margin-top:10px">
-            <label class="small">Hitung Ongkir (gram)</label>
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <select id="courier" style="padding:8px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:#fff">
-                <option value="jne">JNE</option>
-                <option value="jnt">JNT</option>
-                <option value="sicepat">SiCepat</option>
-              </select>
-              <input id="weight" type="number" placeholder="berat (gram)" style="padding:8px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:#fff">
-            </div>
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button class="primary" id="calcShip">Hitung Ongkir</button>
-              <button class="primary" id="applyShip">Masukkan ke Total</button>
-            </div>
-            <div id="shipText" class="small" style="margin-top:8px">Total Ongkir: Rp 0</div>
-          </div>
-
-          <div class="actions" id="cartActions" style="display:none">
-            <button class="primary" id="checkoutBtn">Checkout via WhatsApp</button>
-            <button class="success" id="clearCartBtn">Clear</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Pembayaran</h3>
-          <div class="small">Nomor DANA</div>
-          <div style="font-weight:800;font-size:18px;margin-top:6px" id="danaNumber">08133124186</div>
-          <div class="small">A/N: Danzx Hosting</div>
-
-          <div style="display:flex;gap:8px;margin-top:10px">
-            <button class="success" id="copyDana">Copy Nomor</button>
-            <button class="primary" id="openQris">QRIS</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Kontak & Testimoni</h3>
-          <div style="display:flex;gap:8px;margin-top:10px">
-            <a href="https://t.me/Danzx_Official" target="_blank"><button class="primary">Telegram</button></a>
-            <a href="https://wa.me/6285124271621" target="_blank"><button class="success">WhatsApp</button></a>
-          </div>
-          <div style="margin-top:10px">
-            <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank"><button class="primary" style="width:100%">Testimoni</button></a>
-          </div>
-        </div>
-      </aside>
-    </main>
-
-    <footer>© <span id="year"></span> Danzx Hosting</footer>
+  <div class="hero">
+    <img src="https://files.catbox.moe/6zg5ky.jpg">
   </div>
 
-  <!-- QRIS Modal -->
-  <div id="qrisModal" class="modal" aria-hidden="true">
-    <div class="panel">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <strong>QRIS Pembayaran</strong>
-        <button id="closeQris" class="btn-ghost" style="background:transparent;border:0;color:var(--muted);cursor:pointer">✕</button>
-      </div>
-      <img id="qrisImg" src="https://files.catbox.moe/3vueqq.jpg" alt="QRIS" style="width:100%;border-radius:10px;margin-top:12px;box-shadow:0 10px 30px rgba(0,0,0,0.4)">
-      <div style="display:flex;gap:8px;margin-top:10px">
-        <button class="success" id="copyThenConfirm">Salin & Konfirmasi</button>
-        <button class="primary" id="downloadQris">Download</button>
+  <!-- LIST PRODUK -->
+  <div class="products">
+
+    <div class="product">
+      <img src="https://files.catbox.moe/5uzz0z.jpg">
+      <div class="benefits">
+        <h3>Panel Pterodactyl</h3>
+        <ul>
+          <li>Reseller Panel – Rp 14.000</li>
+          <li>Admin Panel – Rp 16.000</li>
+          <li>PT Panel – Rp 25.000</li>
+          <li>Owner Panel – Rp 30.000</li>
+          <li>Tangan Kanan Panel – Rp 35.000</li>
+        </ul>
+        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
       </div>
     </div>
+
+    <div class="product">
+      <img src="https://files.catbox.moe/uh1bt6.jpg">
+      <div class="benefits">
+        <h3>Script Bot Wa Atau Tele</h3>
+        <ul>
+          <li>Script Danzo MD – Rp 30.000</li>
+          <li>Reseller Script Danzo MD – Rp 80.000</li>
+          <li>Script SelfBot – Rp 25.000</li>
+          <li>Script PushKontak X JadiBot – Rp 15.000</li>
+          <li>Script Alice Asistant – Rp 30.000</li>
+          <li>Script Ochobotzv4 No Update – Rp 20.000</li>
+          <li>Script Ochobotzv4 Free Update – Rp 35.000</li>
+          <li>Reseller Script Ochobotzv4 – Rp 50.000</li>
+          <li>Script Variezyne – Rp 15.000</li>
+          <li>Reseller Script Variezyne – Rp 25.000</li>
+          <li>Script Cpanel X MD Telegram – Rp 20.000</li>
+          <li>Script Cpanel 4 Server Telegram – Rp 20.000</li>
+          <li>Script Protect Simple – Rp 15.000</li>
+          <li>Script Protect X Cpanel Telegram – Rp 20.000</li>
+          <li>Script Digital Ocean Botz – Rp 50.000</li>
+          <li>Script Bug Nika V17 – Rp 20.000</li>
+          <li>Script Bug Justin V22 – Rp 20.000</li>
+        </ul>
+        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://files.catbox.moe/k08euw.jpg">
+      <div class="benefits">
+        <h3>VPS Digital Ocean</h3>
+        <ul>
+          <li>Ram 4 Cpu 2 – Rp 25.000</li>
+          <li>Ram 8 Cpu 4 – Rp 35.000</li>
+          <li>Ram 16 Cpu 4 – Rp 40.000</li>
+          <li>Ram 16 Cpu 8 – Rp 45.000</li>
+        </ul>
+        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://files.catbox.moe/z9iz9p.jpg">
+      <div class="benefits">
+        <h3>Jasa & Produk Lainnya</h3>
+        <ul>
+          <li>Install panel – Rp 5.000</li>
+          <li>Install protect – Rp 8.000</li>
+          <li>Install thema – Rp 5.000</li>
+          <li>Rename script – Rp 10.000</li>
+          <li>Push Saluran WA – Rp 10.000</li>
+          <li>Unban WA Fresh – Rp 30.000</li>
+          <li>Unban WA Lumut – Rp 40.000</li>
+          <li>Admin Saluran WA – Rp 10.000</li>
+          <li>Saluran WA 1k – Rp 50.000</li>
+        </ul>
+        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Floating FAB -->
-  <button class="fab" id="fab">
-    <ion-icon name="cart" style="font-size:22px;color:#071023"></ion-icon>
-    <div class="count" id="fabCount" style="display:none">0</div>
+  <div style="text-align:center">
+    <button class="btn-pay" onclick="showPayment()">Konfirmasi Pembayaran</button>
+  </div>
+
+  <div class="footer">
+    © 2025 Danzx Hosting
+  </div>
+
+</div>
+
+<!-- ╔══════════════════════════════╗
+     ║        PAYMENT PAGE          ║
+     ╚══════════════════════════════╝ -->
+<div id="paymentPage">
+
+  <h2>Konfirmasi Pembayaran</h2>
+
+  <div class="input-group">
+    <label>Nama Lengkap</label>
+    <input type="text" id="name">
+  </div>
+
+  <div class="input-group">
+    <label>Nomor WA</label>
+    <input type="tel" id="wa">
+  </div>
+
+  <div class="input-group">
+    <label>Jumlah Pembayaran</label>
+    <input type="number" id="amount">
+  </div>
+
+  <div class="input-group">
+    <label>Metode Pembayaran</label>
+    <select id="paymentMethod" onchange="updatePaymentMethod()">
+      <option value="">Pilih metode...</option>
+      <option value="dana">DANA</option>
+      <option value="qris">QRIS</option>
+    </select>
+  </div>
+
+  <!-- DANA -->
+  <div id="danaBox" style="display:none">
+    <p>Nomor DANA:</p>
+    <div style="background:#222;padding:12px;border-radius:6px;font-size:17px">
+      <span id="danaNumber">08133124186</span>
+    </div>
+    <button class="btn-copy" onclick="copyDana()">Copy Nomor DANA</button>
+  </div>
+
+  <!-- QRIS TOGGLE -->
+  <button id="btnQrisToggle" class="qris-toggle" onclick="toggleQris()" style="display:none">
+    Tampilkan QRIS
   </button>
 
+  <div id="qrisBox" class="qris-box">
+    <img src="https://files.catbox.moe/your_qris_image.png">
+  </div>
+
+  <div class="input-group">
+    <label>Bukti Transfer</label>
+    <input type="file" id="proof" accept="image/*">
+  </div>
+
+  <button class="btn" onclick="sendPayment()">Kirim Konfirmasi</button>
+  <button class="btn" onclick="showProduct()" style="background:#333;margin-top:10px">← Kembali</button>
+
+</div>
+
 <script>
-/* ---------- Config ---------- */
-const ADMIN_WA = '6285124271621';
-const DANA = '08133124186';
-const QRIS_SRC = 'https://files.catbox.moe/3vueqq.jpg';
-
-/* ---------- Products (panel uses provided image) ---------- */
-const IMG_PANEL = 'https://files.catbox.moe/5uzz0z.jpg';
-const PRODUCTS = [
-  // Panel (with image)
-  { id:'p1', title:'Reseller Panel (Pterodactyl)', price:14000, img:IMG_PANEL },
-  { id:'p2', title:'Admin Panel (Pterodactyl)', price:16000, img:IMG_PANEL },
-  { id:'p3', title:'PT Panel (Pterodactyl)', price:25000, img:IMG_PANEL },
-  { id:'p4', title:'Owner Panel (Pterodactyl)', price:30000, img:IMG_PANEL },
-  { id:'p5', title:'Tangan Kanan Panel', price:35000, img:IMG_PANEL },
-
-  // Script Bot (no image to keep concise)
-  { id:'s1', title:'Danzo MD', price:30000 },
-  { id:'s2', title:'Reseller Danzo MD', price:80000 },
-  { id:'s3', title:'SelfBot', price:25000 },
-
-  // VPS
-  { id:'v1', title:'VPS 4GB / CPU2', price:25000 },
-  { id:'v2', title:'VPS 8GB / CPU4', price:35000 },
-
-  // Jasa
-  { id:'j1', title:'Install Panel', price:5000 },
-  { id:'j2', title:'Rename Script', price:10000 }
-];
-
-/* ---------- State ---------- */
-let cart = JSON.parse(localStorage.getItem('dzx_cart')) || []; // {productId, qty}
-let shippingCost = 0;
-
-/* ---------- Helpers ---------- */
-const $ = s => document.querySelector(s);
-const fmt = n => Number(n).toLocaleString('id-ID');
-
-/* ---------- Render products ---------- */
-function renderProducts(){
-  const el = $('#products');
-  el.innerHTML = '';
-  PRODUCTS.forEach(p=>{
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      ${p.img? `<img src="${p.img}" alt="${p.title}">` : ''}
-      <div class="title">${p.title}</div>
-      <div class="muted">Rp ${fmt(p.price)}</div>
-      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-        <select id="sel-${p.id}" style="padding:8px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:#fff">
-          <option value="${p.id}|0">Beli • Rp ${fmt(p.price)}</option>
-        </select>
-        <button class="btn btn-buy" onclick="addToCart('${p.id}')">Tambah</button>
-      </div>
-    `;
-    el.appendChild(card);
-  });
+function showPayment() {
+  productPage.style.display = "none";
+  paymentPage.style.display = "block";
 }
 
-/* ---------- Cart functions ---------- */
-function persist(){ localStorage.setItem('dzx_cart', JSON.stringify(cart)); }
-
-function addToCart(productId){
-  const idx = cart.findIndex(c=>c.productId===productId);
-  if(idx===-1) cart.push({ productId, qty:1 });
-  else cart[idx].qty++;
-  persist(); renderCart(); pulseFab();
+function showProduct() {
+  productPage.style.display = "block";
+  paymentPage.style.display = "none";
 }
 
-function removeItem(i){ cart.splice(i,1); persist(); renderCart(); }
-function changeQty(i,delta){ cart[i].qty = Math.max(1, cart[i].qty + delta); persist(); renderCart(); }
+function updatePaymentMethod() {
+  let method = paymentMethod.value;
 
-function subtotal(){
-  let s=0;
-  cart.forEach(it=>{
-    const p = PRODUCTS.find(x=>x.id===it.productId);
-    if(p) s += p.price * it.qty;
-  });
-  return s;
+  danaBox.style.display = "none";
+  btnQrisToggle.style.display = "none";
+  qrisBox.style.display = "none";
+
+  if (method === "dana") danaBox.style.display = "block";
+  if (method === "qris") btnQrisToggle.style.display = "block";
 }
 
-/* ---------- Render cart ---------- */
-function renderCart(){
-  const list = $('#cartList');
-  const cartEmpty = $('#cartEmpty');
-  const totalRow = $('#totalRow');
-  const subtotalEl = $('#subtotal');
-  const actions = $('#cartActions');
-  const fabCount = $('#fabCount');
+function copyDana() {
+  navigator.clipboard.writeText(danaNumber.innerText);
+  alert("Nomor DANA berhasil disalin!");
+}
 
-  if(cart.length===0){
-    list.style.display='none';
-    cartEmpty.style.display='block';
-    totalRow.style.display='none';
-    actions.style.display='none';
-    fabCount.style.display='none';
-    subtotalEl.textContent = 'Rp 0';
+function toggleQris() {
+  if (qrisBox.style.display === "none") {
+    qrisBox.style.display = "block";
+    btnQrisToggle.innerText = "Tutup QRIS";
+  } else {
+    qrisBox.style.display = "none";
+    btnQrisToggle.innerText = "Tampilkan QRIS";
+  }
+}
+
+function sendPayment() {
+  let name = document.getElementById("name").value.trim();
+  let wa = document.getElementById("wa").value.trim();
+  let amount = document.getElementById("amount").value.trim();
+  let method = document.getElementById("paymentMethod").value;
+
+  if (!name || !wa || !amount || !method) {
+    alert("Harap isi semua data!");
     return;
   }
 
-  list.style.display='flex';
-  cartEmpty.style.display='none';
-  list.innerHTML = '';
-  let s=0;
-  cart.forEach((it,i)=>{
-    const p = PRODUCTS.find(x=>x.id===it.productId);
-    if(!p) return;
-    const sub = p.price * it.qty; s += sub;
-    const row = document.createElement('div');
-    row.className = 'cart-row';
-    row.innerHTML = `
-      <div style="flex:1">
-        <div style="font-weight:700">${p.title}</div>
-        <div class="small">Rp ${fmt(p.price)} • Sub: Rp ${fmt(sub)}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-        <div class="qty">
-          <button onclick="changeQty(${i},-1)">−</button>
-          <div style="padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px">${it.qty}</div>
-          <button onclick="changeQty(${i},1)">＋</button>
-        </div>
-        <div><button onclick="removeItem(${i})" style="background:transparent;border:none;color:#ff8b8b;cursor:pointer">Hapus</button></div>
-      </div>
-    `;
-    list.appendChild(row);
-  });
+  alert(`💰 Konfirmasi Pembayaran\nNama: ${name}\nWA: ${wa}\nJumlah: Rp${amount}\nMetode: ${method}`);
 
-  subtotalEl.textContent = 'Rp ' + fmt(s + shippingCost);
-  $('#cartList').style.display='flex';
-  totalRow.style.display='flex';
-  actions.style.display='flex';
-  fabCount.style.display='inline-block';
-  fabCount.textContent = cart.reduce((a,b)=>a+b.qty,0);
+  showProduct();
 }
-
-/* ---------- Shipping ---------- */
-function calcShip(courier, grams){
-  const kg = Math.ceil((grams||0)/1000);
-  let rate = 12000;
-  if(courier==='jnt') rate = 11000;
-  if(courier==='sicepat') rate = 10000;
-  return kg * rate;
-}
-$('#calcShip').addEventListener('click', ()=>{
-  const courier = $('#courier').value;
-  const w = parseInt($('#weight').value)||0;
-  if(w<=0){ alert('Masukkan berat (gram)'); return; }
-  shippingCost = calcShip(courier,w);
-  $('#shipText').innerHTML = `Total Ongkir (${courier.toUpperCase()}): <b>Rp ${fmt(shippingCost)}</b>`;
-  renderCart();
-});
-$('#applyShip').addEventListener('click', ()=>{
-  if(cart.length===0){ alert('Keranjang kosong'); return; }
-  if(!shippingCost){ alert('Hitung ongkir dulu'); return; }
-  alert('Ongkir dimasukkan ke total.');
-  renderCart();
-});
-
-/* ---------- Checkout (WhatsApp) ---------- */
-$('#checkoutBtn').addEventListener('click', ()=>{
-  if(cart.length===0){ alert('Keranjang kosong'); return; }
-  const name = prompt('Nama pembeli (untuk konfirmasi):')||'';
-  const phone = prompt('No. WA (format 628...):')||'';
-  const method = prompt('Metode pembayaran (DANA/QRIS):','DANA')||'DANA';
-  let msg = `Halo Admin Danzx Hosting,%0ASaya ingin memesan:%0A%0A`;
-  let total = 0;
-  cart.forEach((it,idx)=>{
-    const p = PRODUCTS.find(x=>x.id===it.productId);
-    const sub = p.price * it.qty; total += sub;
-    msg += `${idx+1}. ${encodeURIComponent(p.title)} x${it.qty} = Rp ${fmt(sub)}%0A`;
-  });
-  msg += `%0ASubtotal: Rp ${fmt(total)}%0A`;
-  msg += `Ongkir: Rp ${fmt(shippingCost)}%0A`;
-  msg += `Total: Rp ${fmt(total + shippingCost)}%0A%0A`;
-  msg += `Nama: ${encodeURIComponent(name)}%0AWA: ${encodeURIComponent(phone)}%0AMetode: ${encodeURIComponent(method)}`;
-  window.open(`https://wa.me/${ADMIN_WA}?text=${msg}`,'_blank');
-});
-
-/* ---------- Payment (DANA/QRIS) ---------- */
-$('#copyDana').addEventListener('click', ()=>{
-  navigator.clipboard.writeText(DANA).then(()=> alert('Nomor DANA disalin: ' + DANA));
-});
-$('#openQris').addEventListener('click', ()=> {
-  $('#qrisImg').src = QRIS_SRC; $('#qrisModal').classList.add('show'); $('#qrisModal').setAttribute('aria-hidden','false');
-});
-$('#closeQris').addEventListener('click', ()=> {
-  $('#qrisModal').classList.remove('show'); $('#qrisModal').setAttribute('aria-hidden','true');
-});
-$('#copyThenConfirm').addEventListener('click', ()=>{
-  navigator.clipboard.writeText(DANA).then(()=> {
-    alert('Nomor DANA disalin. Buka WhatsApp untuk konfirmasi.');
-    window.open(`https://wa.me/${ADMIN_WA}?text=Saya%20sudah%20transfer%20ke%20DANA%20${encodeURIComponent(DANA)}`,'_blank');
-  });
-});
-$('#downloadQris').addEventListener('click', ()=>{
-  const a = document.createElement('a'); a.href = QRIS_SRC; a.download = 'qris.png'; a.click();
-});
-
-/* ---------- FAB ---------- */
-$('#fab').addEventListener('click', ()=> {
-  const y = document.querySelector('.side').offsetTop - 12;
-  window.scrollTo({ top: y, behavior:'smooth' });
-});
-function pulseFab(){ $('#fab').animate([{ transform:'scale(1)' },{ transform:'scale(1.12)' },{ transform:'scale(1)' }], { duration:320 }); }
-
-/* ---------- Init ---------- */
-function init(){
-  $('#danaNumber').innerText = DANA;
-  $('#qrisImg').src = QRIS_SRC;
-  document.getElementById('year').innerText = new Date().getFullYear();
-  renderProducts();
-  renderCart();
-}
-init();
-
-/* expose for debugging (optional) */
-window.PRODUCTS = PRODUCTS;
 </script>
+
 </body>
-                </html>
+  </html>
