@@ -71,16 +71,22 @@
       flex-wrap: wrap;
       justify-content: center;
       padding: 30px 10px;
+      gap: 20px;
     }
 
     .product {
       background-color: #111;
       border: 1px solid #333;
-      border-radius: 10px;
-      margin: 10px;
+      border-radius: 12px;
       width: 280px;
       padding: 15px;
       text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 18px rgba(255,255,255,0.1);
     }
 
     .product img {
@@ -106,7 +112,6 @@
 
     .btn-pay {
       display: inline-block;
-      margin: 30px auto;
       padding: 15px 30px;
       background: #fff;
       color: #000;
@@ -114,6 +119,7 @@
       font-weight: bold;
       text-decoration: none;
       cursor: pointer;
+      margin: 30px auto;
     }
 
     .footer {
@@ -192,6 +198,7 @@
 </head>
 <body>
 
+<!-- Product Page -->
 <div id="productPage">
   <div class="hero">
     <img src="https://files.catbox.moe/6zg5ky.jpg" alt="Hero Image" />
@@ -214,6 +221,7 @@
 
   <div class="products">
 
+    <!-- PRODUCT 1 -->
     <div class="product">
       <img src="https://files.catbox.moe/5uzz0z.jpg" alt="Panel Pterodactyl" />
       <div class="benefits">
@@ -229,8 +237,9 @@
       </div>
     </div>
 
+    <!-- PRODUCT 2 -->
     <div class="product">
-      <img src="https://files.catbox.moe/uh1bt6.jpg" alt="Script Bot Wa Atau Tele" />
+      <img src="https://files.catbox.moe/uh1bt6.jpg" alt="Script Bot WA/Tele" />
       <div class="benefits">
         <h3>Script Bot Wa Atau Tele</h3>
         <ul>
@@ -238,9 +247,9 @@
           <li>Reseller Script Danzo MD – Rp 80.000</li>
           <li>Script SelfBot – Rp 25.000</li>
           <li>Script PushKontak X JadiBot – Rp 15.000</li>
-          <li>Script Alice Asistant – Rp 30.000</li>
-          <li>Script Ochobotzv4 No Update– Rp 20.000</li>
-          <li>Script Ochobotzv4 Free Update– Rp 35.000</li>
+          <li>Script Alice Assistant – Rp 30.000</li>
+          <li>Script Ochobotzv4 No Update – Rp 20.000</li>
+          <li>Script Ochobotzv4 Free Update – Rp 35.000</li>
           <li>Reseller Script Ochobotzv4 – Rp 50.000</li>
           <li>Script Variezyne – Rp 15.000</li>
           <li>Reseller Script Variezyne – Rp 25.000</li>
@@ -256,10 +265,11 @@
       </div>
     </div>
 
+    <!-- PRODUCT 3 -->
     <div class="product">
-      <img src="https://files.catbox.moe/k08euw.jpg" alt="VPS DIGITAL OCEAN" />
+      <img src="https://files.catbox.moe/k08euw.jpg" alt="VPS Digital Ocean" />
       <div class="benefits">
-        <h3>Vps Digital Ocean</h3>
+        <h3>VPS Digital Ocean</h3>
         <ul>
           <li>Ram 4 Cpu 2 – Rp 25.000</li>
           <li>Ram 8 Cpu 4 – Rp 35.000</li>
@@ -270,15 +280,16 @@
       </div>
     </div>
 
+    <!-- PRODUCT 4 -->
     <div class="product">
       <img src="https://files.catbox.moe/z9iz9p.jpg" alt="Jasa & Produk Lainnya" />
       <div class="benefits">
-        <h3>List Jasa & Produk</h3>
+        <h3>Jasa & Produk Lainnya</h3>
         <ul>
           <li>Jasa Install panel pterodactyl – Rp 5.000</li>
           <li>Jasa Install Protect panel – Rp 8.000</li>
           <li>Jasa Install Thema panel – Rp 5.000</li>
-          <li>Jasa Install panel pterodactyl – Rp 5.000</li> 
+          <li>Jasa Install panel pterodactyl – Rp 5.000</li>
           <li>Jasa Rename Script – Rp 10.000</li>
           <li>Jasa Push Saluran WhatsApp – Rp 10.000</li>
           <li>Jasa Unband WhatsApp Fresh – Rp 30.000</li>
@@ -301,8 +312,10 @@
   </div>
 </div>
 
+<!-- Payment Page -->
 <div id="paymentPage">
   <h2>Konfirmasi Pembayaran</h2>
+
   <div id="statusMessage" class="status"></div>
 
   <div class="input-group">
@@ -373,6 +386,8 @@ audio.addEventListener('timeupdate', () => {
 
 playBtn.addEventListener('click', toggleMusic);
 
+
+// Typing Effect
 const welcomeText = `Selamat datang di Danzx Hosting!\nKami menjual berbagai macam produk yang murah, aman, dan terpercaya.\nJika ada pertanyaan atau keluhan, silakan chat admin kami.\nScroll ke bawah untuk melihat produk tersedia.`;
 let i = 0;
 
@@ -386,6 +401,7 @@ function typeWriter() {
 
 window.onload = typeWriter;
 
+// Page Switch
 function showPayment() {
   document.getElementById('productPage').style.display = 'none';
   document.getElementById('paymentPage').style.display = 'block';
@@ -396,6 +412,7 @@ function showProduct() {
   document.getElementById('paymentPage').style.display = 'none';
 }
 
+// Payment Action
 function sendPayment() {
   const name = document.getElementById('name').value.trim();
   const wa = document.getElementById('wa').value.trim();
@@ -415,3 +432,4 @@ function sendPayment() {
 
 </body>
   </html>
+  
