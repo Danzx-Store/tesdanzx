@@ -184,6 +184,7 @@
                 Script premium + update. Pilihan bervariasi.
             </div>
         </div>
+
         <!-- VPS -->
         <div class="product-card">
             <img src="https://files.catbox.moe/k08euw.jpg">
@@ -315,7 +316,8 @@ function updateVarian(){
         });
     }
 }
-    function toggleQR(){
+
+function toggleQR(){
     let img = document.getElementById("qrisImg");
     img.style.display = img.style.display === "none" ? "block" : "none";
 }
@@ -339,16 +341,16 @@ function kirim(){
     let metode = document.getElementById("metode").value;
 
     let pesan =
-    Konfirmasi Pembayaran%0A%0A +
-    Nama: ${nama}%0A +
-    WA: ${wa}%0A +
-    Produk: ${produk}%0A +
-    Varian: ${varian}%0A +
-    Jumlah: ${jumlah}%0A +
-    Metode: ${metode}%0A%0A +
-    Silakan kirim bukti transfer berupa foto.;
+    `Konfirmasi Pembayaran%0A%0A` +
+    `Nama: ${nama}%0A` +
+    `WA: ${wa}%0A` +
+    `Produk: ${produk}%0A` +
+    `Varian: ${varian}%0A` +
+    `Jumlah: ${jumlah}%0A` +
+    `Metode: ${metode}%0A%0A` +
+    `Silakan kirim bukti transfer.` ;
 
-    window.location.href = https://t.me/Danzx_Official?text=${pesan};
+    window.location.href = `https://t.me/Danzx_Official?text=${pesan}`;
 }
 
 </script>
