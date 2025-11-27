@@ -1,491 +1,394 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Danzx Hosting — Store & Pembayaran</title>
-<link rel="icon" href="" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danzx Hosting - Premium Store</title>
+
+<!-- ICON -->
+<script type="module"
+ src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule
+ src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* GLOBAL */
+body{
+  margin:0;
+  background:#050505;
+  color:#fff;
+  font-family:"Poppins", sans-serif;
+}
 
-  :root{
-    --bg1:#0f0b1a;
-    --bg2:#2b1f4a;
-    --glass: rgba(255,255,255,0.06);
-    --accent1: #7c5cff;
-    --accent2: #5af1c9;
-    --success: #2ed573;
-    --gold: #ffb84d;
-    --muted: rgba(255,255,255,0.78);
-  }
+h2{
+  text-align:center;
+  margin:20px 0;
+  color:#c084ff;
+  text-shadow:0 0 20px #a855f7;
+}
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    background: linear-gradient(135deg,var(--bg1),var(--bg2));
-    background-size:300% 300%;
-    animation: bgShift 10s ease-in-out infinite;
-    color:#fff;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    min-height:100vh;
-    padding-bottom:120px;
-  }
-  @keyframes bgShift{
-    0%{background-position:0% 50%}
-    50%{background-position:50% 100%}
-    100%{background-position:100% 50%}
-  }
+button{
+  cursor:pointer;
+  transition:.3s;
+}
 
-  /* particles */
-  .particle{position:fixed;border-radius:50%;pointer-events:none;opacity:.7;filter:blur(.6px)}
+/* SMOOTH ANIMATION */
+.fade{
+  animation:fade .5s ease;
+}
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
 
-  .wrap{max-width:1080px;margin:28px auto;padding:20px}
+/* HEADER */
+.header{
+  text-align:center;
+  padding:20px;
+}
+.header img{
+  width:180px;
+  border-radius:14px;
+  box-shadow:0 0 25px #a855f7;
+}
 
-  /* header */
-  .header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-  .logo{width:72px;height:72px;border-radius:14px;background:linear-gradient(135deg,var(--accent1),#9b8bff);
-    display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:18px;box-shadow:0 8px 30px rgba(124,92,255,0.18)}
-  .title h1{margin:0;font-size:20px}
-  .title p{margin:4px 0 0;color:var(--muted);font-size:13px}
+/* PRODUCT GRID */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
+}
 
-  .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+.product{
+  background:#111;
+  border:1px solid #333;
+  padding:15px;
+  border-radius:14px;
+  transition:.3s;
+  animation:breathe 3s infinite ease-in-out;
+}
+.product:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 25px #a855f7;
+}
 
-  /* left panel */
-  .panel{background:var(--glass);border-radius:14px;padding:18px;backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,0.35)}
-  .panel h2{margin:0 0 12px;font-size:18px}
-  .products{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@keyframes breathe{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.03);}
+  100%{transform:scale(1);}
+}
 
-  .product{
-    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.04);
-    display:flex;gap:12px;align-items:center;transition:transform .18s,box-shadow .18s;
-  }
-  .product:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,0.35)}
-  .product img{width:86px;height:66px;border-radius:8px;object-fit:cover;flex-shrink:0}
-  .p-info{flex:1}
-  .p-info .name{font-weight:600;font-size:14px}
-  .p-info .desc{color:var(--muted);font-size:12px;margin-top:4px}
-  .p-action{text-align:right}
-  .price{font-weight:700;margin-bottom:8px}
-  .btn-buy{background:linear-gradient(135deg,var(--accent1),#a78bfa);border:none;padding:8px 12px;border-radius:10px;color:#fff;cursor:pointer;font-weight:600}
-  .btn-buy:hover{transform:scale(1.03)}
+.product img{
+  width:100%;
+  border-radius:12px;
+}
 
-  /* right column */
-  .side{display:flex;flex-direction:column;gap:12px}
-  .card{background:var(--glass);padding:18px;border-radius:12px;backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,0.35)}
-  .card h3{margin:0 0 10px;font-size:16px}
-  .small{font-size:13px;color:var(--muted)}
+.price{
+  font-size:15px;
+  margin:10px 0;
+  line-height:24px;
+}
 
-  .dana-number{font-size:18px;font-weight:700;letter-spacing:1px;margin-top:8px}
-  .btn{padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
-  .btn-copy{background:linear-gradient(135deg,var(--success),#58e28b);color:#062017}
-  .btn-toggle{background:linear-gradient(135deg,#6ea8ff,#52d0ff);color:#042737}
-  .btn-primary{background:linear-gradient(135deg,var(--accent1),#8b5cf6);color:#fff;width:100%}
-  .btn-wa{background:linear-gradient(135deg,#25d366,#2bd67a);color:#012205}
-  .btn-tele{background:linear-gradient(135deg,#08a0e9,#2a9df4);color:#022238}
-  .btn-gold{background:linear-gradient(135deg,var(--gold),#ff9800);color:#2b1b00}
+.add-btn{
+  background:#c084ff;
+  color:#000;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  box-shadow:0 0 15px #a855f7;
+}
 
-  .qris-box{overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease,opacity .4s}
-  .qris-box.show{max-height:600px;opacity:1}
-  .qris-box img{width:100%;border-radius:10px;margin-top:12px}
+/* CART */
+.cart-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#c084ff;
+  border:none;
+  padding:16px 20px;
+  font-size:20px;
+  border-radius:50%;
+  box-shadow:0 0 20px #a855f7;
+  z-index:99;
+}
+.cart-count{
+  position:absolute;
+  top:-5px;
+  right:-5px;
+  background:red;
+  font-size:12px;
+  padding:3px 6px;
+  border-radius:50%;
+}
 
-  /* cart */
-  .cart-empty{color:var(--muted);font-size:14px;padding:12px 0}
-  .cart-list{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow:auto;padding-right:6px}
-  .cart-item{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px;background:rgba(0,0,0,0.15);border-radius:8px}
-  .cart-item img{width:56px;height:44px;border-radius:8px;object-fit:cover}
-  .cart-item .meta{font-size:13px}
-  .cart-actions{display:flex;gap:8px;margin-top:10px}
-  .total-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:16px;font-weight:700}
+/* CART POPUP */
+#cartBox{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:90%;
+  max-width:450px;
+  background:#111;
+  border:1px solid #333;
+  padding:20px;
+  border-radius:14px;
+  z-index:999;
+}
 
-  /* shipping (ongkir) widget */
-  .ship-row{display:flex;gap:8px;margin-top:10px;align-items:center}
-  .input,select{width:100%;padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:#fff}
+/* PAYMENT */
+input, select{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  margin-top:5px;
+  margin-bottom:15px;
+  background:#222;
+  color:white;
+}
 
-  /* footer */
-  .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;padding:18px}
+.copy-btn{
+  background:#c084ff;
+  padding:10px;
+  border-radius:8px;
+  width:100%;
+  border:none;
+  font-weight:bold;
+}
 
-  /* fab cart */
-  .cart-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(135deg,var(--accent1),#a78bfa);width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(123,80,255,0.28);cursor:pointer;border:none}
-  .cart-count{position:absolute;right:12px;top:8px;background:#ff5b5b;color:#fff;border-radius:999px;padding:4px 7px;font-weight:700;font-size:12px}
+.qris-box{
+  text-align:center;
+  display:none;
+}
+.qris-box img{
+  width:230px;
+  border-radius:12px;
+  box-shadow:0 0 20px #a855f7;
+  margin-top:10px;
+}
 
-  @media(max-width:920px){
-    .grid{grid-template-columns:1fr}
-    .products{grid-template-columns:1fr}
-    .side{order:2}
-  }
+.pay-btn{
+  background:#c084ff;
+  color:#000;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:20px;
+  color:#777;
+  margin-top:20px;
+}
+.social{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:10px;
+}
+.social a{
+  background:#c084ff;
+  color:#000;
+  padding:10px 14px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  box-shadow:0 0 12px #a855f7;
+}
 </style>
 </head>
+
 <body>
 
-<!-- gentle particles -->
-<script>
-(function generateParticles(){
-  const colors=['rgba(255,255,255,0.12)','rgba(124,92,255,0.18)','rgba(90,241,201,0.09)'];
-  for(let i=0;i<20;i++){
-    const el=document.createElement('div');
-    el.className='particle';
-    el.style.left=(Math.random()*100)+'vw';
-    el.style.top=(Math.random()*100)+'vh';
-    const size = 4 + Math.random()*10;
-    el.style.width=size+'px'; el.style.height=size+'px';
-    el.style.background = colors[Math.floor(Math.random()*colors.length)];
-    el.style.animationDuration = (6 + Math.random()*6)+'s';
-    el.style.opacity = 0.25 + Math.random()*0.7;
-    document.body.appendChild(el);
-  }
-})();
-</script>
-
-<div class="wrap">
-  <header class="header">
-    <div class="logo">DZX</div>
-    <div class="title">
-      <h1>Danzx Hosting • Store Premium</h1>
-      <p>Produk & Layanan • Pembayaran DANA/QRIS • Support WA & Telegram</p>
-    </div>
-  </header>
-
-  <main class="grid">
-    <!-- Products -->
-    <section class="panel" aria-label="Daftar Produk">
-      <h2>Daftar Produk</h2>
-      <div class="products" id="products"></div>
-    </section>
-
-    <!-- Side: cart, payment, kontak -->
-    <aside class="side">
-      <!-- Cart -->
-      <div class="card" aria-label="Keranjang Belanja">
-        <h3>Keranjang Belanja</h3>
-        <div id="cartArea">
-          <div id="cartEmpty" class="cart-empty">Keranjang kosong — tambahkan produk.</div>
-          <div id="cartList" class="cart-list" style="display:none"></div>
-
-          <div class="total-row" id="totalRow" style="display:none">
-            <div>Total</div>
-            <div id="totalPrice">Rp 0</div>
-          </div>
-
-          <!-- Shipping selection (calculated at checkout or manually) -->
-          <div style="margin-top:12px">
-            <label class="small">Opsi Ongkir Cepat</label>
-            <div class="ship-row">
-              <select id="shipCourier" class="input">
-                <option value="jne">JNE</option>
-                <option value="jnt">JNT</option>
-                <option value="sicepat">SiCepat</option>
-              </select>
-              <input id="shipWeight" class="input" type="number" placeholder="Berat (gram)" min="1" value="1000" />
-            </div>
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button class="btn btn-primary" id="calcShipBtn">Hitung Ongkir</button>
-              <button class="btn btn-gold" id="addShipToTotal" title="Tambahkan ongkir ke total">Masukkan ke Total</button>
-            </div>
-            <div id="shipResult" class="small" style="margin-top:8px">Total Ongkir: Rp 0</div>
-          </div>
-
-          <div class="cart-actions" style="margin-top:12px;display:none" id="cartActions">
-            <button class="btn btn-wa" id="checkoutWhats">Checkout via WhatsApp</button>
-            <button class="btn btn-primary" id="clearCartBtn">Clear</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Payment DANA -->
-      <div class="card" aria-label="Pembayaran">
-        <h3>Pembayaran DANA</h3>
-        <div class="dana-number" id="danaNumber">08133124186</div>
-        <div class="small">Atas nama: Danzx Hosting</div>
-
-        <div style="display:flex;gap:8px;margin-top:12px">
-          <button class="btn btn-copy" id="copyDanaBtn">Copy Nomor</button>
-          <button class="btn btn-toggle" id="toggleQrisBtn">QRIS</button>
-        </div>
-
-        <div class="qris-box" id="qrisBox">
-          <img src="https://files.catbox.moe/3vueqq.jpg" alt="QRIS Pembayaran">
-          <div style="display:flex;gap:8px;margin-top:10px">
-            <button class="btn btn-primary" id="copyDanaPay">Salin & Konfirmasi</button>
-            <button class="btn btn-gold" id="downloadQris">Download QRIS</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contact & Testimoni -->
-      <div class="card" aria-label="Kontak">
-        <h3>Kontak & Testimoni</h3>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <a href="https://t.me/Danzx_Official" target="_blank" rel="noopener">
-            <button class="btn btn-tele">Telegram</button>
-          </a>
-          <a id="waContact" href="https://wa.me/6285124271621" target="_blank" rel="noopener">
-            <button class="btn btn-wa">WhatsApp</button>
-          </a>
-        </div>
-        <div style="margin-top:12px">
-          <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank" rel="noopener">
-            <button class="btn btn-gold" style="width:100%">Testimoni Pelanggan</button>
-          </a>
-        </div>
-      </div>
-
-    </aside>
-  </main>
-
-  <div class="footer">© <span id="year"></span> Danzx Hosting — dibuat dengan ❤️</div>
+<!-- HEADER -->
+<div class="header fade">
+  <img src="https://files.catbox.moe/6zg5ky.jpg">
 </div>
 
-<!-- Floating cart button -->
-<button class="cart-fab" id="openCartFab" title="Buka Keranjang">
-  <div class="cart-count" id="cartCount" style="display:none">0</div>
-  🛒
+<h2>Produk Danzx Hosting</h2>
+
+<!-- PRODUCT LIST -->
+<div class="products fade">
+
+  <!-- Pterodactyl -->
+  <div class="product">
+    <img src="https://files.catbox.moe/5uzz0z.jpg">
+    <h3>Panel Pterodactyl</h3>
+    <div class="price">
+      • Reseller – 14.000 <br>
+      • Admin – 16.000 <br>
+      • PT Panel – 25.000 <br>
+      • Owner – 30.000 <br>
+      • Tangan Kanan – 35.000
+    </div>
+    <button class="add-btn" onclick="addCart('Panel Pterodactyl',14000)">Tambah</button>
+  </div>
+
+  <!-- Script Bot -->
+  <div class="product">
+    <img src="https://files.catbox.moe/uh1bt6.jpg">
+    <h3>Script Bot WA / Telegram</h3>
+    <div class="price">
+      Mulai 15.000 - 80.000
+    </div>
+    <button class="add-btn" onclick="addCart('Script Bot',15000)">Tambah</button>
+  </div>
+
+  <!-- VPS -->
+  <div class="product">
+    <img src="https://files.catbox.moe/k08euw.jpg">
+    <h3>VPS Digital Ocean</h3>
+    <div class="price">
+      4GB / CPU2 – 25.000 <br>
+      8GB / CPU4 – 35.000 <br>
+      16GB / CPU4 – 40.000 <br>
+      16GB / CPU8 – 45.000
+    </div>
+    <button class="add-btn" onclick="addCart('VPS Digital Ocean',25000)">Tambah</button>
+  </div>
+
+  <!-- Jasa -->
+  <div class="product">
+    <img src="https://files.catbox.moe/z9iz9p.jpg">
+    <h3>Jasa Instalasi</h3>
+    <div class="price">
+      Install Panel – 5.000 <br>
+      Install Protect – 8.000 <br>
+      Rename Script – 10.000
+    </div>
+    <button class="add-btn" onclick="addCart('Jasa Instalasi',5000)">Tambah</button>
+  </div>
+
+</div>
+
+<!-- BUTTON CART -->
+<button class="cart-btn" onclick="openCart()">
+  <ion-icon name="cart"></ion-icon>
+  <span class="cart-count" id="cartCount">0</span>
 </button>
 
+<!-- CART POPUP -->
+<div id="cartBox" class="fade">
+
+  <h3>Keranjang Belanja</h3>
+  <div id="cartItems"></div>
+
+  <h3>Total: <span id="totalPrice">0</span></h3>
+
+  <hr style="border-color:#333">
+
+  <h3>Checkout</h3>
+
+  <label>Nama Lengkap</label>
+  <input id="name">
+
+  <label>WhatsApp</label>
+  <input id="wa">
+
+  <label>Metode Pembayaran</label>
+  <select id="payMethod">
+    <option value="DANA">DANA</option>
+    <option value="QRIS">QRIS</option>
+  </select>
+
+  <!-- DANA -->
+  <button class="copy-btn" onclick="copyDana()">Copy Nomor DANA<br>08133124186</button>
+
+  <!-- QRIS -->
+  <button class="copy-btn" onclick="toggleQRIS()">Tampilkan / Tutup QRIS</button>
+
+  <div class="qris-box" id="qrisBox">
+    <img src="https://files.catbox.moe/3vueqq.jpg">
+  </div>
+
+  <label>Upload Bukti Transfer</label>
+  <input type="file" id="bukti">
+
+  <button class="pay-btn" onclick="finishOrder()">Kirim Pembayaran</button>
+  <button class="copy-btn" style="background:#333;color:white" onclick="closeCart()">Tutup</button>
+</div>
+
+<!-- FOOTER -->
+<div class="footer fade">
+  <div class="social">
+    <a href="https://wa.me/6285124271621" target="_blank">WhatsApp</a>
+    <a href="https://t.me/Danzx_Official" target="_blank">Telegram</a>
+    <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank">Testimoni</a>
+  </div>
+  © 2025 Danzx Hosting
+</div>
+
 <script>
-/* ==========================
-   DATA PRODUK
-   Sesuaikan array ini untuk menambah/mengubah produk
-   ========================== */
-const PRODUCTS = [
-  { id:'p1', name:'Panel Pterodactyl — Reseller', price:14000, img:'https://files.catbox.moe/5uzz0z.jpg' },
-  { id:'p2', name:'Danzo MD (Script Bot)', price:30000, img:'https://files.catbox.moe/uh1bt6.jpg' },
-  { id:'p3', name:'VPS Digital Ocean 4GB / CPU2', price:25000, img:'https://files.catbox.moe/k08euw.jpg' },
-  { id:'p4', name:'Install Panel (Jasa)', price:5000, img:'https://files.catbox.moe/z9iz9p.jpg' },
-  { id:'p5', name:'Ochobotz v4 Update', price:35000, img:'https://files.catbox.moe/uh1bt6.jpg' },
-  { id:'p6', name:'Saluran 1K (Jasa)', price:50000, img:'https://files.catbox.moe/z9iz9p.jpg' }
-];
+/* CART SYSTEM */
+let cart = [];
+const cartCount = document.getElementById("cartCount");
+const cartItems = document.getElementById("cartItems");
+const totalPrice = document.getElementById("totalPrice");
 
-/* ======== Inisialisasi DOM refs ======== */
-const productsEl = document.getElementById('products');
-const cartListEl = document.getElementById('cartList');
-const cartEmptyEl = document.getElementById('cartEmpty');
-const totalRowEl = document.getElementById('totalRow');
-const totalPriceEl = document.getElementById('totalPrice');
-const cartActionsEl = document.getElementById('cartActions');
-const cartCountEl = document.getElementById('cartCount');
-const openCartFab = document.getElementById('openCartFab');
-
-const shipCourierEl = document.getElementById('shipCourier');
-const shipWeightEl = document.getElementById('shipWeight');
-const calcShipBtn = document.getElementById('calcShipBtn');
-const shipResultEl = document.getElementById('shipResult');
-const addShipToTotalBtn = document.getElementById('addShipToTotal');
-const checkoutWhatsBtn = document.getElementById('checkoutWhats');
-
-let shippingCost = 0;
-
-/* ======== Cart state (localStorage) ======== */
-let cart = JSON.parse(localStorage.getItem('dzx_cart_v2') || '[]');
-
-function persist(){ localStorage.setItem('dzx_cart_v2', JSON.stringify(cart)); }
-
-/* ======== Render products ======== */
-function renderProducts(){
-  productsEl.innerHTML = '';
-  PRODUCTS.forEach(p=>{
-    const el = document.createElement('div');
-    el.className = 'product';
-    el.innerHTML = `
-      <img src="${p.img}" alt="${escapeHtml(p.name)}">
-      <div class="p-info">
-        <div class="name">${escapeHtml(p.name)}</div>
-        <div class="desc small">Harga: Rp ${formatRupiah(p.price)}</div>
-      </div>
-      <div class="p-action">
-        <div class="price">Rp ${formatRupiah(p.price)}</div>
-        <button class="btn-buy" onclick="addToCart('${p.id}')">Beli</button>
-      </div>
-    `;
-    productsEl.appendChild(el);
-  });
+function addCart(name, price){
+  cart.push({name, price});
+  cartCount.textContent = cart.length;
+  alert("Ditambahkan ke keranjang!");
 }
 
-/* ======== Cart functions ======== */
-function findProduct(id){ return PRODUCTS.find(x=>x.id===id); }
-
-function addToCart(id){
-  const idx = cart.findIndex(i=>i.id===id);
-  if(idx === -1) cart.push({ id, qty: 1 });
-  else cart[idx].qty += 1;
-  persist(); renderCart(); animateFab();
-}
-
-function removeFromCart(index){
-  if(index>=0 && index<cart.length){
-    cart.splice(index,1);
-    persist(); renderCart();
-  }
-}
-
-function changeQty(index, delta){
-  if(!cart[index]) return;
-  cart[index].qty += delta;
-  if(cart[index].qty < 1) cart[index].qty = 1;
-  persist(); renderCart();
-}
-
-function clearCart(){
-  cart = []; persist(); renderCart();
-}
-
-/* calculate totals */
-function cartTotal(){
-  let sum = 0;
-  cart.forEach(it=>{
-    const p = findProduct(it.id);
-    if(p) sum += p.price * it.qty;
-  });
-  return sum;
-}
-
-/* render cart UI */
-function renderCart(){
-  if(cart.length === 0){
-    cartEmptyEl.style.display = 'block';
-    cartListEl.style.display = 'none';
-    totalRowEl.style.display = 'none';
-    cartActionsEl.style.display = 'none';
-    cartCountEl.style.display = 'none';
-    return;
-  }
-
-  cartEmptyEl.style.display = 'none';
-  cartListEl.style.display = 'flex';
-  cartListEl.innerHTML = '';
-
-  let total = 0;
-  cart.forEach((it, idx) => {
-    const p = findProduct(it.id);
-    if(!p) return;
-    const sub = p.price * it.qty;
-    total += sub;
-
-    const node = document.createElement('div');
-    node.className = 'cart-item';
-    node.innerHTML = `
-      <div style="display:flex;gap:10px;align-items:center">
-        <img src="${p.img}" alt="${escapeHtml(p.name)}">
-        <div>
-          <div class="meta name">${escapeHtml(p.name)}</div>
-          <div class="small">Rp ${formatRupiah(p.price)} • Sub: Rp ${formatRupiah(sub)}</div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <button onclick="changeQty(${idx},-1)" style="background:transparent;border-radius:6px;padding:6px;border:1px solid rgba(255,255,255,0.08);color:#fff;cursor:pointer">−</button>
-          <div style="padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px">${it.qty}</div>
-          <button onclick="changeQty(${idx},1)" style="background:transparent;border-radius:6px;padding:6px;border:1px solid rgba(255,255,255,0.08);color:#fff;cursor:pointer">＋</button>
-        </div>
-        <div>
-          <button onclick="removeFromCart(${idx})" style="background:transparent;border:none;color:#ff8b8b;cursor:pointer">Hapus</button>
-        </div>
-      </div>
-    `;
-    cartListEl.appendChild(node);
-  });
-
-  totalRowEl.style.display = 'flex';
-  totalPriceEl.innerText = 'Rp ' + formatRupiah(cartTotal() + shippingCost);
-  cartActionsEl.style.display = 'flex';
-  cartCountEl.style.display = 'block';
-  cartCountEl.innerText = cart.reduce((a,b)=>a+b.qty,0);
-}
-
-/* ======== Shipping (Ongkir) calculation ======== */
-/*
-  Simple shipping rules (example):
-  - JNE = 12.000 per kg (or per 1000g)
-  - JNT = 11.000 per kg
-  - SiCepat = 10.000 per kg
-  Billing rounds up per kg (ceil)
-*/
-function calcShipping(courier, weightGrams){
-  const kg = Math.ceil((weightGrams || 0) / 1000);
-  let rate = 12000;
-  if(courier === 'jnt') rate = 11000;
-  if(courier === 'sicepat') rate = 10000;
-  return kg * rate;
-}
-
-calcShipBtn.addEventListener('click', ()=>{
-  const courier = shipCourierEl.value;
-  const weight = parseInt(shipWeightEl.value) || 0;
-  if(weight <= 0){ alert('Masukkan berat paket dalam gram.'); return; }
-  const cost = calcShipping(courier, weight);
-  shippingCost = cost;
-  shipResultEl.innerHTML = `Total Ongkir (${courier.toUpperCase()}): <b>Rp ${formatRupiah(cost)}</b>`;
-  totalPriceEl.innerText = 'Rp ' + formatRupiah(cartTotal() + shippingCost);
-});
-
-/* add shipping to total (keperluan checkout) */
-addShipToTotalBtn.addEventListener('click', ()=>{
-  if(cart.length === 0){ alert('Keranjang kosong. Silakan tambahkan produk terlebih dahulu.'); return; }
-  if(!shippingCost){ alert('Hitung ongkir terlebih dahulu.'); return; }
-  alert('Ongkir telah dimasukkan ke total. Silakan checkout.');
+function openCart(){
+  document.getElementById("cartBox").style.display = "block";
   renderCart();
-});
+}
 
-/* ======== Checkout via WhatsApp (prefill) ======== */
-checkoutWhatsBtn.addEventListener('click', ()=>{
-  if(cart.length === 0){ alert('Keranjang kosong.'); return; }
+function closeCart(){
+  document.getElementById("cartBox").style.display = "none";
+}
 
-  // ask buyer info: name, phone, payment method
-  const buyerName = prompt('Masukkan nama Anda untuk konfirmasi (contoh: Budi):') || '';
-  const buyerPhone = prompt('Masukkan nomor WhatsApp Anda (format: 62812...):') || '';
-  const metode = prompt('Metode pembayaran (DANA/QRIS):', 'DANA') || 'DANA';
+function renderCart(){
+  cartItems.innerHTML="";
+  let total=0;
 
-  const adminWa = '6285124271621'; // admin number
-  let message = `Halo Admin Danzx Hosting,%0ASaya ingin melakukan pemesanan.%0A%0A`;
-  message += `Nama: ${encodeURIComponent(buyerName)}%0ANo.WA: ${encodeURIComponent(buyerPhone)}%0AMetode: ${encodeURIComponent(metode)}%0A%0A`;
-  let total = 0;
-  cart.forEach((it, idx) => {
-    const p = findProduct(it.id);
-    const sub = p.price * it.qty;
-    message += `${idx+1}. ${encodeURIComponent(p.name)} x${it.qty} = Rp ${formatRupiah(sub)}%0A`;
-    total += sub;
+  cart.forEach((x,i)=>{
+    total += x.price;
+    cartItems.innerHTML += `
+      <div style="display:flex;justify-content:space-between;margin:5px 0">
+        ${x.name} - Rp ${x.price}
+        <button onclick="delItem(${i})" style="background:red;color:white;border:none;padding:5px 8px;border-radius:6px">X</button>
+      </div>
+    `;
   });
-  message += `%0ASubtotal: Rp ${formatRupiah(total)}%0A`;
-  message += `Ongkir: Rp ${formatRupiah(shippingCost)}%0A`;
-  message += `Total Bayar: Rp ${formatRupiah(total + shippingCost)}%0A%0A`;
-  message += `Catatan: `;
-  const url = `https://wa.me/${adminWa}?text=${message}`;
-  window.open(url, '_blank');
-});
 
-/* ======== Payment actions (DANA & QRIS) ======== */
-document.getElementById('copyDanaBtn').addEventListener('click', ()=>{
-  const dana = document.getElementById('danaNumber').innerText.trim();
-  navigator.clipboard.writeText(dana).then(()=> alert('Nomor DANA disalin: ' + dana));
-});
-document.getElementById('toggleQrisBtn').addEventListener('click', ()=>{
-  document.getElementById('qrisBox').classList.toggle('show');
-});
-document.getElementById('copyDanaPay').addEventListener('click', ()=>{
-  const dana = document.getElementById('danaNumber').innerText.trim();
-  navigator.clipboard.writeText(dana).then(()=>{
-    alert('Nomor DANA disalin. Silakan transfer lalu konfirmasi via WhatsApp.');
-    window.open('https://wa.me/6285124271621?text=Saya%20sudah%20transfer%20ke%20DANA%20'+encodeURIComponent(dana),'_blank');
-  });
-});
-document.getElementById('downloadQris').addEventListener('click', ()=>{
-  const url = document.querySelector('#qrisBox img').src;
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'qris.png';
-  a.click();
-});
+  totalPrice.textContent = total;
+}
 
-/* ======== Fab behavior ======== */
-openCartFab.addEventListener('click', ()=>{
-  // scroll to cart panel
-  const y = document.getElementById('cartArea').getBoundingClientRect().top + window.scrollY - 20;
-  window.scrollTo({ top: y, behavior: 'smooth' });
-});
+function delItem(i){
+  cart.splice(i,1);
+  cartCount.textContent = cart.length;
+  renderCart();
+}
 
-/* ======== Utilities ======== */
-function formatRupiah(num){ return Number(num).toLocaleString('id-ID'); }
-function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<
+/* COPY DANA */
+function copyDana(){
+  navigator.clipboard.writeText("08133124186");
+  alert("Nomor DANA disalin!");
+}
+
+/* QRIS TOGGLE */
+function toggleQRIS(){
+  const box = document.getElementById("qrisBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+/* FINISH ORDER (SIMPEL) */
+function finishOrder(){
+  alert("Pembayaran dikirim! Admin akan cek.");
+}
+</script>
+
+</body>
+    </html>
