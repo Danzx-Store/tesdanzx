@@ -1,394 +1,511 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Danzx Hosting - Premium Store</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Danzx Hosting — Store Premium</title>
 
-<!-- ICON -->
-<script type="module"
- src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule
- src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- IONICONS (opsional, dipakai untuk ikon) -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <style>
-/* GLOBAL */
-body{
-  margin:0;
-  background:#050505;
-  color:#fff;
-  font-family:"Poppins", sans-serif;
-}
+  /* === Visual: premium glassmorphism + neon soft === */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-h2{
-  text-align:center;
-  margin:20px 0;
-  color:#c084ff;
-  text-shadow:0 0 20px #a855f7;
-}
+  :root{
+    --bg-1: #0b0710;
+    --bg-2: #2b1f4a;
+    --glass: rgba(255,255,255,0.06);
+    --accent: linear-gradient(135deg,#7c5cff,#6e9dff);
+    --accent-solid: #7c5cff;
+    --success: #2ed573;
+    --gold: #ffb84d;
+    --muted: rgba(255,255,255,0.75);
+    --card-radius: 14px;
+  }
 
-button{
-  cursor:pointer;
-  transition:.3s;
-}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:28px 18px 80px;
+  }
 
-/* SMOOTH ANIMATION */
-.fade{
-  animation:fade .5s ease;
-}
-@keyframes fade{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
+  /* layout */
+  .container{max-width:1100px;margin:0 auto}
+  .header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+  .logo{
+    width:72px;height:72px;border-radius:12px;
+    background:var(--accent-solid);display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:#fff;box-shadow:0 10px 32px rgba(124,92,255,0.18);
+  }
+  .title h1{margin:0;font-size:20px}
+  .title p{margin:6px 0 0;color:var(--muted);font-size:13px}
 
-/* HEADER */
-.header{
-  text-align:center;
-  padding:20px;
-}
-.header img{
-  width:180px;
-  border-radius:14px;
-  box-shadow:0 0 25px #a855f7;
-}
+  .layout{display:grid;grid-template-columns:1fr 380px;gap:20px}
+  @media(max-width:930px){ .layout{grid-template-columns:1fr} }
 
-/* PRODUCT GRID */
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-  gap:20px;
-  padding:20px;
-}
+  /* Product panel */
+  .panel{
+    background:var(--glass);
+    border-radius:var(--card-radius);
+    padding:18px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+  }
+  .panel h2{margin:0 0 12px;font-size:18px}
+  .products{display:flex;flex-direction:column;gap:12px}
 
-.product{
-  background:#111;
-  border:1px solid #333;
-  padding:15px;
-  border-radius:14px;
-  transition:.3s;
-  animation:breathe 3s infinite ease-in-out;
-}
-.product:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 25px #a855f7;
-}
+  .product{
+    display:flex;gap:14px;align-items:center;padding:12px;border-radius:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.035);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .product:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.45)}
+  .product img{width:110px;height:78px;object-fit:cover;border-radius:8px;flex-shrink:0}
+  .p-info{flex:1}
+  .p-title{font-weight:600}
+  .p-sub{font-size:13px;color:var(--muted);margin-top:6px}
+  .p-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+  select.variant{padding:8px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:#fff}
+  button.btn{padding:10px 12px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+  button.buy{background:linear-gradient(135deg,#7c5cff,#a78bfa);color:#fff;box-shadow:0 8px 20px rgba(124,92,255,0.14)}
+  .price{font-weight:700;margin-bottom:4px}
 
-@keyframes breathe{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.03);}
-  100%{transform:scale(1);}
-}
+  /* Side column */
+  .side{display:flex;flex-direction:column;gap:12px}
+  .card{background:var(--glass);padding:14px;border-radius:12px;backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,0.35)}
 
-.product img{
-  width:100%;
-  border-radius:12px;
-}
+  .cart-list{display:flex;flex-direction:column;gap:10px;max-height:300px;overflow:auto;padding-right:6px}
+  .cart-item{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px;background:rgba(0,0,0,0.14);border-radius:8px}
+  .cart-item .meta{font-size:13px}
+  .qty{display:flex;gap:6px;align-items:center}
+  .qty button{padding:6px;border-radius:6px;border:none;background:rgba(255,255,255,0.03);color:#fff;cursor:pointer}
 
-.price{
-  font-size:15px;
-  margin:10px 0;
-  line-height:24px;
-}
+  .row{display:flex;gap:8px;align-items:center}
+  .muted{color:var(--muted);font-size:13px}
+  .total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-weight:700}
 
-.add-btn{
-  background:#c084ff;
-  color:#000;
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:8px;
-  font-weight:bold;
-  box-shadow:0 0 15px #a855f7;
-}
+  /* payment section specifics */
+  .dana{font-weight:700;font-size:18px;letter-spacing:1px}
+  .small{font-size:13px;color:var(--muted)}
+  .copy{background:linear-gradient(135deg,var(--success),#58e28b);color:#062017;padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .toggle{background:linear-gradient(135deg,#6ea8ff,#52d0ff);color:#042737;padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .primary{background:linear-gradient(135deg,var(--accent-solid),#8b5cf6);color:#fff;padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .gold{background:linear-gradient(135deg,var(--gold),#ff9800);color:#2b1b00;padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
 
-/* CART */
-.cart-btn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#c084ff;
-  border:none;
-  padding:16px 20px;
-  font-size:20px;
-  border-radius:50%;
-  box-shadow:0 0 20px #a855f7;
-  z-index:99;
-}
-.cart-count{
-  position:absolute;
-  top:-5px;
-  right:-5px;
-  background:red;
-  font-size:12px;
-  padding:3px 6px;
-  border-radius:50%;
-}
+  .qris-img{width:100%;border-radius:10px;margin-top:12px;box-shadow:0 8px 30px rgba(0,0,0,0.45)}
 
-/* CART POPUP */
-#cartBox{
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:90%;
-  max-width:450px;
-  background:#111;
-  border:1px solid #333;
-  padding:20px;
-  border-radius:14px;
-  z-index:999;
-}
+  /* footer */
+  .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;padding:18px}
 
-/* PAYMENT */
-input, select{
-  width:100%;
-  padding:12px;
-  border-radius:8px;
-  border:none;
-  margin-top:5px;
-  margin-bottom:15px;
-  background:#222;
-  color:white;
-}
+  /* floating cart button */
+  .fab{
+    position:fixed;right:18px;bottom:18px;background:linear-gradient(135deg,#7c5cff,#a78bfa);width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(124,92,255,0.22);z-index:1000;border:none;cursor:pointer;
+  }
+  .fab .count{position:absolute;right:8px;top:6px;background:#ff5b5b;color:#fff;border-radius:999px;padding:4px 7px;font-weight:700;font-size:12px}
 
-.copy-btn{
-  background:#c084ff;
-  padding:10px;
-  border-radius:8px;
-  width:100%;
-  border:none;
-  font-weight:bold;
-}
-
-.qris-box{
-  text-align:center;
-  display:none;
-}
-.qris-box img{
-  width:230px;
-  border-radius:12px;
-  box-shadow:0 0 20px #a855f7;
-  margin-top:10px;
-}
-
-.pay-btn{
-  background:#c084ff;
-  color:#000;
-  padding:12px;
-  width:100%;
-  border:none;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-/* FOOTER */
-.footer{
-  text-align:center;
-  padding:20px;
-  color:#777;
-  margin-top:20px;
-}
-.social{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  margin-bottom:10px;
-}
-.social a{
-  background:#c084ff;
-  color:#000;
-  padding:10px 14px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
-  box-shadow:0 0 12px #a855f7;
-}
+  /* small responsive */
+  @media(max-width:640px){
+    .product{flex-direction:column;align-items:flex-start}
+    .p-actions{width:100%;flex-direction:row;justify-content:space-between}
+    select.variant{width:70%}
+  }
 </style>
 </head>
-
 <body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">DZX</div>
+      <div class="title">
+        <h1>Danzx Hosting — Store Premium</h1>
+        <p>Produk & Layanan • Pembayaran DANA / QRIS • Support WhatsApp & Telegram</p>
+      </div>
+    </header>
 
-<!-- HEADER -->
-<div class="header fade">
-  <img src="https://files.catbox.moe/6zg5ky.jpg">
-</div>
+    <main class="layout">
+      <!-- LEFT: Products -->
+      <section class="panel" aria-label="Daftar Produk">
+        <h2>Daftar Produk & Varian</h2>
+        <div class="products" id="products"></div>
+      </section>
 
-<h2>Produk Danzx Hosting</h2>
+      <!-- RIGHT: Cart / Payment / Contact -->
+      <aside class="side">
+        <!-- Cart -->
+        <div class="card" aria-label="Keranjang">
+          <h3>Keranjang Belanja</h3>
+          <div id="cartEmpty" class="muted">Keranjang kosong — tambahkan produk.</div>
+          <div class="cart-list" id="cartList" style="display:none"></div>
 
-<!-- PRODUCT LIST -->
-<div class="products fade">
+          <div class="total" id="totalRow" style="display:none">
+            <div>Subtotal</div>
+            <div id="subtotalText">Rp 0</div>
+          </div>
 
-  <!-- Pterodactyl -->
-  <div class="product">
-    <img src="https://files.catbox.moe/5uzz0z.jpg">
-    <h3>Panel Pterodactyl</h3>
-    <div class="price">
-      • Reseller – 14.000 <br>
-      • Admin – 16.000 <br>
-      • PT Panel – 25.000 <br>
-      • Owner – 30.000 <br>
-      • Tangan Kanan – 35.000
-    </div>
-    <button class="add-btn" onclick="addCart('Panel Pterodactyl',14000)">Tambah</button>
+          <!-- Shipping -->
+          <div style="margin-top:12px">
+            <label class="muted">Hitung Ongkir (gram)</label>
+            <div class="row" style="margin-top:8px">
+              <select id="shipCourier" style="padding:10px;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:#fff">
+                <option value="jne">JNE</option>
+                <option value="jnt">JNT</option>
+                <option value="sicepat">SiCepat</option>
+              </select>
+              <input id="shipWeight" type="number" min="1" placeholder="Berat (gram)" value="1000">
+            </div>
+            <div class="row" style="margin-top:8px">
+              <button class="primary" id="calcShipBtn">Hitung Ongkir</button>
+              <button class="gold" id="applyShipBtn">Masukkan ke Total</button>
+            </div>
+            <div class="muted" id="shipResult" style="margin-top:8px">Total Ongkir: Rp 0</div>
+          </div>
+
+          <div class="row" style="margin-top:12px;display:none" id="cartActions">
+            <button class="primary" id="checkoutBtn">Checkout via WhatsApp</button>
+            <button class="copy" id="clearBtn">Clear</button>
+          </div>
+        </div>
+
+        <!-- Payment DANA -->
+        <div class="card" aria-label="Pembayaran">
+          <h3>Pembayaran</h3>
+          <div class="muted">Nomor DANA</div>
+          <div class="dana" id="danaNumber">08133124186</div>
+          <div class="muted">A/N Danzx Hosting</div>
+
+          <div style="margin-top:10px" class="row">
+            <button class="copy" id="copyDanaBtn">Copy Nomor</button>
+            <button class="toggle" id="qrisToggleBtn">QRIS</button>
+          </div>
+
+          <div id="qrisBox" style="display:none;margin-top:12px">
+            <img class="qris-img" id="qrisImg" src="https://files.catbox.moe/3vueqq.jpg" alt="QRIS">
+            <div class="row" style="margin-top:10px">
+              <button class="primary" id="copyThenConfirm">Salin & Konfirmasi</button>
+              <button class="gold" id="downloadQrisBtn">Download QRIS</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="card" aria-label="Kontak">
+          <h3>Kontak & Testimoni</h3>
+          <div class="row" style="margin-top:10px">
+            <a href="https://t.me/Danzx_Official" target="_blank" rel="noopener"><button class="primary">Telegram</button></a>
+            <a id="waContact" href="https://wa.me/6285124271621" target="_blank" rel="noopener"><button class="copy">WhatsApp</button></a>
+          </div>
+          <div style="margin-top:12px">
+            <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank" rel="noopener"><button class="gold" style="width:100%">Testimoni</button></a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">© <span id="year"></span> Danzx Hosting — semua hak dilindungi</footer>
   </div>
 
-  <!-- Script Bot -->
-  <div class="product">
-    <img src="https://files.catbox.moe/uh1bt6.jpg">
-    <h3>Script Bot WA / Telegram</h3>
-    <div class="price">
-      Mulai 15.000 - 80.000
-    </div>
-    <button class="add-btn" onclick="addCart('Script Bot',15000)">Tambah</button>
-  </div>
-
-  <!-- VPS -->
-  <div class="product">
-    <img src="https://files.catbox.moe/k08euw.jpg">
-    <h3>VPS Digital Ocean</h3>
-    <div class="price">
-      4GB / CPU2 – 25.000 <br>
-      8GB / CPU4 – 35.000 <br>
-      16GB / CPU4 – 40.000 <br>
-      16GB / CPU8 – 45.000
-    </div>
-    <button class="add-btn" onclick="addCart('VPS Digital Ocean',25000)">Tambah</button>
-  </div>
-
-  <!-- Jasa -->
-  <div class="product">
-    <img src="https://files.catbox.moe/z9iz9p.jpg">
-    <h3>Jasa Instalasi</h3>
-    <div class="price">
-      Install Panel – 5.000 <br>
-      Install Protect – 8.000 <br>
-      Rename Script – 10.000
-    </div>
-    <button class="add-btn" onclick="addCart('Jasa Instalasi',5000)">Tambah</button>
-  </div>
-
-</div>
-
-<!-- BUTTON CART -->
-<button class="cart-btn" onclick="openCart()">
-  <ion-icon name="cart"></ion-icon>
-  <span class="cart-count" id="cartCount">0</span>
-</button>
-
-<!-- CART POPUP -->
-<div id="cartBox" class="fade">
-
-  <h3>Keranjang Belanja</h3>
-  <div id="cartItems"></div>
-
-  <h3>Total: <span id="totalPrice">0</span></h3>
-
-  <hr style="border-color:#333">
-
-  <h3>Checkout</h3>
-
-  <label>Nama Lengkap</label>
-  <input id="name">
-
-  <label>WhatsApp</label>
-  <input id="wa">
-
-  <label>Metode Pembayaran</label>
-  <select id="payMethod">
-    <option value="DANA">DANA</option>
-    <option value="QRIS">QRIS</option>
-  </select>
-
-  <!-- DANA -->
-  <button class="copy-btn" onclick="copyDana()">Copy Nomor DANA<br>08133124186</button>
-
-  <!-- QRIS -->
-  <button class="copy-btn" onclick="toggleQRIS()">Tampilkan / Tutup QRIS</button>
-
-  <div class="qris-box" id="qrisBox">
-    <img src="https://files.catbox.moe/3vueqq.jpg">
-  </div>
-
-  <label>Upload Bukti Transfer</label>
-  <input type="file" id="bukti">
-
-  <button class="pay-btn" onclick="finishOrder()">Kirim Pembayaran</button>
-  <button class="copy-btn" style="background:#333;color:white" onclick="closeCart()">Tutup</button>
-</div>
-
-<!-- FOOTER -->
-<div class="footer fade">
-  <div class="social">
-    <a href="https://wa.me/6285124271621" target="_blank">WhatsApp</a>
-    <a href="https://t.me/Danzx_Official" target="_blank">Telegram</a>
-    <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank">Testimoni</a>
-  </div>
-  © 2025 Danzx Hosting
-</div>
+  <!-- Floating cart FAB -->
+  <button class="fab" id="fabBtn" title="Buka Keranjang">
+    <ion-icon name="cart" style="font-size:22px;color:#fff"></ion-icon>
+    <div class="count" id="fabCount" style="display:none">0</div>
+  </button>
 
 <script>
-/* CART SYSTEM */
-let cart = [];
-const cartCount = document.getElementById("cartCount");
-const cartItems = document.getElementById("cartItems");
-const totalPrice = document.getElementById("totalPrice");
+/* --------------------------
+   Configuration (ganti bila perlu)
+   -------------------------- */
+const ADMIN_WA = '6285124271621'; // nomor admin untuk checkout
+const DANA_NUMBER = '08133124186';
+const QRIS_IMG = 'https://files.catbox.moe/3vueqq.jpg';
 
-function addCart(name, price){
-  cart.push({name, price});
-  cartCount.textContent = cart.length;
-  alert("Ditambahkan ke keranjang!");
-}
+/* --------------------------
+   Produk + varian (daftar lengkap)
+   Ubah/extend array ini bila perlu
+   -------------------------- */
+const PRODUCTS = [
+  {
+    id: 'panel-ptero',
+    title: 'Panel Pterodactyl',
+    img: 'https://files.catbox.moe/5uzz0z.jpg',
+    variants: [
+      { name: 'Reseller Panel', price: 14000 },
+      { name: 'Admin Panel', price: 16000 },
+      { name: 'PT Panel', price: 25000 },
+      { name: 'Owner Panel', price: 30000 },
+      { name: 'Tangan Kanan Panel', price: 35000 }
+    ]
+  },
+  {
+    id: 'script-bot',
+    title: 'Script Bot WA & Telegram',
+    img: 'https://files.catbox.moe/uh1bt6.jpg',
+    variants: [
+      { name: 'Danzo MD', price: 30000 },
+      { name: 'Reseller Danzo MD', price: 80000 },
+      { name: 'SelfBot', price: 25000 },
+      { name: 'PushKontak', price: 15000 },
+      { name: 'Alice Assistant', price: 30000 },
+      { name: 'Ochobotz v4', price: 20000 },
+      { name: 'Ochobotz v4 Update', price: 35000 },
+      { name: 'Reseller Ochobotz', price: 50000 },
+      { name: 'Variezyne', price: 15000 },
+      { name: 'Reseller Variezyne', price: 25000 },
+      { name: 'Cpanel X MD', price: 20000 },
+      { name: 'Cpanel 4 Server', price: 20000 },
+      { name: 'Protect Simple', price: 15000 },
+      { name: 'Protect Telegram', price: 20000 },
+      { name: 'Digital Ocean Botz', price: 50000 },
+      { name: 'Bug Nika', price: 20000 },
+      { name: 'Bug Justin', price: 20000 }
+    ]
+  },
+  {
+    id: 'vps-do',
+    title: 'VPS Digital Ocean',
+    img: 'https://files.catbox.moe/k08euw.jpg',
+    variants: [
+      { name: 'Ram 4 / CPU 2', price: 25000 },
+      { name: 'Ram 8 / CPU 4', price: 35000 },
+      { name: 'Ram 16 / CPU 4', price: 40000 },
+      { name: 'Ram 16 / CPU 8', price: 45000 }
+    ]
+  },
+  {
+    id: 'jasa-lain',
+    title: 'Jasa & Layanan Lainnya',
+    img: 'https://files.catbox.moe/z9iz9p.jpg',
+    variants: [
+      { name: 'Install Panel', price: 5000 },
+      { name: 'Install Protect', price: 8000 },
+      { name: 'Install Tema', price: 5000 },
+      { name: 'Rename Script', price: 10000 },
+      { name: 'Push Saluran', price: 10000 },
+      { name: 'Unband WA Fresh', price: 30000 },
+      { name: 'Unband WA Lumut', price: 40000 },
+      { name: 'Admin Saluran', price: 10000 },
+      { name: 'Saluran 1K', price: 50000 }
+    ]
+  }
+];
 
-function openCart(){
-  document.getElementById("cartBox").style.display = "block";
-  renderCart();
-}
+/* --------------------------
+   State (cart + shipping)
+   persisted in localStorage
+   -------------------------- */
+let cart = JSON.parse(localStorage.getItem('dzx_cart')) || []; // { productId, variantIndex, qty }
+let shippingCost = 0;
 
-function closeCart(){
-  document.getElementById("cartBox").style.display = "none";
-}
+/* --------------------------
+   Helpers
+   -------------------------- */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+function formatIDR(n){ return Number(n).toLocaleString('id-ID'); }
+function persist(){ localStorage.setItem('dzx_cart', JSON.stringify(cart)); }
 
-function renderCart(){
-  cartItems.innerHTML="";
-  let total=0;
+/* --------------------------
+   Render products
+   -------------------------- */
+function renderProducts(){
+  const container = $('#products');
+  container.innerHTML = '';
+  PRODUCTS.forEach(prod => {
+    const card = document.createElement('div');
+    card.className = 'product';
+    // build variant select
+    let variantOptions = `<select class="variant" id="sel-${prod.id}">`;
+    prod.variants.forEach((v,i) => {
+      variantOptions += `<option value="${i}">${v.name} — Rp ${formatIDR(v.price)}</option>`;
+    });
+    variantOptions += `</select>`;
 
-  cart.forEach((x,i)=>{
-    total += x.price;
-    cartItems.innerHTML += `
-      <div style="display:flex;justify-content:space-between;margin:5px 0">
-        ${x.name} - Rp ${x.price}
-        <button onclick="delItem(${i})" style="background:red;color:white;border:none;padding:5px 8px;border-radius:6px">X</button>
+    card.innerHTML = `
+      <img src="${prod.img}" alt="${prod.title}">
+      <div class="p-info">
+        <div class="p-title">${prod.title}</div>
+        <div class="p-sub muted">${prod.variants.length} varian tersedia</div>
+        <div style="margin-top:8px">${variantOptions}</div>
+      </div>
+      <div class="p-actions">
+        <div class="price">Mulai Rp ${formatIDR(prod.variants[0].price)}</div>
+        <div style="margin-top:8px">
+          <button class="btn buy" onclick="addToCart('${prod.id}', document.getElementById('sel-${prod.id}').value)">Tambah</button>
+        </div>
       </div>
     `;
+    container.appendChild(card);
+  });
+}
+
+/* --------------------------
+   Cart functions
+   -------------------------- */
+function addToCart(productId, variantIndex){
+  variantIndex = Number(variantIndex);
+  const idx = cart.findIndex(c => c.productId === productId && c.variantIndex === variantIndex);
+  if(idx === -1) cart.push({ productId, variantIndex, qty: 1 });
+  else cart[idx].qty += 1;
+  persist(); renderCart(); pulseFab();
+}
+
+function removeCartItem(i){
+  cart.splice(i,1);
+  persist(); renderCart();
+}
+
+function changeQty(i, delta){
+  cart[i].qty += delta;
+  if(cart[i].qty < 1) cart[i].qty = 1;
+  persist(); renderCart();
+}
+
+function clearCart(){
+  if(!confirm('Kosongkan keranjang?')) return;
+  cart = []; persist(); renderCart();
+}
+
+function cartSubtotal(){
+  let sum = 0;
+  cart.forEach(item => {
+    const p = PRODUCTS.find(x => x.id === item.productId);
+    if(!p) return;
+    const v = p.variants[item.variantIndex];
+    sum += v.price * item.qty;
+  });
+  return sum;
+}
+
+/* --------------------------
+   Render cart UI
+   -------------------------- */
+function renderCart(){
+  const cartList = $('#cartList');
+  const cartEmpty = $('#cartEmpty');
+  const totalRow = $('#totalRow');
+  const subtotalText = $('#subtotalText');
+  const cartActions = $('#cartActions');
+  const fabCount = $('#fabCount');
+
+  if(cart.length === 0){
+    cartEmpty.style.display = 'block';
+    cartList.style.display = 'none';
+    totalRow.style.display = 'none';
+    cartActions.style.display = 'none';
+    fabCount.style.display = 'none';
+    subtotalText.textContent = 'Rp 0';
+    return;
+  }
+
+  cartEmpty.style.display = 'none';
+  cartList.style.display = 'flex';
+  cartList.innerHTML = '';
+  let subtotal = 0;
+
+  cart.forEach((it, i) => {
+    const p = PRODUCTS.find(x => x.id === it.productId);
+    if(!p) return;
+    const v = p.variants[it.variantIndex];
+    const sub = v.price * it.qty;
+    subtotal += sub;
+
+    const node = document.createElement('div');
+    node.className = 'cart-item';
+    node.innerHTML = `
+      <div style="display:flex;gap:10px;align-items:center">
+        <img src="${p.img}" style="width:56px;height:42px;border-radius:8px;object-fit:cover" alt="">
+        <div class="meta">
+          <div style="font-weight:700">${p.title}</div>
+          <div class="muted">${v.name} • Rp ${formatIDR(v.price)} • Sub: Rp ${formatIDR(sub)}</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+        <div class="qty">
+          <button onclick="changeQty(${i}, -1)">−</button>
+          <div style="padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px">${it.qty}</div>
+          <button onclick="changeQty(${i}, 1)">＋</button>
+        </div>
+        <div><button style="background:transparent;border:none;color:#ff8b8b;cursor:pointer" onclick="removeCartItem(${i})">Hapus</button></div>
+      </div>
+    `;
+    cartList.appendChild(node);
   });
 
-  totalPrice.textContent = total;
+  totalRow.style.display = 'flex';
+  subtotalText.textContent = 'Rp ' + formatIDR(subtotal + shippingCost);
+  cartActions.style.display = 'flex';
+  $('#fabCount').style.display = 'inline-block';
+  $('#fabCount').textContent = cart.reduce((a,b)=>a+b.qty,0);
 }
 
-function delItem(i){
-  cart.splice(i,1);
-  cartCount.textContent = cart.length;
+/* --------------------------
+   Shipping: simple per-kg
+   -------------------------- */
+function calcShipping(courier, grams){
+  const kg = Math.ceil((grams || 0) / 1000);
+  let rate = 12000; // default JNE
+  if(courier === 'jnt') rate = 11000;
+  if(courier === 'sicepat') rate = 10000;
+  return kg * rate;
+}
+
+$('#calcShipBtn').addEventListener('click', () => {
+  const courier = $('#shipCourier').value;
+  const weight = parseInt($('#shipWeight').value) || 0;
+  if(weight <= 0){ alert('Masukkan berat paket (gram)'); return; }
+  shippingCost = calcShipping(courier, weight);
+  $('#shipResult').innerHTML = `Total Ongkir (${courier.toUpperCase()}): <b>Rp ${formatIDR(shippingCost)}</b>`;
   renderCart();
-}
+});
 
-/* COPY DANA */
-function copyDana(){
-  navigator.clipboard.writeText("08133124186");
-  alert("Nomor DANA disalin!");
-}
+$('#applyShipBtn').addEventListener('click', () => {
+  if(cart.length === 0){ alert('Keranjang kosong. Tambahkan produk terlebih dahulu.'); return; }
+  if(!shippingCost){ alert('Hitung ongkir terlebih dahulu.'); return; }
+  alert('Ongkir telah dimasukkan ke total.');
+  renderCart();
+});
 
-/* QRIS TOGGLE */
-function toggleQRIS(){
-  const box = document.getElementById("qrisBox");
-  box.style.display = box.style.display === "block" ? "none" : "block";
-}
+/* --------------------------
+   Checkout via WhatsApp
+   -------------------------- */
+$('#checkoutBtn').addEventListener('click', () => {
+  if(cart.length === 0){ alert('Keranjang kosong.'); return; }
+  const buyerName = prompt('Nama pembeli (untuk konfirmasi):') || '';
+  const buyerPhone = prompt('Nomor WhatsApp Anda (contoh: 62812...):') || '';
+  const method = prompt('Metode pembayaran (DANA/QRIS):', 'DANA') || 'DANA';
 
-/* FINISH ORDER (SIMPEL) */
-function finishOrder(){
-  alert("Pembayaran dikirim! Admin akan cek.");
-}
-</script>
+  const admin = ADMIN_WA;
+  let message = `Halo%20Admin%20Danzx%20Hosting%2C%20saya%20ingin%20melakukan%20pemesanan.%0A%0A`;
+  message += `Nama%3A%20${encodeURIComponent(buyerName)}%0ANo.WA%3A%20${encodeURIComponent(buyerPhone)}%0AMetode%3A%20${encodeURIComponent(method)}%0A%0A`;
 
-</body>
-    </html>
+  let subtotal = 0;
+  cart.forEach((it, idx) => {
+    const p = PRODUCTS.find(x => x.id === it.productId);
+    const v = p.variants[it.variantIndex];
+    const sub = v.price * it.qty;
+    subtotal += sub;
+    message += `${idx+1}. ${encodeURIComponent(p.title)} - ${encodeURIComponent(v.name)} x${it.qty} = Rp ${formatIDR(sub)}%0A`;
+  });
+
+  message += `%0ASubtotal%3A%20Rp%20${formatIDR(subtotal)}%0A`;
+  message += `Ongkir%3A%20Rp%20${formatIDR(shippingCost)}%0A`;
+  message += `Total%3A%20Rp%20${formatIDR(subtotal + shippingCost)}%0A%0A`;
+  message += `Catatan%3A%20`;
+
+  const url = `https://wa.me/${admin}?text=${message}`;
+  window.open(url, '_blank');
+});
+
+/* --------------------------
+   Payment actions: DANA & QRIS
+   -------------------------- */
+$('#copyDanaBtn').addEventListener('click', () => {
+  const dana = DANA_NUMBER;
+  navigator.clipboard.writeTex
