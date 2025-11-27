@@ -7,90 +7,121 @@
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background: #eef2f5;
+        font-family: "Poppins", sans-serif;
+        background: #0d0f14;
         padding: 20px;
         margin: 0;
+        color: #e6e6e6;
     }
+
     .container {
-        background: white;
+        background: #151821;
         padding: 22px;
-        border-radius: 14px;
-        max-width: 550px;
+        border-radius: 18px;
+        max-width: 600px;
         margin: auto;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 0 30px rgba(0, 132, 255, 0.25);
+        animation: fadeIn 0.8s ease-in-out;
     }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(25px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
     h2, h3 {
         text-align: center;
         margin-bottom: 15px;
+        color: #58a6ff;
     }
+
     .produk-box {
-        border: 1px solid #ddd;
+        border: 1px solid #2a2f3a;
         padding: 15px;
-        border-radius: 12px;
+        border-radius: 14px;
         margin-bottom: 20px;
-        background: #fafafa;
+        background: #1c1f27;
+        transition: 0.3s;
     }
+
+    .produk-box:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 18px rgba(0, 140, 255, 0.3);
+    }
+
     .produk-box img {
         width: 100%;
-        border-radius: 10px;
+        border-radius: 12px;
         margin-top: 10px;
     }
+
     .harga {
         font-size: 18px;
         font-weight: bold;
         margin: 8px 0;
-        color: #1d9bf0;
+        color: #4fb3ff;
     }
+
     select, input {
         width: 100%;
-        padding: 12px;
+        padding: 14px;
         margin-top: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
+        border-radius: 10px;
+        border: 1px solid #3a3f4a;
+        background: #0f1117;
+        color: white;
+        font-size: 15px;
     }
+
     button, a.button {
         display: block;
         width: 100%;
-        padding: 12px;
+        padding: 14px;
         margin-top: 15px;
         text-align: center;
-        background: #1d9bf0;
+        background: linear-gradient(90deg, #1d9bf0, #007bff);
         color: white;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: bold;
         text-decoration: none;
         border: none;
         cursor: pointer;
         transition: 0.2s;
+        font-size: 16px;
     }
+
     button:hover, a.button:hover {
         opacity: 0.85;
+        transform: scale(1.03);
     }
-    .btn-wa { background: #25D366; }
-    .btn-tg { background: #1d9bf0; }
+
+    .btn-wa { background: linear-gradient(90deg, #25D366, #128C4A); }
+    .btn-tg { background: linear-gradient(90deg, #1d9bf0, #0b75cc); }
+
     .payment-box {
         padding: 15px;
-        border: 1px solid #ddd;
+        border: 1px solid #2f3542;
         border-radius: 12px;
-        background: #fafafa;
+        background: #1a1d26;
         margin-top: 25px;
     }
+
     .qris-img {
         width: 230px;
         display: none;
         border-radius: 12px;
         margin: 10px auto;
     }
+
     .title-section {
         background: #1d9bf0;
-        color: white;
-        padding: 12px;
-        margin-bottom: 20px;
-        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 25px;
+        border-radius: 12px;
         text-align: center;
-        font-size: 18px;
+        font-size: 19px;
         font-weight: bold;
+        box-shadow: 0 0 15px rgba(29, 155, 240, 0.5);
     }
 </style>
 </head>
@@ -99,7 +130,7 @@
 
 <div class="container">
 
-    <div class="title-section">🛒 Produk Digital Premium</div>
+    <div class="title-section">✨ Produk Digital Premium</div>
 
     <h2>Daftar Produk</h2>
 
@@ -177,7 +208,7 @@
 </div>
 
 <script>
-// QR ON/OFF
+// Show/Hide QR
 function toggleQR() {
     const img = document.getElementById("qrisImage");
     img.style.display = img.style.display === "none" ? "block" : "none";
@@ -189,7 +220,7 @@ function copyDana() {
     alert("Nomor DANA berhasil disalin!");
 }
 
-// Kirim ke Telegram
+// Kirim ke Telegram Admin
 document.getElementById("paymentForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
