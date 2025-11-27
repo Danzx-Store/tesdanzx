@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pembelian Produk & Konfirmasi Pembayaran</title>
+<title>Pembelian Produk Digital</title>
 
 <style>
     body {
@@ -35,6 +35,12 @@
         width: 100%;
         border-radius: 10px;
         margin-top: 10px;
+    }
+    .harga {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 8px 0;
+        color: #1d9bf0;
     }
     select, input {
         width: 100%;
@@ -97,22 +103,27 @@
 
     <h2>Daftar Produk</h2>
 
-    <!-- PRODUK LIST -->
+    <!-- PRODUK 1 -->
     <div class="produk-box">
-        <h3>Produk 1 - Premium</h3>
-        <p>Harga: <b>Rp 25.000</b></p>
+        <h3>Produk 1 – Premium Access</h3>
+        <p>Akses premium untuk fitur lengkap dan layanan full support.</p>
+        <p class="harga">Rp 25.000</p>
         <img src="https://files.catbox.moe/3vueqq.jpg">
     </div>
 
+    <!-- PRODUK 2 -->
     <div class="produk-box">
-        <h3>Produk 2 - VIP</h3>
-        <p>Harga: <b>Rp 50.000</b></p>
+        <h3>Produk 2 – VIP Access</h3>
+        <p>Mendapatkan fitur tambahan + prioritas bantuan admin.</p>
+        <p class="harga">Rp 50.000</p>
         <img src="https://files.catbox.moe/3vueqq.jpg">
     </div>
 
+    <!-- PRODUK 3 -->
     <div class="produk-box">
-        <h3>Produk 3 - Ultimate</h3>
-        <p>Harga: <b>Rp 100.000</b></p>
+        <h3>Produk 3 – Ultimate Access</h3>
+        <p>Akses full semua fitur, update lifetime, dan pelayanan tercepat.</p>
+        <p class="harga">Rp 100.000</p>
         <img src="https://files.catbox.moe/3vueqq.jpg">
     </div>
 
@@ -124,9 +135,9 @@
 
         <select id="produk" required>
             <option value="" disabled selected>Pilih Produk</option>
-            <option>Produk 1 - 25.000</option>
-            <option>Produk 2 - 50.000</option>
-            <option>Produk 3 - 100.000</option>
+            <option>Produk 1 – Premium Access – 25.000</option>
+            <option>Produk 2 – VIP Access – 50.000</option>
+            <option>Produk 3 – Ultimate Access – 100.000</option>
         </select>
         
         <select id="metode">
@@ -150,7 +161,7 @@
         <button onclick="copyDana()">📋 Copy Nomor DANA</button>
     </div>
 
-    <!-- Tombol2 -->
+    <!-- Tombol Kontak -->
     <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank" class="button btn-wa">
         ⭐ Lihat Testimoni Admin
     </a>
@@ -166,19 +177,19 @@
 </div>
 
 <script>
-// Tampilkan QR
+// QR ON/OFF
 function toggleQR() {
     const img = document.getElementById("qrisImage");
     img.style.display = img.style.display === "none" ? "block" : "none";
 }
 
-// Copy nomor DANA
+// Copy DANA
 function copyDana() {
     navigator.clipboard.writeText("08133124186");
     alert("Nomor DANA berhasil disalin!");
 }
 
-// Form → Telegram
+// Kirim ke Telegram
 document.getElementById("paymentForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
