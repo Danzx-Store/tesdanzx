@@ -3,242 +3,354 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pembelian Produk Digital</title>
+<title>Danzx Hosting – Produk & Pembayaran</title>
 
 <style>
     body {
-        font-family: "Poppins", sans-serif;
-        background: #0d0f14;
-        padding: 20px;
         margin: 0;
-        color: #e6e6e6;
-    }
-
-    .container {
-        background: #151821;
-        padding: 22px;
-        border-radius: 18px;
-        max-width: 600px;
-        margin: auto;
-        box-shadow: 0 0 30px rgba(0, 132, 255, 0.25);
-        animation: fadeIn 0.8s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(25px);}
-        to {opacity: 1; transform: translateY(0);}
+        background: #050109;
+        font-family: Arial, sans-serif;
+        color: white;
     }
 
     h2, h3 {
-        text-align: center;
-        margin-bottom: 15px;
-        color: #58a6ff;
+        color: #bb00ff;
+        text-shadow: 0 0 12px #b300ff;
     }
 
-    .produk-box {
-        border: 1px solid #2a2f3a;
-        padding: 15px;
+    .hero {
+        text-align: center;
+        padding: 25px;
+    }
+
+    .hero img {
+        width: 220px;
         border-radius: 14px;
-        margin-bottom: 20px;
-        background: #1c1f27;
-        transition: 0.3s;
+        box-shadow: 0 0 25px #9a32ff;
     }
 
-    .produk-box:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 18px rgba(0, 140, 255, 0.3);
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 25px;
+        padding: 20px;
     }
 
-    .produk-box img {
-        width: 100%;
-        border-radius: 12px;
-        margin-top: 10px;
-    }
-
-    .harga {
-        font-size: 18px;
-        font-weight: bold;
-        margin: 8px 0;
-        color: #4fb3ff;
-    }
-
-    select, input {
-        width: 100%;
-        padding: 14px;
-        margin-top: 10px;
-        border-radius: 10px;
-        border: 1px solid #3a3f4a;
-        background: #0f1117;
-        color: white;
-        font-size: 15px;
-    }
-
-    button, a.button {
-        display: block;
-        width: 100%;
-        padding: 14px;
-        margin-top: 15px;
-        text-align: center;
-        background: linear-gradient(90deg, #1d9bf0, #007bff);
-        color: white;
-        border-radius: 10px;
-        font-weight: bold;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: 0.2s;
-        font-size: 16px;
-    }
-
-    button:hover, a.button:hover {
-        opacity: 0.85;
-        transform: scale(1.03);
-    }
-
-    .btn-wa { background: linear-gradient(90deg, #25D366, #128C4A); }
-    .btn-tg { background: linear-gradient(90deg, #1d9bf0, #0b75cc); }
-
-    .payment-box {
+    .product-card {
+        background: #0e0618;
+        border: 2px solid #6a1b9a;
+        border-radius: 14px;
         padding: 15px;
-        border: 1px solid #2f3542;
-        border-radius: 12px;
-        background: #1a1d26;
-        margin-top: 25px;
+        text-align: center;
+        transition: 0.25s;
+        box-shadow: 0 0 18px #4d007d;
+    }
+
+    .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 28px #b300ff;
+    }
+
+    .product-card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        box-shadow: 0 0 14px #7d00c8;
+    }
+
+    .product-desc {
+        font-size: 14px;
+        color: #ddd;
+        margin-bottom: 12px;
+    }
+
+    .btn-pay {
+        display: block;
+        background: #bb00ff;
+        padding: 14px;
+        border-radius: 8px;
+        text-align: center;
+        margin: 25px auto;
+        width: 260px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 0 20px #bb00ff;
+    }
+
+    .btn-pay:hover {
+        background: #d000ff;
+    }
+
+    /* Payment Page */
+    #paymentPage {
+        display: none;
+        max-width: 500px;
+        margin: 25px auto;
+        background: #0e0618;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 0 20px #9a32ff;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px;
+        background: #180a2b;
+        border: 1px solid #7515c4;
+        border-radius: 8px;
+        margin-top: 10px;
+        color: white;
+    }
+
+    .submit-btn {
+        background: #bb00ff;
+        width: 100%;
+        padding: 14px;
+        margin-top: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        border: none;
+        color: white;
+        box-shadow: 0 0 15px #bb00ff;
+    }
+
+    .submit-btn:hover {
+        background: #d000ff;
     }
 
     .qris-img {
-        width: 230px;
+        width: 220px;
+        margin: auto;
+        border-radius: 10px;
         display: none;
-        border-radius: 12px;
-        margin: 10px auto;
+        box-shadow: 0 0 20px #b300ff;
     }
 
-    .title-section {
-        background: #1d9bf0;
-        padding: 14px;
-        margin-bottom: 25px;
-        border-radius: 12px;
+    .toggle-btn {
+        margin-top: 12px;
+        background: #9d00ff;
+        padding: 12px;
+        border-radius: 8px;
         text-align: center;
-        font-size: 19px;
-        font-weight: bold;
-        box-shadow: 0 0 15px rgba(29, 155, 240, 0.5);
+        cursor: pointer;
     }
+
+    /* Quick Buttons */
+    .menu-btn {
+        display: block;
+        padding: 14px;
+        margin-top: 15px;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+    }
+
+    .btn-tg { background: #1d9bf0; }
+    .btn-wa { background: #25d366; }
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div id="productPage">
 
-    <div class="title-section">✨ Produk Digital Premium</div>
-
-    <h2>Daftar Produk</h2>
-
-    <!-- PRODUK 1 -->
-    <div class="produk-box">
-        <h3>Produk 1 – Premium Access</h3>
-        <p>Akses premium untuk fitur lengkap dan layanan full support.</p>
-        <p class="harga">Rp 25.000</p>
-        <img src="https://files.catbox.moe/3vueqq.jpg">
+    <div class="hero">
+        <img src="https://files.catbox.moe/6zg5ky.jpg">
+        <h2>Danzx Hosting – Produk Resmi</h2>
     </div>
 
-    <!-- PRODUK 2 -->
-    <div class="produk-box">
-        <h3>Produk 2 – VIP Access</h3>
-        <p>Mendapatkan fitur tambahan + prioritas bantuan admin.</p>
-        <p class="harga">Rp 50.000</p>
-        <img src="https://files.catbox.moe/3vueqq.jpg">
+    <div class="products">
+
+        <!-- PANEL -->
+        <div class="product-card">
+            <img src="https://files.catbox.moe/5uzz0z.jpg">
+            <h3>Panel Pterodactyl</h3>
+            <div class="product-desc">
+                Pilihan panel hosting lengkap dengan harga berbeda.
+            </div>
+        </div>
+
+        <!-- SCRIPT BOT -->
+        <div class="product-card">
+            <img src="https://files.catbox.moe/uh1bt6.jpg">
+            <h3>Script Bot WA / Telegram</h3>
+            <div class="product-desc">
+                Script premium + update. Pilihan bervariasi.
+            </div>
+        </div>
+        <!-- VPS -->
+        <div class="product-card">
+            <img src="https://files.catbox.moe/k08euw.jpg">
+            <h3>VPS Digital Ocean</h3>
+            <div class="product-desc">
+                Server kencang & murah, cocok untuk bot / hosting.
+            </div>
+        </div>
+
+        <!-- JASA -->
+        <div class="product-card">
+            <img src="https://files.catbox.moe/z9iz9p.jpg">
+            <h3>Jasa & Produk Lainnya</h3>
+            <div class="product-desc">
+                Layanan install, push channel, unband WA dan banyak lagi.
+            </div>
+        </div>
+
     </div>
 
-    <!-- PRODUK 3 -->
-    <div class="produk-box">
-        <h3>Produk 3 – Ultimate Access</h3>
-        <p>Akses full semua fitur, update lifetime, dan pelayanan tercepat.</p>
-        <p class="harga">Rp 100.000</p>
-        <img src="https://files.catbox.moe/3vueqq.jpg">
-    </div>
+    <a class="btn-pay" onclick="showPayment()">Konfirmasi Pembayaran</a>
 
-    <h2>Form Pemesanan</h2>
+</div>
 
-    <form id="paymentForm">
-        <input type="text" id="nama" placeholder="Nama lengkap" required>
-        <input type="text" id="wa" placeholder="Nomor WhatsApp" required>
+<!-- PAYMENT PAGE -->
+<div id="paymentPage">
 
-        <select id="produk" required>
-            <option value="" disabled selected>Pilih Produk</option>
-            <option>Produk 1 – Premium Access – 25.000</option>
-            <option>Produk 2 – VIP Access – 50.000</option>
-            <option>Produk 3 – Ultimate Access – 100.000</option>
-        </select>
-        
-        <select id="metode">
-            <option>DANA</option>
-            <option>QRIS</option>
-        </select>
+    <h2>Konfirmasi Pembayaran</h2>
 
-        <button type="submit">Kirim Konfirmasi</button>
-    </form>
+    <label>Pilih Produk</label>
+    <select id="produk" onchange="updateVarian()">
+        <option value="">-- Pilih Produk --</option>
+        <option value="panel">Panel Pterodactyl</option>
+        <option value="script">Script Bot WA / Telegram</option>
+        <option value="vps">VPS Digital Ocean</option>
+        <option value="jasa">Jasa Lainnya</option>
+    </select>
 
-    <!-- INFO PEMBAYARAN -->
-    <div class="payment-box">
-        <h3>Metode Pembayaran</h3>
+    <label>Pilih Varian / Harga</label>
+    <select id="varian"></select>
 
-        <p><b>Nomor DANA:</b> 08133124186</p>
+    <label>Nama Lengkap</label>
+    <input type="text" id="nama">
 
-        <img src="https://files.catbox.moe/3vueqq.jpg" id="qrisImage" class="qris-img">
+    <label>Nomor WhatsApp</label>
+    <input type="text" id="wa">
 
-        <button onclick="toggleQR()">📷 Tampilkan / Sembunyikan QRIS</button>
+    <!-- PAYMENT -->
+    <label>Jumlah Pembayaran</label>
+    <input type="text" id="jumlah">
 
-        <button onclick="copyDana()">📋 Copy Nomor DANA</button>
-    </div>
+    <label>Metode Pembayaran</label>
+    <select id="metode">
+        <option value="DANA">DANA</option>
+        <option value="QRIS">QRIS</option>
+    </select>
 
-    <!-- Tombol Kontak -->
-    <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank" class="button btn-wa">
-        ⭐ Lihat Testimoni Admin
-    </a>
+    <!-- QRIS -->
+    <img src="https://files.catbox.moe/3vueqq.jpg" id="qrisImg" class="qris-img">
+    <div class="toggle-btn" onclick="toggleQR()">Tampilkan / Sembunyikan QRIS</div>
 
-    <a href="https://t.me/Danzx_Official" target="_blank" class="button btn-tg">
-        📩 Lanjutkan ke Telegram Admin
-    </a>
+    <button class="submit-btn" onclick="kirim()">Kirim Konfirmasi</button>
+    <button class="submit-btn" style="background:#333" onclick="showProduct()">Kembali</button>
 
-    <a href="https://wa.me/6285124271621" target="_blank" class="button btn-wa">
-        💬 Lanjutkan ke WhatsApp Admin
-    </a>
+    <!-- BUTTONS -->
+    <a class="menu-btn btn-wa" target="_blank" href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11">Lihat Testimoni Admin</a>
+    <a class="menu-btn btn-tg" target="_blank" href="https://t.me/Danzx_Official">Telegram Admin</a>
+    <a class="menu-btn btn-wa" target="_blank" href="https://wa.me/6285124271621">WhatsApp Admin</a>
 
 </div>
 
 <script>
-// Show/Hide QR
-function toggleQR() {
-    const img = document.getElementById("qrisImage");
+const daftarVarian = {
+    panel: [
+        "Reseller Panel – 14000",
+        "Admin Panel – 16000",
+        "PT Panel – 25000",
+        "Owner Panel – 30000",
+        "Tangan Kanan Panel – 35000"
+    ],
+    script: [
+        "Script Danzo MD – 30000",
+        "Reseller Danzo MD – 80000",
+        "Script SelfBot – 25000",
+        "PushKontak JadiBot – 15000",
+        "Alice Assistant – 30000",
+        "Ochobotz No Update – 20000",
+        "Ochobotz Free Update – 35000",
+        "Reseller Ochobotz – 50000",
+        "Variezyne – 15000",
+        "Reseller Variezyne – 25000",
+        "Cpanel X MD – 20000",
+        "Cpanel 4 Server – 20000",
+        "Protect Simple – 15000",
+        "Protect X Cpanel – 20000",
+        "Digital Ocean Botz – 50000",
+        "Bug Nika V17 – 20000",
+        "Bug Justin V22 – 20000"
+    ],
+    vps: [
+        "RAM 4 CPU 2 – 25000",
+        "RAM 8 CPU 4 – 35000",
+        "RAM 16 CPU 4 – 40000",
+        "RAM 16 CPU 8 – 45000"
+    ],
+    jasa: [
+        "Install Panel – 5000",
+        "Install Protect – 8000",
+        "Install Theme – 5000",
+        "Rename Script – 10000",
+        "Push Channel – 10000",
+        "Unband Fresh – 30000",
+        "Unband Lumut – 40000",
+        "Admin Channel – 10000",
+        "Channel 1k – 50000"
+    ]
+};
+
+function updateVarian(){
+    let produk = document.getElementById("produk").value;
+    let varian = document.getElementById("varian");
+    varian.innerHTML = "";
+
+    if(daftarVarian[produk]){
+        daftarVarian[produk].forEach(v=>{
+            let op = document.createElement("option");
+            op.textContent = v;
+            varian.appendChild(op);
+        });
+    }
+}
+    function toggleQR(){
+    let img = document.getElementById("qrisImg");
     img.style.display = img.style.display === "none" ? "block" : "none";
 }
 
-// Copy DANA
-function copyDana() {
-    navigator.clipboard.writeText("08133124186");
-    alert("Nomor DANA berhasil disalin!");
+function showPayment(){
+    document.getElementById("productPage").style.display = "none";
+    document.getElementById("paymentPage").style.display = "block";
 }
 
-// Kirim ke Telegram Admin
-document.getElementById("paymentForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+function showProduct(){
+    document.getElementById("productPage").style.display = "block";
+    document.getElementById("paymentPage").style.display = "none";
+}
 
-    const nama = document.getElementById("nama").value;
-    const wa = document.getElementById("wa").value;
-    const produk = document.getElementById("produk").value;
-    const metode = document.getElementById("metode").value;
+function kirim(){
+    let nama = document.getElementById("nama").value;
+    let wa = document.getElementById("wa").value;
+    let produk = document.getElementById("produk").value;
+    let varian = document.getElementById("varian").value;
+    let jumlah = document.getElementById("jumlah").value;
+    let metode = document.getElementById("metode").value;
 
-    const pesan =
-        `Pemesanan Produk%0A%0A` +
-        `Nama: ${nama}%0A` +
-        `WhatsApp: ${wa}%0A` +
-        `Produk: ${produk}%0A` +
-        `Metode Pembayaran: ${metode}%0A%0A` +
-        `Silakan kirim foto bukti transfer.`;
+    let pesan =
+    Konfirmasi Pembayaran%0A%0A +
+    Nama: ${nama}%0A +
+    WA: ${wa}%0A +
+    Produk: ${produk}%0A +
+    Varian: ${varian}%0A +
+    Jumlah: ${jumlah}%0A +
+    Metode: ${metode}%0A%0A +
+    Silakan kirim bukti transfer berupa foto.;
 
-    window.location.href = `https://t.me/Danzx_Official?text=${pesan}`;
-});
+    window.location.href = https://t.me/Danzx_Official?text=${pesan};
+}
+
 </script>
 
 </body>
