@@ -1,435 +1,203 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Produk & Pembayaran - Danzx Hosting</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembelian Produk & Konfirmasi Pembayaran</title>
+
+<style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-      overflow-x: hidden;
+        font-family: Arial, sans-serif;
+        background: #eef2f5;
+        padding: 20px;
+        margin: 0;
     }
-
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
+    .container {
+        background: white;
+        padding: 22px;
+        border-radius: 14px;
+        max-width: 550px;
+        margin: auto;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
-
-    .hero img {
-      width: 200px;
-      border-radius: 12px;
+    h2, h3 {
+        text-align: center;
+        margin-bottom: 15px;
     }
-
-    .music-player {
-      margin-top: 20px;
-      padding: 20px;
-      width: 90%;
-      max-width: 600px;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      text-align: center;
+    .produk-box {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        background: #fafafa;
     }
-
-    .player-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+    .produk-box img {
+        width: 100%;
+        border-radius: 10px;
+        margin-top: 10px;
     }
-
-    .btn-play {
-      background-color: white;
-      color: black;
-      border: none;
-      border-radius: 50%;
-      padding: 12px 16px;
-      font-size: 18px;
-      cursor: pointer;
+    select, input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
     }
-
-    .seekbar {
-      width: 80%;
+    button, a.button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        text-align: center;
+        background: #1d9bf0;
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: 0.2s;
     }
-
-    .song-info {
-      margin-top: 20px;
+    button:hover, a.button:hover {
+        opacity: 0.85;
     }
-
-    .typing-container {
-      margin-top: 15px;
-      font-size: 16px;
-      white-space: pre-wrap;
+    .btn-wa { background: #25D366; }
+    .btn-tg { background: #1d9bf0; }
+    .payment-box {
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        background: #fafafa;
+        margin-top: 25px;
     }
-
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 30px 10px;
-      gap: 20px;
+    .qris-img {
+        width: 230px;
+        display: none;
+        border-radius: 12px;
+        margin: 10px auto;
     }
-
-    .product {
-      background-color: #111;
-      border: 1px solid #333;
-      border-radius: 12px;
-      width: 280px;
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .title-section {
+        background: #1d9bf0;
+        color: white;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
     }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 18px rgba(255,255,255,0.1);
-    }
-
-    .product img {
-      width: 100%;
-      border-radius: 8px;
-      animation: breathe 3s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .benefits {
-      text-align: left;
-      margin-top: 10px;
-    }
-
-    .benefits ul {
-      padding-left: 20px;
-    }
-
-    .btn-pay {
-      display: inline-block;
-      padding: 15px 30px;
-      background: #fff;
-      color: #000;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
-      margin: 30px auto;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    #paymentPage {
-      display: none;
-      max-width: 500px;
-      margin: 40px auto;
-      background-color: #111;
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 30px;
-    }
-
-    #paymentPage h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .input-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #333;
-      border-radius: 6px;
-      background: #222;
-      color: #fff;
-      box-sizing: border-box;
-    }
-
-    .btn {
-      background: #fff;
-      color: #000;
-      border: none;
-      padding: 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      width: 100%;
-    }
-
-    .btn:hover {
-      background: #ccc;
-    }
-
-    .note {
-      font-size: 12px;
-      color: #aaa;
-    }
-
-    .status {
-      padding: 10px;
-      border-radius: 4px;
-      margin: 10px 0;
-      text-align: center;
-      display: none;
-    }
-
-    .success { background: #0f4c0f; color: #fff; }
-    .error { background: #6b1f1f; color: #fff; }
-  </style>
+</style>
 </head>
+
 <body>
 
-<!-- Product Page -->
-<div id="productPage">
-  <div class="hero">
-    <img src="https://files.catbox.moe/6zg5ky.jpg" alt="Hero Image" />
-  </div>
+<div class="container">
 
-  <div class="music-player">
-    <div class="player-controls">
-      <button class="btn-play" id="playBtn">▶</button>
-      <input type="range" class="seekbar" id="seekbar" value="0" />
+    <div class="title-section">🛒 Produk Digital Premium</div>
+
+    <h2>Daftar Produk</h2>
+
+    <!-- PRODUK LIST -->
+    <div class="produk-box">
+        <h3>Produk 1 - Premium</h3>
+        <p>Harga: <b>Rp 25.000</b></p>
+        <img src="https://files.catbox.moe/3vueqq.jpg">
     </div>
 
-    <div class="song-info">
-      <h3>Welcome to Danzx Hosting</h3>
+    <div class="produk-box">
+        <h3>Produk 2 - VIP</h3>
+        <p>Harga: <b>Rp 50.000</b></p>
+        <img src="https://files.catbox.moe/3vueqq.jpg">
     </div>
 
-    <div class="typing-container" id="typing-text"></div>
-  </div>
-
-  <audio id="music" src="https://files.catbox.moe/z4b1u2" preload="auto"></audio>
-
-  <div class="products">
-
-    <!-- PRODUCT 1 -->
-    <div class="product">
-      <img src="https://files.catbox.moe/5uzz0z.jpg" alt="Panel Pterodactyl" />
-      <div class="benefits">
-        <h3>Panel Pterodactyl</h3>
-        <ul>
-          <li>Reseller Panel – Rp 14.000</li>
-          <li>Admin Panel – Rp 16.000</li>
-          <li>PT Panel – Rp 25.000</li>
-          <li>Owner Panel – Rp 30.000</li>
-          <li>Tangan Kanan Panel – Rp 35.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" target="_blank" style="color:#00f">Hubungi Admin</a>
-      </div>
+    <div class="produk-box">
+        <h3>Produk 3 - Ultimate</h3>
+        <p>Harga: <b>Rp 100.000</b></p>
+        <img src="https://files.catbox.moe/3vueqq.jpg">
     </div>
 
-    <!-- PRODUCT 2 -->
-    <div class="product">
-      <img src="https://files.catbox.moe/uh1bt6.jpg" alt="Script Bot WA/Tele" />
-      <div class="benefits">
-        <h3>Script Bot Wa Atau Tele</h3>
-        <ul>
-          <li>Script Danzo MD – Rp 30.000</li>
-          <li>Reseller Script Danzo MD – Rp 80.000</li>
-          <li>Script SelfBot – Rp 25.000</li>
-          <li>Script PushKontak X JadiBot – Rp 15.000</li>
-          <li>Script Alice Assistant – Rp 30.000</li>
-          <li>Script Ochobotzv4 No Update – Rp 20.000</li>
-          <li>Script Ochobotzv4 Free Update – Rp 35.000</li>
-          <li>Reseller Script Ochobotzv4 – Rp 50.000</li>
-          <li>Script Variezyne – Rp 15.000</li>
-          <li>Reseller Script Variezyne – Rp 25.000</li>
-          <li>Script Cpanel X MD Telegram – Rp 20.000</li>
-          <li>Script Cpanel 4 Server Telegram – Rp 20.000</li>
-          <li>Script Protect Simple – Rp 15.000</li>
-          <li>Script Protect X Cpanel Telegram – Rp 20.000</li>
-          <li>Script Digital Ocean Botz – Rp 50.000</li>
-          <li>Script Bug Nika V17 – Rp 20.000</li>
-          <li>Script Bug Justin V22 – Rp 20.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" target="_blank" style="color:#00f">Hubungi Admin</a>
-      </div>
+    <h2>Form Pemesanan</h2>
+
+    <form id="paymentForm">
+        <input type="text" id="nama" placeholder="Nama lengkap" required>
+        <input type="text" id="wa" placeholder="Nomor WhatsApp" required>
+
+        <select id="produk" required>
+            <option value="" disabled selected>Pilih Produk</option>
+            <option>Produk 1 - 25.000</option>
+            <option>Produk 2 - 50.000</option>
+            <option>Produk 3 - 100.000</option>
+        </select>
+        
+        <select id="metode">
+            <option>DANA</option>
+            <option>QRIS</option>
+        </select>
+
+        <button type="submit">Kirim Konfirmasi</button>
+    </form>
+
+    <!-- INFO PEMBAYARAN -->
+    <div class="payment-box">
+        <h3>Metode Pembayaran</h3>
+
+        <p><b>Nomor DANA:</b> 08133124186</p>
+
+        <img src="https://files.catbox.moe/3vueqq.jpg" id="qrisImage" class="qris-img">
+
+        <button onclick="toggleQR()">📷 Tampilkan / Sembunyikan QRIS</button>
+
+        <button onclick="copyDana()">📋 Copy Nomor DANA</button>
     </div>
 
-    <!-- PRODUCT 3 -->
-    <div class="product">
-      <img src="https://files.catbox.moe/k08euw.jpg" alt="VPS Digital Ocean" />
-      <div class="benefits">
-        <h3>VPS Digital Ocean</h3>
-        <ul>
-          <li>Ram 4 Cpu 2 – Rp 25.000</li>
-          <li>Ram 8 Cpu 4 – Rp 35.000</li>
-          <li>Ram 16 Cpu 4 – Rp 40.000</li>
-          <li>Ram 16 Cpu 8 – Rp 45.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" target="_blank" style="color:#00f">Hubungi Admin</a>
-      </div>
-    </div>
+    <!-- Tombol2 -->
+    <a href="https://whatsapp.com/channel/0029VbBSKdh8aKvShLrENh11" target="_blank" class="button btn-wa">
+        ⭐ Lihat Testimoni Admin
+    </a>
 
-    <!-- PRODUCT 4 -->
-    <div class="product">
-      <img src="https://files.catbox.moe/z9iz9p.jpg" alt="Jasa & Produk Lainnya" />
-      <div class="benefits">
-        <h3>Jasa & Produk Lainnya</h3>
-        <ul>
-          <li>Jasa Install panel pterodactyl – Rp 5.000</li>
-          <li>Jasa Install Protect panel – Rp 8.000</li>
-          <li>Jasa Install Thema panel – Rp 5.000</li>
-          <li>Jasa Install panel pterodactyl – Rp 5.000</li>
-          <li>Jasa Rename Script – Rp 10.000</li>
-          <li>Jasa Push Saluran WhatsApp – Rp 10.000</li>
-          <li>Jasa Unband WhatsApp Fresh – Rp 30.000</li>
-          <li>Jasa Unband WhatsApp Lumut – Rp 40.000</li>
-          <li>Admin Saluran WhatsApp – Rp 10.000</li>
-          <li>Saluran WhatsApp 1k – Rp 50.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" target="_blank" style="color:#00f">Hubungi Admin</a>
-      </div>
-    </div>
+    <a href="https://t.me/Danzx_Official" target="_blank" class="button btn-tg">
+        📩 Lanjutkan ke Telegram Admin
+    </a>
 
-  </div>
+    <a href="https://wa.me/6285124271621" target="_blank" class="button btn-wa">
+        💬 Lanjutkan ke WhatsApp Admin
+    </a>
 
-  <div style="text-align:center">
-    <button class="btn-pay" onclick="showPayment()">Konfirmasi Pembayaran</button>
-  </div>
-
-  <div class="footer">
-    <p>© 2025 Danzx Hosting | Semua Hak Dilindungi</p>
-  </div>
-</div>
-
-<!-- Payment Page -->
-<div id="paymentPage">
-  <h2>Konfirmasi Pembayaran</h2>
-
-  <div id="statusMessage" class="status"></div>
-
-  <div class="input-group">
-    <label>Nama Lengkap</label>
-    <input type="text" id="name" placeholder="Nama sesuai rekening" required />
-  </div>
-
-  <div class="input-group">
-    <label>Nomor WhatsApp</label>
-    <input type="tel" id="wa" placeholder="628xxxxxxx" required />
-    <p class="note">Pastikan nomor aktif untuk konfirmasi</p>
-  </div>
-
-  <div class="input-group">
-    <label>Jumlah Pembayaran</label>
-    <input type="number" id="amount" placeholder="50000" required />
-  </div>
-
-  <div class="input-group">
-    <label>Metode Pembayaran</label>
-    <select id="paymentMethod" required>
-      <option value="">Pilih metode...</option>
-      <option value="dana">DANA</option>
-      <option value="qris">QRIS</option>
-    </select>
-  </div>
-
-  <div id="instructions" style="margin:15px 0;font-size:14px;color:#ccc;display:none">
-    <strong>Petunjuk:</strong>
-    <ul>
-      <li>DANA: 08133124186</li>
-    </ul>
-  </div>
-
-  <div class="input-group">
-    <label>Bukti Transfer (gambar)</label>
-    <input type="file" id="proof" accept="image/*" />
-  </div>
-
-  <button class="btn" onclick="sendPayment()">Kirim Konfirmasi</button>
-  <button class="btn" onclick="showProduct()" style="margin-top:10px;background:#333">← Kembali</button>
 </div>
 
 <script>
-const audio = document.getElementById('music');
-const seekbar = document.getElementById('seekbar');
-const playBtn = document.getElementById('playBtn');
-let isPlaying = false;
-
-function toggleMusic() {
-  if (isPlaying) {
-    audio.pause();
-    playBtn.innerHTML = '▶';
-  } else {
-    audio.play();
-    playBtn.innerHTML = '❚❚';
-  }
-  isPlaying = !isPlaying;
+// Tampilkan QR
+function toggleQR() {
+    const img = document.getElementById("qrisImage");
+    img.style.display = img.style.display === "none" ? "block" : "none";
 }
 
-function seekMusic() {
-  audio.currentTime = (seekbar.value / 100) * audio.duration;
+// Copy nomor DANA
+function copyDana() {
+    navigator.clipboard.writeText("08133124186");
+    alert("Nomor DANA berhasil disalin!");
 }
 
-audio.addEventListener('timeupdate', () => {
-  seekbar.value = (audio.currentTime / audio.duration) * 100;
+// Form → Telegram
+document.getElementById("paymentForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nama = document.getElementById("nama").value;
+    const wa = document.getElementById("wa").value;
+    const produk = document.getElementById("produk").value;
+    const metode = document.getElementById("metode").value;
+
+    const pesan =
+        `Pemesanan Produk%0A%0A` +
+        `Nama: ${nama}%0A` +
+        `WhatsApp: ${wa}%0A` +
+        `Produk: ${produk}%0A` +
+        `Metode Pembayaran: ${metode}%0A%0A` +
+        `Silakan kirim foto bukti transfer.`;
+
+    window.location.href = `https://t.me/Danzx_Official?text=${pesan}`;
 });
-
-playBtn.addEventListener('click', toggleMusic);
-
-
-// Typing Effect
-const welcomeText = `Selamat datang di Danzx Hosting!\nKami menjual berbagai macam produk yang murah, aman, dan terpercaya.\nJika ada pertanyaan atau keluhan, silakan chat admin kami.\nScroll ke bawah untuk melihat produk tersedia.`;
-let i = 0;
-
-function typeWriter() {
-  if (i < welcomeText.length) {
-    document.getElementById('typing-text').textContent += welcomeText.charAt(i);
-    i++;
-    setTimeout(typeWriter, 40);
-  }
-}
-
-window.onload = typeWriter;
-
-// Page Switch
-function showPayment() {
-  document.getElementById('productPage').style.display = 'none';
-  document.getElementById('paymentPage').style.display = 'block';
-}
-
-function showProduct() {
-  document.getElementById('productPage').style.display = 'block';
-  document.getElementById('paymentPage').style.display = 'none';
-}
-
-// Payment Action
-function sendPayment() {
-  const name = document.getElementById('name').value.trim();
-  const wa = document.getElementById('wa').value.trim();
-  const amount = document.getElementById('amount').value.trim();
-  const method = document.getElementById('paymentMethod').value;
-
-  if (!name || !wa || !amount || !method) {
-    alert('Harap lengkapi semua data!');
-    return;
-  }
-
-  const message = `💰 Konfirmasi Pembayaran\n\nNama: ${name}\nWhatsApp: ${wa}\nJumlah: Rp${amount}\nMetode: ${method}`;
-  alert('Pesan terkirim:\n\n' + message);
-  showProduct();
-}
 </script>
 
 </body>
-  </html>
-  
+</html>
