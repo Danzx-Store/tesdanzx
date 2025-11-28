@@ -1,374 +1,377 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Website Produk & Pembayaran - Danzx Hosting</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DanzX Store</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #000;
-  color: #fff;
-  overflow-x: hidden;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-}
+    header {
+        background: #222;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 2px solid #333;
+    }
+    header h1 {
+        margin: 0;
+        font-size: 28px;
+    }
+    header p {
+        margin: 5px 0 0;
+        font-size: 14px;
+        opacity: .7;
+    }
 
-.hero img {
-  width: 200px;
-  border-radius: 12px;
-}
+    /* PRODUCT GRID */
+    .product-section {
+        padding: 20px;
+    }
+    .product-section h2 {
+        margin-bottom: 10px;
+    }
 
-.products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 30px 10px;
-}
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
 
-.product {
-  background-color: #111;
-  border: 1px solid #333;
-  border-radius: 10px;
-  margin: 10px;
-  width: 280px;
-  padding: 15px;
-  text-align: center;
-}
+    .product-card {
+        background: #1b1b1b;
+        padding: 12px;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid #333;
+    }
+    .product-card img {
+        width: 100%;
+        border-radius: 8px;
+    }
+    .product-card h3 {
+        margin: 10px 0 5px;
+        font-size: 16px;
+    }
+    .product-card button {
+        margin-top: 8px;
+        padding: 8px 12px;
+        background: #00aaff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
 
-.product img {
-  width: 100%;
-  border-radius: 8px;
-  animation: breathe 3s ease-in-out infinite;
-}
+    /* CART SECTION */
+    .cart-section {
+        background: #161616;
+        margin-top: 20px;
+        padding: 15px;
+    }
+    #cartItems {
+        border-top: 1px solid #333;
+        padding-top: 10px;
+    }
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+    .cart-footer {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .pay-btn {
+        padding: 10px 18px;
+        background: #0f0;
+        color: #111;
+        font-weight: bold;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+    }
 
-@keyframes breathe {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.benefits ul {
-  padding-left: 20px;
-  text-align: left;
-}
-
-.btn-pay {
-  display: inline-block;
-  margin: 30px auto;
-  padding: 15px 30px;
-  background: #fff;
-  color: #000;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.footer {
-  text-align: center;
-  margin-top: 40px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* Payment Page */
-#paymentPage {
-  display: none;
-  max-width: 500px;
-  margin: 40px auto;
-  background-color: #111;
-  border: 1px solid #333;
-  border-radius: 12px;
-  padding: 30px;
-}
-
-.input-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-
-input, select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #333;
-  border-radius: 6px;
-  background: #222;
-  color: #fff;
-}
-
-.btn {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #fff;
-  color: #000;
-  font-weight: bold;
-}
-
-.btn-copy {
-  background:#00d0ff;
-  color:#000;
-  padding:8px 12px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  display:block;
-  margin-top:10px;
-  font-weight:bold;
-}
-
-.qris-toggle {
-  background:#fff;
-  color:#000;
-  border:none;
-  padding:10px;
-  border-radius:6px;
-  cursor:pointer;
-  width:100%;
-  margin-top:10px;
-  font-weight:bold;
-}
-
-.qris-box {
-  display:none;
-  text-align:center;
-  margin-top:10px;
-}
-
-.qris-box img {
-  width:260px;
-  border-radius:12px;
-}
+    /* PAYMENT MODAL */
+    #overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        z-index: 9999;
+    }
+    .payment-box {
+        background: #1d1d1d;
+        padding: 20px;
+        width: 100%;
+        max-width: 430px;
+        border-radius: 12px;
+        border: 1px solid #333;
+    }
+    .payment-box h2 {
+        margin-top: 0;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: 1px solid #444;
+        background: #0f0f0f;
+        color: #fff;
+    }
+    #qrisBox {
+        display: none;
+        margin-top: 10px;
+        text-align: center;
+    }
+    #qrisBox img {
+        width: 220px;
+        border-radius: 10px;
+        border: 2px solid #444;
+    }
+    .close-btn {
+        background: red;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
 </style>
 </head>
 
 <body>
 
-<!-- ╔══════════════════════════════╗
-     ║        PRODUK PAGE           ║
-     ╚══════════════════════════════╝ -->
-<div id="productPage">
+<header>
+    <h1>DanzX Store</h1>
+    <p>Top Up Game • Voucher • Layanan Digital</p>
+</header>
 
-  <div class="hero">
-    <img src="https://files.catbox.moe/6zg5ky.jpg">
-  </div>
+<!-- PRODUK -->
+<section class="product-section">
+    <h2>Daftar Produk</h2>
 
-  <!-- LIST PRODUK -->
-  <div class="products">
+    <div class="product-grid">
 
-    <div class="product">
-      <img src="https://files.catbox.moe/5uzz0z.jpg">
-      <div class="benefits">
-        <h3>Panel Pterodactyl</h3>
-        <ul>
-          <li>Reseller Panel – Rp 14.000</li>
-          <li>Admin Panel – Rp 16.000</li>
-          <li>PT Panel – Rp 25.000</li>
-          <li>Owner Panel – Rp 30.000</li>
-          <li>Tangan Kanan Panel – Rp 35.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
-      </div>
+        <div class="product-card">
+            <img src="https://cdn.jsdelivr.net/gh/Danzx-Store/assets/mlbb.jpg">
+            <h3>Mobile Legends Diamond</h3>
+            <p>Mulai Rp 3.000</p>
+            <button onclick="addToCart('Mobile Legends Diamond', 3000)">Tambah</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://cdn.jsdelivr.net/gh/Danzx-Store/assets/ff.jpg">
+            <h3>Free Fire Diamond</h3>
+            <p>Mulai Rp 2.500</p>
+            <button onclick="addToCart('Free Fire Diamond', 2500)">Tambah</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://cdn.jsdelivr.net/gh/Danzx-Store/assets/pubg.jpg">
+            <h3>PUBG UC</h3>
+            <p>Mulai Rp 5.000</p>
+            <button onclick="addToCart('PUBG UC', 5000)">Tambah</button>
+        </div>
+
+        <div class="product-card">
+            <img src="https://cdn.jsdelivr.net/gh/Danzx-Store/assets/genshin.jpg">
+            <h3>Genshin Genesis Crystal</h3>
+            <p>Mulai Rp 15.000</p>
+            <button onclick="addToCart('Genshin Genesis Crystal', 15000)">Tambah</button>
+        </div>
+
     </div>
+</section>
 
-    <div class="product">
-      <img src="https://files.catbox.moe/uh1bt6.jpg">
-      <div class="benefits">
-        <h3>Script Bot Wa Atau Tele</h3>
-        <ul>
-          <li>Script Danzo MD – Rp 30.000</li>
-          <li>Reseller Script Danzo MD – Rp 80.000</li>
-          <li>Script SelfBot – Rp 25.000</li>
-          <li>Script PushKontak X JadiBot – Rp 15.000</li>
-          <li>Script Alice Asistant – Rp 30.000</li>
-          <li>Script Ochobotzv4 No Update – Rp 20.000</li>
-          <li>Script Ochobotzv4 Free Update – Rp 35.000</li>
-          <li>Reseller Script Ochobotzv4 – Rp 50.000</li>
-          <li>Script Variezyne – Rp 15.000</li>
-          <li>Reseller Script Variezyne – Rp 25.000</li>
-          <li>Script Cpanel X MD Telegram – Rp 20.000</li>
-          <li>Script Cpanel 4 Server Telegram – Rp 20.000</li>
-          <li>Script Protect Simple – Rp 15.000</li>
-          <li>Script Protect X Cpanel Telegram – Rp 20.000</li>
-          <li>Script Digital Ocean Botz – Rp 50.000</li>
-          <li>Script Bug Nika V17 – Rp 20.000</li>
-          <li>Script Bug Justin V22 – Rp 20.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
-      </div>
+<!-- CART -->
+<section class="cart-section">
+    <h2>Keranjang</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-footer">
+        <strong>Total:</strong> 
+        <span id="cartTotal">Rp 0</span>
+        <button class="pay-btn" onclick="openPayment()">Bayar</button>
     </div>
+</section>
 
-    <div class="product">
-      <img src="https://files.catbox.moe/k08euw.jpg">
-      <div class="benefits">
-        <h3>VPS Digital Ocean</h3>
-        <ul>
-          <li>Ram 4 Cpu 2 – Rp 25.000</li>
-          <li>Ram 8 Cpu 4 – Rp 35.000</li>
-          <li>Ram 16 Cpu 4 – Rp 40.000</li>
-          <li>Ram 16 Cpu 8 – Rp 45.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
-      </div>
+<!-- PAYMENT MODAL -->
+<div id="overlay">
+    <div class="payment-box">
+        <h2>Pembayaran</h2>
+
+        <label>Nama:</label>
+        <input id="custName" placeholder="Nama lengkap">
+
+        <label>Nomor WhatsApp:</label>
+        <input id="custWA" placeholder="08xxxx">
+
+        <label>Produk:</label>
+        <input id="orderProduct" readonly>
+
+        <label>Harga Satuan:</label>
+        <input id="unitPrice" readonly>
+
+        <label>Jumlah:</label>
+        <input id="qty" type="number" min="1" value="1" oninput="updateTotal()">
+
+        <label>Total:</label>
+        <input id="totalPrice" readonly>
+
+        <label>Nomor DANA:</label>
+        <div style="display:flex;justify-content:space-between;align-items:center;background:#222;padding:10px;border-radius:8px;">
+            <span id="danaNumber">08133124186</span>
+            <button onclick="copyDana()">Copy</button>
+        </div>
+
+        <button onclick="toggleQRIS()">Tampilkan QRIS</button>
+        <div id="qrisBox">
+            <img src="https://files.catbox.moe/3vueqq.jpg">
+        </div>
+
+        <label>Upload bukti transfer:</label>
+        <input id="proof" type="file" accept="image/*">
+
+        <p>Waktu tersisa: <span id="countdown">15:00</span></p>
+
+        <button class="pay-btn" onclick="confirmPayment()">Kirim Pembayaran</button>
+        <button class="close-btn" onclick="closePayment()">Batal</button>
     </div>
-
-    <div class="product">
-      <img src="https://files.catbox.moe/z9iz9p.jpg">
-      <div class="benefits">
-        <h3>Jasa & Produk Lainnya</h3>
-        <ul>
-          <li>Install panel – Rp 5.000</li>
-          <li>Install protect – Rp 8.000</li>
-          <li>Install thema – Rp 5.000</li>
-          <li>Rename script – Rp 10.000</li>
-          <li>Push Saluran WA – Rp 10.000</li>
-          <li>Unban WA Fresh – Rp 30.000</li>
-          <li>Unban WA Lumut – Rp 40.000</li>
-          <li>Admin Saluran WA – Rp 10.000</li>
-          <li>Saluran WA 1k – Rp 50.000</li>
-        </ul>
-        <a href="https://t.me/Danzx_Hosting" style="color:#00f">Hubungi Admin</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="text-align:center">
-    <button class="btn-pay" onclick="showPayment()">Konfirmasi Pembayaran</button>
-  </div>
-
-  <div class="footer">
-    © 2025 Danzx Hosting
-  </div>
-
 </div>
 
-<!-- ╔══════════════════════════════╗
-     ║        PAYMENT PAGE          ║
-     ╚══════════════════════════════╝ -->
-<div id="paymentPage">
-
-  <h2>Konfirmasi Pembayaran</h2>
-
-  <div class="input-group">
-    <label>Nama Lengkap</label>
-    <input type="text" id="name">
-  </div>
-
-  <div class="input-group">
-    <label>Nomor WA</label>
-    <input type="tel" id="wa">
-  </div>
-
-  <div class="input-group">
-    <label>Jumlah Pembayaran</label>
-    <input type="number" id="amount">
-  </div>
-
-  <div class="input-group">
-    <label>Metode Pembayaran</label>
-    <select id="paymentMethod" onchange="updatePaymentMethod()">
-      <option value="">Pilih metode...</option>
-      <option value="dana">DANA</option>
-      <option value="qris">QRIS</option>
-    </select>
-  </div>
-
-  <!-- DANA -->
-  <div id="danaBox" style="display:none">
-    <p>Nomor DANA:</p>
-    <div style="background:#222;padding:12px;border-radius:6px;font-size:17px">
-      <span id="danaNumber">08133124186</span>
-    </div>
-    <button class="btn-copy" onclick="copyDana()">Copy Nomor DANA</button>
-  </div>
-
-  <!-- QRIS TOGGLE -->
-  <button id="btnQrisToggle" class="qris-toggle" onclick="toggleQris()" style="display:none">
-    Tampilkan QRIS
-  </button>
-
-  <div id="qrisBox" class="qris-box">
-    <img src="https://files.catbox.moe/your_qris_image.png">
-  </div>
-
-  <div class="input-group">
-    <label>Bukti Transfer</label>
-    <input type="file" id="proof" accept="image/*">
-  </div>
-
-  <button class="btn" onclick="sendPayment()">Kirim Konfirmasi</button>
-  <button class="btn" onclick="showProduct()" style="background:#333;margin-top:10px">← Kembali</button>
-
-</div>
-
+<!-- SCRIPT -->
 <script>
-function showPayment() {
-  productPage.style.display = "none";
-  paymentPage.style.display = "block";
+const currency = v => "Rp" + Number(v).toLocaleString("id-ID");
+let cart = [];
+let timer = null;
+let timeLeft = 900;
+
+/* CART */
+function addToCart(name, price){
+    cart.push({name, price});
+    renderCart();
+}
+function renderCart(){
+    const box = document.getElementById("cartItems");
+    const totalBox = document.getElementById("cartTotal");
+    box.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item)=>{
+        total += item.price;
+        box.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name}</span>
+                <span>${currency(item.price)}</span>
+            </div>
+        `;
+    });
+
+    totalBox.textContent = currency(total);
 }
 
-function showProduct() {
-  productPage.style.display = "block";
-  paymentPage.style.display = "none";
+/* OPEN PAYMENT */
+function openPayment(){
+    if(cart.length === 0){
+        alert("Keranjang kosong!");
+        return;
+    }
+
+    const first = cart[0];
+    document.getElementById("orderProduct").value = first.name;
+    document.getElementById("unitPrice").value = first.price;
+    document.getElementById("qty").value = 1;
+    updateTotal();
+
+    document.getElementById("overlay").style.display = "flex";
+
+    startTimer();
 }
 
-function updatePaymentMethod() {
-  let method = paymentMethod.value;
-
-  danaBox.style.display = "none";
-  btnQrisToggle.style.display = "none";
-  qrisBox.style.display = "none";
-
-  if (method === "dana") danaBox.style.display = "block";
-  if (method === "qris") btnQrisToggle.style.display = "block";
+/* CLOSE PAYMENT */
+function closePayment(){
+    document.getElementById("overlay").style.display = "none";
+    stopTimer();
 }
 
-function copyDana() {
-  navigator.clipboard.writeText(danaNumber.innerText);
-  alert("Nomor DANA berhasil disalin!");
+/* UPDATE TOTAL */
+function updateTotal(){
+    const price = parseInt(document.getElementById("unitPrice").value);
+    const qty = parseInt(document.getElementById("qty").value);
+    document.getElementById("totalPrice").value = currency(price * qty);
 }
 
-function toggleQris() {
-  if (qrisBox.style.display === "none") {
-    qrisBox.style.display = "block";
-    btnQrisToggle.innerText = "Tutup QRIS";
-  } else {
-    qrisBox.style.display = "none";
-    btnQrisToggle.innerText = "Tampilkan QRIS";
-  }
+/* COPY DANA */
+function copyDana(){
+    navigator.clipboard.writeText("08133124186");
+    alert("Nomor DANA disalin!");
 }
 
-function sendPayment() {
-  let name = document.getElementById("name").value.trim();
-  let wa = document.getElementById("wa").value.trim();
-  let amount = document.getElementById("amount").value.trim();
-  let method = document.getElementById("paymentMethod").value;
+/* TOGGLE QRIS */
+function toggleQRIS(){
+    const box = document.getElementById("qrisBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+}
 
-  if (!name || !wa || !amount || !method) {
-    alert("Harap isi semua data!");
-    return;
-  }
+/* COUNTDOWN */
+function startTimer(){
+    timeLeft = 900;
+    timer = setInterval(()=>{
+        let m = Math.floor(timeLeft / 60);
+        let s = timeLeft % 60;
+        document.getElementById("countdown").textContent = `${m}:${s < 10 ? "0"+s : s}`;
+        timeLeft--;
 
-  alert(`💰 Konfirmasi Pembayaran\nNama: ${name}\nWA: ${wa}\nJumlah: Rp${amount}\nMetode: ${method}`);
+        if(timeLeft < 0){
+            stopTimer();
+            alert("Waktu pembayaran habis!");
+            closePayment();
+        }
+    }, 1000);
+}
+function stopTimer(){
+    clearInterval(timer);
+}
 
-  showProduct();
+/* CONFIRM PAYMENT */
+function confirmPayment(){
+    const name = document.getElementById("custName").value;
+    const wa = document.getElementById("custWA").value;
+    const proof = document.getElementById("proof").files[0];
+
+    if(!name || !wa || !proof){
+        alert("Harap isi semua data & upload bukti.");
+        return;
+    }
+
+    alert("Pembayaran dikirim untuk verifikasi!");
+
+    cart = [];
+    renderCart();
+    closePayment();
+
+    window.location.href = "https://t.me/Danzx_Hosting";
 }
 </script>
 
 </body>
-  </html>
+          </html>
